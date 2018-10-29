@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <!-- our own stylesheet -->
-    <link rel="stylesheet" type="text/css" href="home-style.css">
+    <link rel="stylesheet" type="text/css" href="Resourses/Styles/home-style.css">
 
     <title>U.S. Redistricting</title>
     <meta name="viewport" content="initial-scale=1.0">
