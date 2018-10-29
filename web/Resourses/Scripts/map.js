@@ -70,13 +70,19 @@ var map;
         });
         
           
-        var oregonCtaLayer = new google.maps.KmlLayer({
-          url: 'https://www.dropbox.com/s/rfkjs7onbk7mowf/Oregon.json?dl=0',
-          map: map,
-          preserveViewport: true
-        });
-            
+       
+        var oregonLayer = new google.maps.Data();
+        oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Oregon.json');
+        oregonLayer.setMap(map);
           
+          
+          
+//google.maps.event.addListener(map, 'click', function(event) {
+//    placeMarker(event.latLng);
+//});
+
+          
+
           
     
 
