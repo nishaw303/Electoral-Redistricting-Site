@@ -1,4 +1,5 @@
 var map;
+
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 37.09024, lng: -95.712891}, // approximate center of US
@@ -69,11 +70,27 @@ var map;
           preserveViewport: true
         });
         
+
+          
+        map.data.addListener('mouseover', function(event) {
+            console.log('pusi');
+        });
+
           
        
         var oregonLayer = new google.maps.Data();
         oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Oregon.json');
-        oregonLayer.setMap(map);
+        //oregonLayer.setMap(map);
+          
+        var ohioLayer = new google.maps.Data();
+        ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Ohio.json');
+        //ohioLayer.setMap(map);
+          
+        var massachusettesLayer = new google.maps.Data();
+        massachusettesLayer.loadGeoJson(
+            'https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Massachusettes.json');
+        //massachusettesLayer.setMap(map);
+          
           
           
           
