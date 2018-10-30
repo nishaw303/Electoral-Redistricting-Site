@@ -65,17 +65,23 @@ var map;
         });
 
         var usaCtaLayer = new google.maps.KmlLayer({
-          url: 'https://developers.google.com/kml/documentation/us_states.kml',
+          url: 'https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/States.kml',
           map: map,
           preserveViewport: true
         });
+          
+          
+        usaCtaLayer.addListener('click', function(event) {
+            console.log(event.featureData);
+        });
+          
+     
+          
+
         
 
           
-        map.data.addListener('mouseover', function(event) {
-            console.log('pusi');
-        });
-
+       
           
        
         var oregonLayer = new google.maps.Data();
@@ -93,10 +99,10 @@ var map;
           
           
           
-          
-//google.maps.event.addListener(map, 'click', function(event) {
-//    placeMarker(event.latLng);
-//});
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            console.log(event.latLng.lat(),event.latLng.lng());
+        });
 
           
 
