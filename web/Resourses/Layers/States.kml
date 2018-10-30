@@ -29,15 +29,15 @@
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
       <ExtendedData>
-        <Data name="lat">
+        <Data name="suka">
           <value>5</value>
         </Data>
-        <Data name="lng">
+        <Data name="sika">
           <value>523</value>
         </Data>
       </ExtendedData>
       <Snippet maxLines="0">empty</Snippet>
-      <lat>-156.326917860547</lat>
+      <suka>-156.326917860547</suka>
       <lng>20.2401578536914</lng>
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
