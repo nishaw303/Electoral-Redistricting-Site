@@ -28,10 +28,7 @@
 
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
-      <lat>21.094318</lat>
-      <lng>-157.498337</lng>
-      
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-156.326917860547</lat> <lng>20.2401578536914</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -284,7 +281,7 @@
     </Placemark>
     <Placemark id="pm252">
       <name><![CDATA[Washington (1889)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-120.428027450366</lat> <lng>47.3767619529735</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -664,6 +661,7 @@
     <Placemark id="pm253">
       <name><![CDATA[Montana (1889)]]></name>
       <Snippet maxLines="0">empty</Snippet>
+    <lat>20.2401578536914</lat> <lng>-156.326917860547</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -1043,7 +1041,7 @@
     </Placemark>
     <Placemark id="pm254">
       <name><![CDATA[Maine (1820)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-69.2342803140978</lat> <lng>45.3894093487898</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -1289,7 +1287,7 @@
     </Placemark>
     <Placemark id="pm255">
       <name><![CDATA[North Dakota (1889)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-100.470755004497</lat> <lng>47.4460775747168</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -1532,7 +1530,7 @@
     </Placemark>
     <Placemark id="pm256">
       <name><![CDATA[South Dakota (1889)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-100.235288914651</lat> <lng>44.4333181443813 </lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -1760,7 +1758,7 @@
     </Placemark>
     <Placemark id="pm257">
       <name><![CDATA[Wyoming (1890)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-107.553081008537</lat> <lng>42.9982837598069</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -1891,7 +1889,7 @@
     </Placemark>
     <Placemark id="pm258">
       <name><![CDATA[Wisconsin (1848)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-90.006191227598</lat> <lng>44.6331178864174</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -2253,7 +2251,7 @@
     </Placemark>
     <Placemark id="pm259">
       <name><![CDATA[Idaho (1890)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-114.661865415542</lat> <lng>44.3858954726855</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -2704,7 +2702,7 @@
     </Placemark>
     <Placemark id="pm260">
       <name><![CDATA[Vermont (1791)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-72.660656242184</lat> <lng>44.072240587832</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -2917,7 +2915,7 @@
     </Placemark>
     <Placemark id="pm261">
       <name><![CDATA[Minnesota (1858)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-94.3059456842785</lat> <lng>46.315646568988</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -3306,7 +3304,7 @@
     </Placemark>
     <Placemark id="pm262">
       <name><![CDATA[Oregon (1859)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-120.55462738557</lat> <lng>43.9315095486322</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -3588,7 +3586,7 @@
     </Placemark>
     <Placemark id="pm263">
       <name><![CDATA[New Hampshire (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-71.577769589032</lat> <lng>43.6851910338169</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -3794,7 +3792,7 @@
     </Placemark>
     <Placemark id="pm264">
       <name><![CDATA[Iowa (1846)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-93.5010908992209</lat> <lng>42.0759891389773</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -4125,7 +4123,7 @@
     </Placemark>
     <Placemark id="pm265">
       <name><![CDATA[Massachusetts (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-71.80258992883</lat> <lng>42.2568345174596</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -4345,7 +4343,7 @@
     </Placemark>
     <Placemark id="pm266">
       <name><![CDATA[Nebraska (1867)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-99.8078006001403</lat> <lng>41.5231582790057</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -4624,7 +4622,7 @@
     </Placemark>
     <Placemark id="pm267">
       <name><![CDATA[New York (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-75.5122574227018</lat> <lng>42.9466608265549</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -4948,7 +4946,7 @@
     </Placemark>
     <Placemark id="pm268">
       <name><![CDATA[Pennsylvania (1787)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-77.8028454187969</lat> <lng>40.8748890585198</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -5185,7 +5183,7 @@
     </Placemark>
     <Placemark id="pm269">
       <name><![CDATA[Connecticut (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-72.7247699791</lat> <lng>41.6180326565837</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -5308,7 +5306,7 @@
     </Placemark>
     <Placemark id="pm270">
       <name><![CDATA[Rhode Island (1790)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-71.5610444257682</lat> <lng>41.6817724921721</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -5452,7 +5450,7 @@
     </Placemark>
     <Placemark id="pm271">
       <name><![CDATA[New Jersey (1787)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-74.6766277762304</lat> <lng>40.1983130309155</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -5661,7 +5659,7 @@
     </Placemark>
     <Placemark id="pm272">
       <name><![CDATA[Indiana (1816)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-86.2761573203861</lat> <lng>39.9127401204667</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -6008,7 +6006,7 @@
     </Placemark>
     <Placemark id="pm273">
       <name><![CDATA[Nevada (1864)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-116.650735151808</lat> <lng>39.3520158009473</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -6175,7 +6173,7 @@
     </Placemark>
     <Placemark id="pm274">
       <name><![CDATA[Utah (1896)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-111.676053595522</lat> <lng>39.3225122931614</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -6299,7 +6297,7 @@
     </Placemark>
     <Placemark id="pm275">
       <name><![CDATA[California (1850)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-119.601147078817</lat> <lng>37.2417411000423</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -6698,7 +6696,7 @@
     </Placemark>
     <Placemark id="pm276">
       <name><![CDATA[Ohio (1803)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-82.7873906731324</lat> <lng>40.2875354201742</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -6994,7 +6992,7 @@
     </Placemark>
     <Placemark id="pm277">
       <name><![CDATA[Illinois (1818)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-89.2037678267293</lat> <lng>40.0640001695085</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -7403,7 +7401,7 @@
     </Placemark>
     <Placemark id="pm278">
       <name><![CDATA[Delaware (1787)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-75.5005536711258</lat> <lng>38.9951144260073</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -7523,7 +7521,7 @@
     </Placemark>
     <Placemark id="pm279">
       <name><![CDATA[West Virginia (1863)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-80.614059565661</lat> <lng>38.6412110051568</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -8003,7 +8001,7 @@
     </Placemark>
     <Placemark id="pm280">
       <name><![CDATA[Maryland (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-76.8193852682105</lat> <lng>39.0640555384767</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -8383,7 +8381,7 @@
     </Placemark>
     <Placemark id="pm281">
       <name><![CDATA[Colorado (1876)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-105.547857280633</lat> <lng>38.9972631547834</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -8522,7 +8520,7 @@
     </Placemark>
     <Placemark id="pm282">
       <name><![CDATA[Kentucky (1792)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-85.2903664199658</lat> <lng>37.5265035728688</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -8975,7 +8973,7 @@
     </Placemark>
     <Placemark id="pm283">
       <name><![CDATA[Kansas (1861)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-98.3832572332682</lat> <lng>38.4826574728393</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -9182,7 +9180,7 @@
     </Placemark>
     <Placemark id="pm284">
       <name><![CDATA[Virginia (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-78.8515944401178</lat> <lng>37.5186355576459</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -9691,7 +9689,7 @@
     </Placemark>
     <Placemark id="pm285">
       <name><![CDATA[Missouri (1821)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-92.4801886377418</lat> <lng>38.3639901274756</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -10110,7 +10108,7 @@
     </Placemark>
     <Placemark id="pm286">
       <name><![CDATA[Arizona (1912)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-111.664591949232</lat> <lng>34.2916834221835</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -10346,7 +10344,7 @@
     </Placemark>
     <Placemark id="pm287">
       <name><![CDATA[Oklahoma (1907)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-97.5094585942961</lat> <lng>35.583978004302</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -10745,7 +10743,7 @@
     </Placemark>
     <Placemark id="pm288">
       <name><![CDATA[North Carolina (1789)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-79.4013155346895</lat> <lng>35.5472650672799</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -11174,7 +11172,7 @@
     </Placemark>
     <Placemark id="pm289">
       <name><![CDATA[Tennessee (1796)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-86.3340670065268</lat> <lng>35.8467078879312</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -11507,7 +11505,7 @@
     </Placemark>
     <Placemark id="pm290">
       <name><![CDATA[Texas (1845)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-99.3520963926805</lat> <lng>31.4911603586956</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -12484,7 +12482,7 @@
     </Placemark>
     <Placemark id="pm291">
       <name><![CDATA[New Mexico (1912)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-106.102403151381</lat> <lng>34.4234110071301</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -12625,7 +12623,7 @@
     </Placemark>
     <Placemark id="pm292">
       <name><![CDATA[Alabama (1819)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-86.8263454497332</lat> <lng>32.7948233460272</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -12851,7 +12849,7 @@
     </Placemark>
     <Placemark id="pm293">
       <name><![CDATA[Mississippi (1817)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-89.6640053796168</lat> <lng>32.7591641085257</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -13356,7 +13354,7 @@
     </Placemark>
     <Placemark id="pm294">
       <name><![CDATA[Georgia (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-83.4542258116492</lat> <lng>32.6550957052741</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -13799,7 +13797,7 @@
     </Placemark>
     <Placemark id="pm295">
       <name><![CDATA[South Carolina (1788)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-80.9010200865815</lat> <lng>33.9187422703577</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -14141,7 +14139,7 @@
     </Placemark>
     <Placemark id="pm296">
       <name><![CDATA[Arkansas (1836)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-92.4338014912365</lat> <lng>34.8979530772317</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -14561,7 +14559,7 @@
     </Placemark>
     <Placemark id="pm297">
       <name><![CDATA[Louisiana (1812)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-92.0291541159725</lat> <lng>31.0957346447301</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -15228,7 +15226,7 @@
     </Placemark>
     <Placemark id="pm298">
       <name><![CDATA[Florida (1845)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-82.4955741421186</lat> <lng>28.6586764601475</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -15735,7 +15733,7 @@
     </Placemark>
     <Placemark id="pm299">
       <name><![CDATA[Michigan (1837)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-85.4386025294334</lat> <lng>44.3365484429102</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
@@ -16185,7 +16183,7 @@
     </Placemark>
     <Placemark id="pm300">
       <name><![CDATA[Alaska (1959)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
+      <Snippet maxLines="0">empty</Snippet> <lat>-152.571308132839</lat> <lng>64.3171717929199</lng> 
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
