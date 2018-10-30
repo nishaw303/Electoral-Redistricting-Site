@@ -28,17 +28,8 @@
 
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
-      <ExtendedData>
-        <Data name="suka">
-          <value>5</value>
-        </Data>
-        <Data name="sika">
-          <value>523</value>
-        </Data>
-      </ExtendedData>
-      <Snippet maxLines="0">empty</Snippet>
-      <suka>-156.326917860547</suka>
-      <lng>20.2401578536914</lng>
+      <author>-156.326917860547</author>
+      <Snippet maxLines="0">20.2401578536914</Snippet>
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
 <tr>
 <td>states.AREA:</td>
