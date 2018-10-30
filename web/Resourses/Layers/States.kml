@@ -28,16 +28,15 @@
 
     <Placemark id="pm251">
       <name><![CDATA[Hawaii (1959)]]></name>
-      <Snippet maxLines="0">empty</Snippet>
       <ExtendedData>
-      <Data name="lat">
-        <value>5</value>
-      </Data>
-      <Data name="lng">
-        <value>523</value>
-      </Data>
+        <Data name="lat">
+          <value>5</value>
+        </Data>
+        <Data name="lng">
+          <value>523</value>
+        </Data>
       </ExtendedData>
-
+      <Snippet maxLines="0">empty</Snippet>
       <lat>-156.326917860547</lat>
       <lng>20.2401578536914</lng>
       <description><![CDATA[<table cellpadding="1" cellspacing="1">
