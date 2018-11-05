@@ -71,22 +71,13 @@ var map;
         });
           
           
-        usaCtaLayer.addListener('click', function(event) {
-            console.log(event.featureData);
-        });
-          
-     
-          
-
-        
-
-          
-       
+  
           
        
         var oregonLayer = new google.maps.Data();
         oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Oregon.json');
-        //oregonLayer.setMap(map);
+       // oregonLayer.setMap(map);
+    
           
         var ohioLayer = new google.maps.Data();
         ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Ohio.json');
@@ -97,7 +88,34 @@ var map;
             'https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Massachusettes.json');
         //massachusettesLayer.setMap(map);
           
-          
+
+          usaCtaLayer.addListener('click', function(event) {
+            var name = event.featureData.name;
+            
+           if (name.includes("Massachusetts"))  {
+                massachusettesLayer.setMap(map);
+                ohioLayer.setMap(null);
+                oregonLayer.setMap(null);
+           }
+           else if (name.includes("Ohio")) {
+                massachusettesLayer.setMap(null);
+                ohioLayer.setMap(map);
+                oregonLayer.setMap(null);
+               
+           }
+           else if (name.includes("Oregon")) {
+                massachusettesLayer.setMap(null);
+                ohioLayer.setMap(null);
+                oregonLayer.setMap(map);
+           }
+           else {
+               massachusettesLayer.setMap(null);
+               ohioLayer.setMap(null);
+               oregonLayer.setMap(null);
+           }
+       });
+               
+           
           
 
         google.maps.event.addListener(map, 'click', function(event) {

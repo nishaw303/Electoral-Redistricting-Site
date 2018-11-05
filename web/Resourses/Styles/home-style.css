@@ -193,3 +193,7 @@ select {
      #target {
        width: 345px;
      }
+
+     .form-control {
+         width: 230px;
+     }
