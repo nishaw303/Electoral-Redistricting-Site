@@ -65,7 +65,7 @@ var map;
         });
 
         var usaCtaLayer = new google.maps.KmlLayer({
-          url: 'https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/States.kml',
+          url: 'https://developers.google.com/kml/documentation/us_states.kml',
           map: map,
           preserveViewport: true
         });
@@ -107,11 +107,6 @@ var map;
                 massachusettesLayer.setMap(null);
                 ohioLayer.setMap(null);
                 oregonLayer.setMap(map);
-           }
-           else {
-               massachusettesLayer.setMap(null);
-               ohioLayer.setMap(null);
-               oregonLayer.setMap(null);
            }
        });
                

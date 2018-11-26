@@ -72,6 +72,46 @@ public class MapServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+//        
+//       ObjectiveFunction objectiveFunction = new ObjectiveFunction();  
+//       
+//       
+//       //set metrics
+//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
+//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
+//               
+//               
+//               request.getParameter("populationWeight"),
+//               request.getParameter("populationWeight"),
+//       );
+//       
+//       if( regionGrowingWasntRun ) {
+//           
+//           if ( seedsWerentPicked) {
+//               
+//           }
+//       }
+//       
+//       
+//        SimulatedAnealing simulatedAnealing = new SimulatedAnealing();
+        
+        
+       
+//       
+
+
+//       SeedStrategy s;
+//       if ( request.getParameter("seedStrategy").equals("randomS")) {
+//       }
+//            
+//       Algorithm algorithm = new Algorithm();
+//       algorithm.setObjectiveFunction(objectiveFunction);
+//       algorithm.run();
+//
+//        
+//        
+       
 
         processRequest(request, response);
     }

@@ -97,10 +97,6 @@
               Population Equality
             </label>
           </div>
-          
-            <div id="equality-expanded" style="display:none;">
-            <p><input type="range" name="equality" min="0" max="1" value="0" step="0.01" class="slider">
-          <span  class="slider_label"></span></p>
 
           <div class="form-check">
             <label class="form-check-label">
@@ -109,20 +105,12 @@
             </label>
           </div>
 
-        <div id="consistency-expanded" style="display:none;">
-        <p><input type="range" name="consistency" min="0" max="1" value="0" step="0.01" class="slider">
-      <span  class="slider_label"></span></p>
-
           <div class="form-check">
             <label class="form-check-label">
               <input type="checkbox" class="form-check-input">
               Partisan Symmetry
             </label>
           </div>
-        
-          <div id="symmetry-expanded" style="display:none;">
-            <p><input type="range" name="symmetry" min="0" max="1" value="0" step="0.01" class="slider">
-          <span  class="slider_label"></span></p>
 
           <div class="form-check">
             <label class="form-check-label">
@@ -130,10 +118,6 @@
               Political Fairness
             </label>
           </div>
-            
-            <div id="fairness-expanded" style="display:none;">
-            <p><input type="range" name="fairness" min="0" max="1" value="0" step="0.01" class="slider">
-          <span  class="slider_label"></span></p>
 
           <div class="form-check">
             <label class="form-check-label">
@@ -141,10 +125,6 @@
               Alignment
             </label>
           </div>
-            
-              <div id="alignment-expanded" style="display:none;">
-            <p><input type="range" name="alignment" min="0" max="1" value="0" step="0.01" class="slider">
-          <span  class="slider_label"></span></p>
 
           <button id="submit-btn" type="submit" onclick="window.alert('Please make sure weights add up to 1!');" class="btn btn-success">CALCULATE</button>
       </form>
