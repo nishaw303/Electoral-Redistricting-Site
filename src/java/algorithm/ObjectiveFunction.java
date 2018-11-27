@@ -16,10 +16,18 @@ import mapObjects.Precinct;
  */
 public class ObjectiveFunction {
     
-	HashMap<Metric, Double> metrics = new HashMap<Metric, Double>();
+	HashMap<Metric, Double> metrics;
+	
+	public ObjectiveFunction() {
+		metrics = new HashMap<Metric, Double>();
+	}
 	
 	public void setWeight(Metric metric, double val) {
 		metrics.put(metric, val);
+	}
+	
+	public void setMetrics(HashMap<Metric, Double> metrics) {
+		this.metrics = metrics;
 	}
 	
 	public double calculateObjectiveFunction(Set<Precinct> precincts) {
