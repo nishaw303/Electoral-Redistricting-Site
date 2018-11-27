@@ -32,8 +32,6 @@ public class State {
         return true;
     }
     
-    
-    
     public double compareToState(State otherState) {
         return 0;
     }
