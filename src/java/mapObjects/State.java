@@ -20,10 +20,13 @@ import dataTypes.StateName;
 public class State {
     private StateName name;
     private ShortStateName shortName;
+    private int ID;
     private ArrayList<District> districts;
+    private District unassigned;
     //adjacentPrecincts: List<Precinct[]>
     private Set<Representative> representatives;
     private int numPrecincts;
+    private int numDistricts;
     
     public boolean makeMove(Move move) {
         return true;
@@ -48,7 +51,7 @@ public class State {
     
     // done
     public District getUnassignedDistrict() {
-        return districts.get(0);
+        return this.unassigned;
     }
     
     
@@ -70,5 +73,15 @@ public class State {
         return representatives;
     }
     
+    public int getNumDistricts() {
+    	return numDistricts;
+    }
     
+    public int getID(){
+    	return this.ID;
+    }
+    
+    public void setDistricts(ArrayList<District> districts) {
+    	this.districts = districts;
+    }
 }

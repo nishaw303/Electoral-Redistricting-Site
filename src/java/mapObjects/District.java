@@ -6,6 +6,7 @@
 package mapObjects;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -22,7 +23,13 @@ public class District {
     private int population;
     private PriorityQueue<Precinct> candidates;
     
-    
+    public District(State s, int ID) {
+    	this.stateID = s.getID();
+    	this.ID = ID;
+    	this.precincts = new HashSet<Precinct>();
+    	this.population = 0;
+    	this.candidates = new PriorityQueue<Precinct>();
+    }
     
     public Precinct getPrecinctById(int id) {
         return null;
@@ -91,5 +98,9 @@ public class District {
     	Precinct p = this.candidates.poll();
     	this.candidates.addAll(cache);
     	return p;
+    }
+    
+    public int getNumPrecincts() {
+    	return precincts.size();
     }
 }

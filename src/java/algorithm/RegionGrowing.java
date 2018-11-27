@@ -36,7 +36,7 @@ public class RegionGrowing extends Algorithm {
     		d.addPrecinct(precinctToMove);
     		unassigned.removePrecinct(precinctToMove);
     	}
-    	while (!unassigned.getPrecincts().isEmpty()) {
+    	while (this.checkTerimanationConditions() != true) {
     		District d = this.selectDistrictToGrow();
     		Precinct precinctToMove = this.findBestMovablePrecinct(d);
     		moves.push(new Move(precinctToMove, unassigned, d));
@@ -47,7 +47,8 @@ public class RegionGrowing extends Algorithm {
 
     @Override
     public boolean checkTerimanationConditions() {
-        return true;
+    	District unassigned = this.currentState.getUnassignedDistrict();
+    	return unassigned.getPrecincts().isEmpty();
     }
     
     private Precinct findBestMovablePrecinct(District d) {
@@ -68,7 +69,7 @@ public class RegionGrowing extends Algorithm {
     }
     
     public District selectDistrictToGrow() {
-        return null;
+    	return this.currentState.getLowestPolulationDistrict();
     }
     
     public void setSeedStrategy(SeedStrategy seedStrategy) {
