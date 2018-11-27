@@ -5,9 +5,8 @@
  */
 package algorithm;
 
+import mapObjects.State;
 import java.util.Stack;
-import representations.Move;
-import representations.State;
 
 /**
  *

@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package representations;
+package mapObjects;
 
+import algorithm.Move;
 import java.util.ArrayList;
 import java.util.Set;
+import dataTypes.Representative;
+import dataTypes.ShortStateName;
+import dataTypes.StateName;
 
 /**
  *

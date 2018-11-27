@@ -5,7 +5,7 @@
  */
 package algorithm;
 
-import representations.Precinct;
+import mapObjects.Precinct;
 
 /**
  *

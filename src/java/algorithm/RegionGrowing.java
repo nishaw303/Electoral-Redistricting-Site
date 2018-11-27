@@ -5,8 +5,8 @@
  */
 package algorithm;
 
-import representations.District;
-import representations.Precinct;
+import mapObjects.District;
+import mapObjects.Precinct;
 import seeding.SeedStrategy;
 
 /**

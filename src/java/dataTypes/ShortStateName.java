@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package representations;
+package dataTypes;
 
 /**
  *
  * @author spitlord
  */
-public enum StateName {
-    OHIO,
-    OREGON,
-    MASSACHUSETTS
+public enum ShortStateName {
+    MA,
+    OH,
+    OR
 }

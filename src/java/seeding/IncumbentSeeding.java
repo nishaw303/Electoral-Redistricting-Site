@@ -5,7 +5,7 @@
  */
 package seeding;
 
-import representations.State;
+import mapObjects.State;
 
 /**
  *

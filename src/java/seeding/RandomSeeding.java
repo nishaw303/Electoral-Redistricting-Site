@@ -5,13 +5,15 @@
  */
 package seeding;
 
-import representations.State;
+import mapObjects.State;
 
 /**
  *
  * @author spitlord
  */
 public class RandomSeeding implements SeedStrategy {
+
+
 
     @Override
     public void seed(State s) {
