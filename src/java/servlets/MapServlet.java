@@ -5,10 +5,10 @@
  */
 package servlets;
 
+import algorithm.Metric;
+import algorithm.ObjectiveFunction;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,44 +73,47 @@ public class MapServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-//        
-//       ObjectiveFunction objectiveFunction = new ObjectiveFunction();  
-//       
-//       
-//       //set metrics
-//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
-//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
-//               
-//               
-//               request.getParameter("populationWeight"),
-//               request.getParameter("populationWeight"),
-//       );
-//       
-//       if( regionGrowingWasntRun ) {
-//           
-//           if ( seedsWerentPicked) {
-//               
-//           }
-//       }
-//       
-//       
-//        SimulatedAnealing simulatedAnealing = new SimulatedAnealing();
         
-        
+       ObjectiveFunction objectiveFunction = new ObjectiveFunction();  
        
-//       
+       
+       //set metrics
+       double compactness = Double.valueOf(request.getParameter("compactness"));
+       double partisanFairness = Double.valueOf(request.getParameter("partisanFairness"));
+       double consistency = Double.valueOf(request.getParameter("consistency"));
+       double gerrymandering = Double.valueOf(request.getParameter("gerrymandering"));
+       double allignment = Double.valueOf(request.getParameter("populationWeight"));
+       double populationEquality = Double.valueOf(request.getParameter("populationWeight"));
+       
+       objectiveFunction.setWeights(Metric.COMPACTNESS, compactness);
+       
+       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
+        request.getParameter("populationWeight");
+               request.getParameter("populationWeight"),
+       );
+       
+       if( regionGrowingWasntRun ) {
+           
+           if ( seedsWerentPicked) {
+               
+           }
+       }
+       
+       
+        SimulatedAnealing simulatedAnealing = new SimulatedAnealing();
+          
 
 
-//       SeedStrategy s;
-//       if ( request.getParameter("seedStrategy").equals("randomS")) {
-//       }
-//            
-//       Algorithm algorithm = new Algorithm();
-//       algorithm.setObjectiveFunction(objectiveFunction);
-//       algorithm.run();
-//
-//        
-//        
+       SeedStrategy s;
+       if ( request.getParameter("seedStrategy").equals("randomS")) {
+       }
+            
+       Algorithm algorithm = new Algorithm();
+       algorithm.setObjectiveFunction(objectiveFunction);
+       algorithm.run();
+
+        
+        
        
 
         processRequest(request, response);

@@ -23,8 +23,7 @@ public class Precinct {
     private double area;
     private ArrayList<Precinct> neighbors;
     private Map<Year, VotingData> votingData;
-    // isMovable
-    // isBorder
+    private boolean isBorder;
     // points: List<Point>
 
     public ArrayList<Precinct> getNeighbors() {
