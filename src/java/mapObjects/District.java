@@ -26,7 +26,7 @@ public class District {
         return null;
     }
     
-    // done
+    // Add logic to update candidates
     public boolean addPrecinct(Precinct precinct) {
         if (precincts.add(precinct)) {
             updatePopulation(population + precinct.getPopulation());
@@ -35,7 +35,7 @@ public class District {
         return false;
     }
     
-    // done
+    // Add logic to update candidates
     public boolean removePrecinct(Precinct precinct) {
         if (precincts.remove(precinct)) {
             updatePopulation(population - precinct.getPopulation());
