@@ -6,6 +6,7 @@
 package algorithm;
 
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import mapObjects.District;
 import mapObjects.Precinct;
@@ -30,18 +31,15 @@ public class RegionGrowing extends Algorithm {
     	District unassigned = currentState.getUnassignedDistrict();
     	while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() / 2) {
     		District d = this.selectDistrictToGrow();
-    		PriorityQueue<Precinct> candidates = d.getCandidates();
-    		Precinct precinctToMove = candidates.poll();
-    		Move move = new Move(precinctToMove, unassigned, d);
-    		moves.push(move);
+    		Precinct precinctToMove = d.getRandomCandidate();
+    		moves.push(new Move(precinctToMove, unassigned, d));
     		d.addPrecinct(precinctToMove);
     		unassigned.removePrecinct(precinctToMove);
     	}
-    	while (unassigned.getPrecincts().size() > 0) {
+    	while (!unassigned.getPrecincts().isEmpty()) {
     		District d = this.selectDistrictToGrow();
     		Precinct precinctToMove = this.findBestMovablePrecinct(d);
-    		Move move = new Move(precinctToMove, unassigned, d);
-    		moves.push(move);
+    		moves.push(new Move(precinctToMove, unassigned, d));
     		d.addPrecinct(precinctToMove);
     		unassigned.removePrecinct(precinctToMove);
     	}
@@ -54,10 +52,19 @@ public class RegionGrowing extends Algorithm {
     
     private Precinct findBestMovablePrecinct(District d) {
     	PriorityQueue<Precinct> candidates = d.getCandidates();
+    	Set<Precinct> precincts = d.getPrecincts();
+    	Precinct bestP = null;
+    	double bestOFV = 0;
     	for (Precinct p: candidates) {
-    		
+    		precincts.add(p);
+    		double currentOFV = objectiveFunction.calculateObjectiveFunction(precincts);
+    		if (currentOFV > bestOFV) {
+    			bestOFV = currentOFV;
+    			bestP = p;
+    		}
+    		precincts.remove(p);
     	}
-    	return null;
+    	return bestP;
     }
     
     public District selectDistrictToGrow() {
@@ -66,16 +73,5 @@ public class RegionGrowing extends Algorithm {
     
     public void setSeedStrategy(SeedStrategy seedStrategy) {
         this.seedStrategy = seedStrategy;
-    }
-    
-    
-    
-    
-    
-
-    
-   
-    
-    
-    
+    } 
 }

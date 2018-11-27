@@ -5,8 +5,10 @@
  */
 package mapObjects;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -80,5 +82,14 @@ public class District {
         return population;
     }
     
-    
+    public Precinct getRandomCandidate(){
+    	ArrayList<Precinct> cache = new ArrayList<Precinct>();
+    	int rand = ThreadLocalRandom.current().nextInt(this.candidates.size());
+    	for (int i = 0; i < rand; i++) {
+    		cache.add(this.candidates.poll());
+    	}
+    	Precinct p = this.candidates.poll();
+    	this.candidates.addAll(cache);
+    	return p;
+    }
 }

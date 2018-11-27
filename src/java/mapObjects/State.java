@@ -5,9 +5,10 @@
  */
 package mapObjects;
 
-import algorithm.Move;
 import java.util.ArrayList;
 import java.util.Set;
+
+import algorithm.Move;
 import dataTypes.Representative;
 import dataTypes.ShortStateName;
 import dataTypes.StateName;
@@ -32,6 +33,10 @@ public class State {
     
     public double compareToState(State otherState) {
         return 0;
+    }
+    
+    public int getNumPrecincts() {
+    	return this.numPrecincts;
     }
     
     // done
