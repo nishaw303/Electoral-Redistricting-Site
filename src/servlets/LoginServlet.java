@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("username", username);
         
         // redirecting to the map page
-        response.sendRedirect("/elections/map.jsp");
+        response.sendRedirect("/election/map.jsp");
       
        
     }
