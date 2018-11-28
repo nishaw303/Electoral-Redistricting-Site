@@ -25,7 +25,7 @@ public class Precinct {
     private ArrayList<Precinct> neighbors;
     private Map<Year, VotingData> votingData;
     // isMovable
-    // isBorder
+    private boolean isBorder;
     // points: List<Point>
 
     public ArrayList<Precinct> getNeighbors() {
@@ -34,6 +34,10 @@ public class Precinct {
 
     public int getDistrictID() {
         return districtID;
+    }
+    
+    public boolean isBorder() {
+    	return isBorder;
     }
 
     public Map<Year, VotingData> getVotingData() {
