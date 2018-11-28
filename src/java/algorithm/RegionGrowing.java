@@ -57,7 +57,7 @@ public class RegionGrowing extends Algorithm {
     }
 
     @Override
-    public boolean checkTerimanationConditions() {
+    protected boolean checkTerimanationConditions() {
     	District unassigned = this.currentState.getUnassignedDistrict();
     	return unassigned.getPrecincts().isEmpty();
     }
@@ -79,7 +79,7 @@ public class RegionGrowing extends Algorithm {
     	return bestP;
     }
     
-    public District selectDistrictToGrow() {
+    private District selectDistrictToGrow() {
     	return this.currentState.getLowestPolulationDistrict();
     }
     

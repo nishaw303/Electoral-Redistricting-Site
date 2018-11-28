@@ -25,6 +25,6 @@ public abstract class Algorithm {
  
  abstract public void run();
  
- abstract public boolean checkTerimanationConditions();
+ abstract protected boolean checkTerimanationConditions();
  
 }

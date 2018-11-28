@@ -6,6 +6,8 @@
 package mapObjects;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Set;
 
 import algorithm.Move;
@@ -32,8 +34,6 @@ public class State {
         return true;
     }
     
-    
-    
     public double compareToState(State otherState) {
         return 0;
     }
@@ -57,15 +57,9 @@ public class State {
     
     // done
     public District getLowestPolulationDistrict() {
-        int minPopulation = Integer.MAX_VALUE;
-        District lowestPopulationDistrict = districts.get(1);
-        
-        for (int i = 2; i < districts.size(); i++) {
-            if (districts.get(i).getPopulation() < minPopulation) {
-                lowestPopulationDistrict = districts.get(i);
-            }    
-        }
-        return lowestPopulationDistrict;
+    	return Collections.min(districts, (District d1, District d2) -> {
+    		return ((Integer) d1.getPopulation()).compareTo(d2.getPopulation());
+    	});
     }
     
     // done
