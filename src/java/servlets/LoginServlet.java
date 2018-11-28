@@ -36,8 +36,6 @@ public class LoginServlet extends HttpServlet {
         
         // redirecting to the map page
         response.sendRedirect("/elections/map.jsp");
-      
-       
     }
 
 }

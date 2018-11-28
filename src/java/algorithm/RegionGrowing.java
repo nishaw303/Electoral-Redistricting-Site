@@ -66,7 +66,8 @@ public class RegionGrowing extends Algorithm {
     	double bestOFV = 0;
     	for (Precinct p: candidates) {
     		precincts.add(p);
-    		double currentOFV = objectiveFunction.calculateObjectiveFunction(precincts);
+    		double currentOFV = 0;//objectiveFunction.calculateObjectiveFunction(precincts);
+                
     		if (currentOFV > bestOFV) {
     			bestOFV = currentOFV;
     			bestP = p;

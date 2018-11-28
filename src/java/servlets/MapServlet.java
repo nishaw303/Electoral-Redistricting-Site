@@ -88,7 +88,7 @@ public class MapServlet extends HttpServlet {
       
        
        if(!isLoaded) {
-            ObjectiveFunction objectiveFunction = new ObjectiveFunction();
+            
             HashMap<Metric, Double> metrics = new HashMap();
             metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
             metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
@@ -97,7 +97,9 @@ public class MapServlet extends HttpServlet {
             metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
             metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
             
-            objectiveFunction.setMetrics(metrics);
+            
+            ObjectiveFunction objectiveFunction = new ObjectiveFunction(metrics);
+      
             
             SeedStrategy seedStrategy = null;
             
@@ -115,30 +117,16 @@ public class MapServlet extends HttpServlet {
                     seedStrategy
             );
             regionGrowing.run();
-            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(new State()); // 
+            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(new State()); //  State manager
             
             
        }
        else {
-           
-       }
        }
           
 
 
-       SeedStrategy s;
-       if ( request.getParameter("seedStrategy").equals("randomS")) {
-       }
-            
-       Algorithm algorithm = new Algorithm();
-       algorithm.setObjectiveFunction(objectiveFunction);
-       algorithm.run();
-
-        
-        
-       
-
-        processRequest(request, response);
+    
     }
 
     /**
