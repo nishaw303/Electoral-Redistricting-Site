@@ -5,8 +5,9 @@
  */
 package algorithm;
 
-import mapObjects.State;
 import java.util.Stack;
+
+import mapObjects.State;
 
 /**
  *
@@ -14,18 +15,16 @@ import java.util.Stack;
  */
 public abstract class Algorithm {
     
- private double currentObjectiveValue;
- private ObjectiveFunction objectiveFunction;
- private State currentState;
- private int noImprovement;
- private static int noImprovementTolerance;
- private Stack<Move> moves;
+ protected double currentObjectiveValue;
+ protected ObjectiveFunction objectiveFunction;
+ protected State currentState;
+ protected int noImprovement;
+ protected static int noImprovementTolerance;
+ protected Stack<Move> moves;
     
  
  abstract public void run();
  
- abstract public boolean checkTerimanationConditions();
-
- 
+ abstract protected boolean checkTerimanationConditions();
  
 }

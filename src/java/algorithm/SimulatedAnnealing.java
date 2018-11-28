@@ -24,7 +24,7 @@ public class SimulatedAnnealing extends Algorithm {
     }
 
     @Override
-    public boolean checkTerimanationConditions() {
+    protected boolean checkTerimanationConditions() {
         return true;
     }
     

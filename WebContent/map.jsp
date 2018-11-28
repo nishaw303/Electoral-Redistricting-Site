@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>    
+  <head>
+      
     <!-- GoogleAPI jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Font Awesome Icons -->
@@ -25,7 +26,7 @@
     <meta charset="utf-8">
   </head>
   <body>
-        <div id="map"></div>
+    <div id="map"></div>
     <div id="left-panel">
       <div id="content" style="display:inline;">
       <div id="tabs">
@@ -43,130 +44,87 @@
       </div>
 
       <div id="customize-panel">
-        <form class="form" id="options-form" action="calculate" method="post">
-          <h1>Redistricting Metrics</h1>
-          <div class="form-group row" id="state">
-           <label class="control-label col-sm-4" for="state">
-             <h2>State:</h2>
-           </label>
-           <div class="col-sm-8">
-             <select class="form-control" id="state" name="state">
-               <option name="Massachusetts" value="MA">Massachusets</option>
-               <option name="Ohio" value="OH">Ohio</option>
-               <option name="Oregon" value="OR">Oregon</option>
-             </select>
-           </div>
+        <form id="options-form">
+          <h2>Objective Function Factors</h2>
+
+          <div class="form-group">
+           <label for="year">Election Data Year</label>
+           <select class="form-control" id="year" name="year">
+             <option value="2017">2017</option>
+             <option value="2016">2016</option>
+             <option value="2015">2015</option>
+             <option value="2014">2014</option>
+             <option value="2013">2013</option>
+             <option value="2012">2012</option>
+             <option value="2011">2011</option>
+             <option value="2010">2010</option>
+           </select>
+           <label for="typoooooo">Election Type</label>
+           <select class="form-control" id="typeOfElection" name="typeofelection">
+             <option value="Congressional">Congressional</option>
+             <option value="Presidential">Presidential</option>
+             <option value="Legislative">Legislative</option>
+           </select>
          </div>
 
-         <div class="form-group row" id="districts">
-          <label class="control-label col-sm-4" for="districts">
-            Num Districts:
-          </label>
-          <div class="col-sm-7">
-            <input class="form-control" type="number" id="numDistricts" name="numDistricts" min="1" max="100">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" onchange="toggleCheck(this);">
+              Compactness
+            </label>
           </div>
-        </div>
 
-          <div class="form-group row" id="electionYear">
-           <label class="control-label col-sm-4" for="year">
-             Election Year:
-           </label>
-           <div class="col-sm-7">
-             <select class="form-control" id="year" name="year">
-           </select>
-         </div>
-         </div>
-         
-         
-          <div class="form-group row" id="electionYear">
-           <label class="control-label col-sm-4" for="year">
-             Seed Strategy:
-           </label>
-           <div class="col-sm-7">
-             <select class="form-control" id="seedStrategy" name="seedStrategy">
-             	<option value="random">Random</option>
-             	<option value="incumbent">Incumbent</option>
-           </select>
-         </div>
-         </div>
+          <div id="compactness-expanded" style="display:none;">
+            <p><input type="range" name="compactness" min="0" max="1" value="0" step="0.01" class="slider">
+          <span  class="slider_label"></span></p>
 
-         <div class="form-check" id="compactness">
-           <label class="form-check-label">
-             <input type="checkbox" name="compactness" class="form-check-input" onchange="toggleCheck(this);">
-             Compactness
-           </label>
-         </div>
-      <div id="compactness-expanded" style="display:none;">
-        <p><input type="range" name="compactness" min="0" max="1" value="0" step="0.01" class="slider">
-        <span  class="slider_label"></span></p>
+            <p><label for="range_weight">Polsby-Popper: </label>
+              <input type="range" name="polsby" min="0" max="1" value="0" step="0.01" class="sub slider">
+            <span  class="slider_label"></span></p>
 
-        <p><label for="range_weight">Polsby-Popper: </label>
-          <input type="range" name="polsby" min="0" max="1" value="0" step="0.01" class="sub slider">
-        <span  class="slider_label"></span></p>
+            <p><label for="range_weight">Schwartzberg: </label>
+              <input type="range" name="schwartzberg" min="0" max="1" value="0" step="0.01" class="sub slider">
+            <span  class="slider_label"></span></p>
 
-        <p><label for="range_weight">Schwartzberg: </label>
-          <input type="range" name="schwartzberg" min="0" max="1" value="0" step="0.01" class="sub slider">
-        <span  class="slider_label"></span></p>
+            <p><label for="range_weight">Reock Score: </label>
+              <input type="range" name="reock" min="0" max="1" value="0" step="0.01" class="sub slider">
+            <span style="display:inline;"class="slider_label"></span></p>
+          </div>
 
-        <p><label for="range_weight">Reock Score: </label>
-          <input type="range" name="reock" min="0" max="1" value="0" step="0.01" class="sub slider">
-        <span style="display:inline;"class="slider_label"></span></p>
-      </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              Population Equality
+            </label>
+          </div>
 
-  <div class="form-check" id="populationEquality">
-    <label class="form-check-label">
-      <input type="checkbox" name="populationEquality" class="form-check-input" onchange="toggleCheck(this);">
-      Population Equality
-    </label>
-  </div>
-    <div id="population-equality-expanded" style="display:none;">
-      <p><input type="range" name="populationEquality" min="0" max="1" value="0" step="0.01" class="slider">
-    <span  class="slider_label"></span></p>
-    </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              Consistency
+            </label>
+          </div>
 
-  <div class="form-check" id="consistency">
-    <label class="form-check-label">
-      <input type="checkbox" name="consistency" class="form-check-input" onchange="toggleCheck(this);">
-      Consistency (*?)
-    </label>
-  </div>
-    <div id="consistency-expanded" style="display:none;">
-      <p><input type="range" name="consistency" min="0" max="1" value="0" step="0.01" class="slider">
-    <span  class="slider_label"></span></p>
-    </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              Partisan Symmetry
+            </label>
+          </div>
 
-  <div class="form-check" id="partisanSymmetry">
-    <label class="form-check-label">
-      <input type="checkbox" name="partisanSymmetry" class="form-check-input" onchange="toggleCheck(this);">
-      Partisan Symmetry
-    </label>
-  </div>
-    <div id="partisan-symmetry-expanded" style="display:none;">
-      <p><input type="range" name="partisanSymmetry" min="0" max="1" value="0" step="0.01" class="slider">
-    <span  class="slider_label"></span></p>
-    </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              Political Fairness
+            </label>
+          </div>
 
-  <div class="form-check" id="politicalFairness">
-    <label class="form-check-label">
-      <input type="checkbox" name="politicalFairness" class="form-check-input" onchange="toggleCheck(this);">
-      Political Fairness
-    </label>
-  </div>
-    <div id="political-fairness-expanded" style="display:none;">
-      <p><input type="range" name="politicalFairness" min="0" max="1" value="0" step="0.01" class="slider">
-    <span  class="slider_label"></span></p>
-    </div>
-
-  <div class="form-check" id="alignment">
-    <label class="form-check-label">
-      <input type="checkbox" name="alignment" class="form-check-input" onchange="toggleCheck(this);">
-      Alignment
-    </label>
-  </div>
-    <div id="alignment-expanded" style="display:none;">
-      <p><input type="range" name="alignment" min="0" max="1" value="0" step="0.01" class="slider">
-    <span  class="slider_label"></span></p>
-    </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input">
+              Alignment
+            </label>
+          </div>
 
           <button id="submit-btn" type="submit" onclick="window.alert('Please make sure weights add up to 1!');" class="btn btn-success">CALCULATE</button>
       </form>
@@ -211,7 +169,6 @@
 
     </div>
     <div id="console">
-    	<!--  TODO: add if statement here to check if username is null, just say Welcome. -->
       <p>Welcome, ${sessionScope.username} <p>
       <p>/Console log</p>
       <p>Server is currently active.<p>
