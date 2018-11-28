@@ -107,17 +107,17 @@
           
        
         var oregonLayer = new google.maps.Data();
-        oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Oregon.json');
+        oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Oregon.json');
        // oregonLayer.setMap(map);
     
           
         var ohioLayer = new google.maps.Data();
-        ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Ohio.json');
+        ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Ohio.json');
         //ohioLayer.setMap(map);
           
         var massachusettesLayer = new google.maps.Data();
         massachusettesLayer.loadGeoJson(
-            'https://raw.githubusercontent.com/spitlord/election/master/web/Resourses/Layers/Massachusettes.json');
+            'https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Massachusettes.json');
         //massachusettesLayer.setMap(map);
           
 
