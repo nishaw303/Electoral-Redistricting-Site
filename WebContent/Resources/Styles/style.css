@@ -1,0 +1,15 @@
+#info {
+  margin: 0 auto;
+  max-width: 60%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+body {
+  background-color: CadetBlue	;
+}
+
+.question {
+  background-color: LemonChiffon;
+}
