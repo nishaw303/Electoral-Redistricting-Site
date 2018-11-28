@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("username", username);
         
         // redirecting to the map page
-        response.sendRedirect("/elections/map.jsp");
+        response.sendRedirect("/election/map.jsp");
       
        
     }
