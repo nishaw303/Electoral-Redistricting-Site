@@ -8,6 +8,7 @@ package servlets;
 import algorithm.Metric;
 import algorithm.ObjectiveFunction;
 import algorithm.RegionGrowing;
+import algorithm.SimulatedAnnealing;
 import mapObjects.State;
 import dataTypes.StateName;
 import java.io.IOException;
@@ -95,6 +96,7 @@ public class MapServlet extends HttpServlet {
             metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
             metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
             metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
+            
             objectiveFunction.setMetrics(metrics);
             
             SeedStrategy seedStrategy = null;
@@ -108,38 +110,19 @@ public class MapServlet extends HttpServlet {
             
             StateName stateName = StateName.valueOf(request.getParameter("stateName"));
             RegionGrowing regionGrowing = new RegionGrowing(
-                    StateManager.
-                    
+                    new State(),  // state manager? how to use? static
+                    objectiveFunction,
+                    seedStrategy
             );
-                    
-            );
-            regionGrowing.setObjectiveFunction(objectiveFunction);
-            regionGrowing.setSeedStrategy(seedStrategy);
-            
             regionGrowing.run();
+            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(new State()); // 
+            
+            
        }
        else {
            
        }
-            
-            
-            
-            
-            
-            RegionGrowing regionGrowing = new RegionGrowing();
-            regionGrowing.setObjectiveFunction(objectiveFunction);
-            regionGrowing.setSeedStrategy(seedStrategy);
-            
-            
-            
-            
-           
-           
-           
        }
-       
-       
-        SimulatedAnealing simulatedAnealing = new SimulatedAnealing();
           
 
 

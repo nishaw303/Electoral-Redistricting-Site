@@ -6,6 +6,7 @@
 package algorithm;
 
 import mapObjects.Precinct;
+import mapObjects.State;
 
 /**
  *
@@ -13,8 +14,11 @@ import mapObjects.Precinct;
  */
 public class SimulatedAnnealing extends Algorithm {
 
-    public SimulatedAnnealing() {
+    
+
+    public SimulatedAnnealing(State state) {
         super();
+        this.currentState = state;
     }
     
     

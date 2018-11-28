@@ -27,9 +27,6 @@ public class RegionGrowing extends Algorithm {
         this.objectiveFunction = of;
         this.seedStrategy = strategy;
     }
-    
-   
-   
 
     public RegionGrowing(SeedStrategy seedStrategy) {
        super();
