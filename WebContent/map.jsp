@@ -77,6 +77,18 @@
            </select>
          </div>
          </div>
+         
+         <div class="form-group row" id="electionYear">
+           <label class="control-label col-sm-4" for="year">
+             Seed Strategy
+           </label>
+           <div class="col-sm-7">
+             <select class="form-control" id="seedStrategy" name="seedStrategy">
+             	<option>Random</option>
+             	<option>Incumbent</option>
+           </select>
+         </div>
+         </div>
 
          <div class="form-check" id="compactness">
            <label class="form-check-label">

@@ -60,6 +60,7 @@ height: 70%;
   position: absolute;  /* lays on top of map div */
   top: 0;
   left: 0;
+  overflow: auto;
 }
 
 #tabs {
