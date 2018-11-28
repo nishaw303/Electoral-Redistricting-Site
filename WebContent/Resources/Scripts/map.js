@@ -32,11 +32,11 @@ function expand() {
 	}
 }
 
- function displayContent() {
+function displayContent() {
 	 document.getElementById("content").style = "display:inline;";
  }
 
-  function toggleCheck(checkbox) {
+function toggleCheck(checkbox) {
     if (checkbox.checked == true) {
     	if (checkbox.name === "compactness") 
 		document.getElementById("compactness-expanded").style.display = "inline";
@@ -65,90 +65,68 @@ function expand() {
 		else if (checkbox.name === "alignment") 
 			document.getElementById("alignment-expanded").style.display = "none";
 	 }
-	 }
-  // function to update slider values
-  $(function() {
+}
+  
+  
+$(function() {
   $('.slider').on('input change', function(){
-        $(this).next($('.slider_label')).html(this.value);
-      });
-    $('.slider_label').each(function(){
-        var value = $(this).prev().attr('value');
-            $(this).html(value);
-          });
+	  $(this).next($('.slider_label')).html(this.value);
   });
-  
-  
-      // This example adds a search box to a map, using the Google Place Autocomplete
-  // feature. People can enter geographical searches. The search box will return a
-  // pick list containing a mix of places and predicted search terms.
-
-  // This example requires the Places library. Include the libraries=places
-  // parameter when you first load the API. For example:
-  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-  function initAutocomplete() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 4,
-  center: {lat: 37, lng: -97}
+  $('.slider_label').each(function(){
+	  var value = $(this).prev().attr('value');
+      $(this).html(value);
+  });
 });
+  
+  
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+function initAutocomplete() {
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 4,
+		center: {lat: 37, lng: -97}
+	});
 
-var usaCtaLayer = new google.maps.KmlLayer({
-  url: 'https://developers.google.com/kml/documentation/us_states.kml',
-          map: map,
-          preserveViewport: true
-        });
+	var usaCtaLayer = new google.maps.KmlLayer({
+	  url: 'https://developers.google.com/kml/documentation/us_states.kml',
+	          map: map,
+	          preserveViewport: true
+	});
           
-          
+    var oregonLayer = new google.maps.Data();
+    oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Oregon.json');
+ 
+    var ohioLayer = new google.maps.Data();
+    ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Ohio.json');
   
-          
-       
-        var oregonLayer = new google.maps.Data();
-        oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Oregon.json');
-   // oregonLayer.setMap(map);
-
-  
-var ohioLayer = new google.maps.Data();
-ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Ohio.json');
-//ohioLayer.setMap(map);
-  
-var massachusettesLayer = new google.maps.Data();
-massachusettesLayer.loadGeoJson(
-    'https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Massachusetts.json');
-//massachusettesLayer.setMap(map);
-  
-
-  usaCtaLayer.addListener('click', function(event) {
-    var name = event.featureData.name;
-    
-   if (name.includes("Massachusetts"))  {
-        massachusettesLayer.setMap(map);
-        ohioLayer.setMap(null);
-        oregonLayer.setMap(null);
-   }
-   else if (name.includes("Ohio")) {
-        massachusettesLayer.setMap(null);
-        ohioLayer.setMap(map);
-        oregonLayer.setMap(null);
-       
-   }
-   else if (name.includes("Oregon")) {
-            massachusettesLayer.setMap(null);
-            ohioLayer.setMap(null);
-            oregonLayer.setMap(map);
-       }
-   });
-           
-       
-      
-
+    var massachusettsLayer = new google.maps.Data();
+    massachusettsLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Massachusetts.json');
+ 
+    usaCtaLayer.addListener('click', function(event) {
+    	var name = event.featureData.name;
+    	if (name.includes("Massachusetts"))  {
+	        massachusettsLayer.setMap(map);
+	        ohioLayer.setMap(null);
+	        oregonLayer.setMap(null);
+    	}
+    	else if (name.includes("Ohio")) {
+	        massachusettsLayer.setMap(null);
+	        ohioLayer.setMap(map);
+	        oregonLayer.setMap(null);
+    	}
+    	else if (name.includes("Oregon")) {
+	        massachusettsLayer.setMap(null);
+	        ohioLayer.setMap(null);
+	        oregonLayer.setMap(map);
+    	}
+   });         
     google.maps.event.addListener(map, 'click', function(event) {
     console.log(event.latLng.lat(),event.latLng.lng());
 });
-
-  
-
-  
-
 
 // Create the search box and link it to the UI element.
 var input = document.getElementById('pac-input');
