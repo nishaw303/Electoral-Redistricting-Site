@@ -5,9 +5,10 @@
  */
 package mapObjects;
 
-import algorithm.Move;
 import java.util.ArrayList;
 import java.util.Set;
+
+import algorithm.Move;
 import dataTypes.Representative;
 import dataTypes.ShortStateName;
 import dataTypes.StateName;
@@ -19,10 +20,13 @@ import dataTypes.StateName;
 public class State {
     private StateName name;
     private ShortStateName shortName;
+    private int ID;
     private ArrayList<District> districts;
+    private District unassigned;
     //adjacentPrecincts: List<Precinct[]>
     private Set<Representative> representatives;
     private int numPrecincts;
+    private int numDistricts;
     
     public boolean makeMove(Move move) {
         return true;
@@ -34,6 +38,10 @@ public class State {
         return 0;
     }
     
+    public int getNumPrecincts() {
+    	return this.numPrecincts;
+    }
+    
     // done
     public boolean isAdjacenct(Precinct p1, Precinct p2) {
         if (p1.getNeighbors().contains(p2)) return true;
@@ -43,7 +51,7 @@ public class State {
     
     // done
     public District getUnassignedDistrict() {
-        return districts.get(0);
+        return this.unassigned;
     }
     
     
@@ -65,5 +73,15 @@ public class State {
         return representatives;
     }
     
+    public int getNumDistricts() {
+    	return numDistricts;
+    }
     
+    public int getID(){
+    	return this.ID;
+    }
+    
+    public void setDistricts(ArrayList<District> districts) {
+    	this.districts = districts;
+    }
 }

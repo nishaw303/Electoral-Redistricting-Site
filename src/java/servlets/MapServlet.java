@@ -7,11 +7,17 @@ package servlets;
 
 import algorithm.Metric;
 import algorithm.ObjectiveFunction;
+import algorithm.RegionGrowing;
+import mapObjects.State;
+import dataTypes.StateName;
 import java.io.IOException;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import seeding.RandomSeeding;
+import seeding.SeedStrategy;
 
 /**
  *
@@ -74,29 +80,62 @@ public class MapServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-       ObjectiveFunction objectiveFunction = new ObjectiveFunction();  
        
        
-       //set metrics
-       double compactness = Double.valueOf(request.getParameter("compactness"));
-       double partisanFairness = Double.valueOf(request.getParameter("partisanFairness"));
-       double consistency = Double.valueOf(request.getParameter("consistency"));
-       double gerrymandering = Double.valueOf(request.getParameter("gerrymandering"));
-       double allignment = Double.valueOf(request.getParameter("populationWeight"));
-       double populationEquality = Double.valueOf(request.getParameter("populationWeight"));
+       boolean isLoaded = Boolean.valueOf(request.getParameter("isLoaded"));
        
-       objectiveFunction.setWeights(Metric.COMPACTNESS, compactness);
+      
        
-       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
-        request.getParameter("populationWeight");
-               request.getParameter("populationWeight"),
-       );
-       
-       if( regionGrowingWasntRun ) {
+       if(!isLoaded) {
+            ObjectiveFunction objectiveFunction = new ObjectiveFunction();
+            HashMap<Metric, Double> metrics = new HashMap();
+            metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
+            metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
+            metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("consistency")));
+            metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
+            metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
+            metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
+            objectiveFunction.setMetrics(metrics);
+            
+            SeedStrategy seedStrategy = null;
+            
+            if (request.getParameter("seedStrategy").equals("random")){
+                seedStrategy = new RandomSeeding();
+            }
+            else if (request.getParameter("seedStrategy").equals("incumbent")) {
+                seedStrategy = new RandomSeeding();
+            }
+            
+            StateName stateName = StateName.valueOf(request.getParameter("stateName"));
+            RegionGrowing regionGrowing = new RegionGrowing(
+                    StateManager.
+                    
+            );
+                    
+            );
+            regionGrowing.setObjectiveFunction(objectiveFunction);
+            regionGrowing.setSeedStrategy(seedStrategy);
+            
+            regionGrowing.run();
+       }
+       else {
            
-           if ( seedsWerentPicked) {
-               
-           }
+       }
+            
+            
+            
+            
+            
+            RegionGrowing regionGrowing = new RegionGrowing();
+            regionGrowing.setObjectiveFunction(objectiveFunction);
+            regionGrowing.setSeedStrategy(seedStrategy);
+            
+            
+            
+            
+           
+           
+           
        }
        
        

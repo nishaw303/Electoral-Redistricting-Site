@@ -8,6 +8,7 @@ package mapObjects;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
+
 import dataTypes.VotingData;
 
 /**
@@ -54,12 +55,18 @@ public class Precinct {
         return ID;
     }
     
+    @Override
+    public int hashCode() {
+    	return (int) ID * name.hashCode();
+    }
     
-    
-    
-    
-    
-    
- 
-    
+    @Override
+    public boolean equals(Object o) {
+    	if (o instanceof Precinct) {
+    		if (this.ID == ((Precinct) o).ID && this.name == ((Precinct) o).name) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 }
