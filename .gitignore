@@ -1,2 +1,5 @@
 /dist/
 /bin/
+/.settings/
+/.project/
+/.classpath/
