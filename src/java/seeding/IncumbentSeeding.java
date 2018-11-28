@@ -35,6 +35,7 @@ public class IncumbentSeeding implements SeedStrategy {
     		District d = new District(s, i.getAndIncrement());
     		districts.add(d);
     		d.addPrecinct(seed);
+    		unassigned.removePrecinct(seed);
     	});
     	s.setDistricts(districts);
     }
