@@ -13,6 +13,7 @@ import mapObjects.State;
 import dataTypes.StateName;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,21 +85,15 @@ public class MapServlet extends HttpServlet {
        
        
        boolean isLoaded = Boolean.valueOf(request.getParameter("isLoaded"));
-       
-      
-       
        if(!isLoaded) {
-            
-            HashMap<Metric, Double> metrics = new HashMap();
+            Map<Metric, Double> metrics = new HashMap();
             metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
             metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
             metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("consistency")));
             metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
             metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
             metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
-            
-            
-            ObjectiveFunction objectiveFunction = new ObjectiveFunction(metrics);
+            ObjectiveFunction objectiveFunction = new ObjectiveFunction(metrics);// todo
       
             
             SeedStrategy seedStrategy = null;
@@ -107,7 +102,7 @@ public class MapServlet extends HttpServlet {
                 seedStrategy = new RandomSeeding();
             }
             else if (request.getParameter("seedStrategy").equals("incumbent")) {
-                seedStrategy = new RandomSeeding();
+                seedStrategy = new RandomSeeding();//mhhh
             }
             
             StateName stateName = StateName.valueOf(request.getParameter("stateName"));
@@ -122,6 +117,7 @@ public class MapServlet extends HttpServlet {
             
        }
        else {
+           // ... 
        }
           
 

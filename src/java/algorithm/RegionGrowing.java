@@ -37,7 +37,7 @@ public class RegionGrowing extends Algorithm {
     public void run() {
     	seedStrategy.seed(currentState);
     	District unassigned = currentState.getUnassignedDistrict();
-    	while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() / 2) {
+    	while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() / 2) { // magic
     		District d = this.selectDistrictToGrow();
     		Precinct precinctToMove = d.getRandomCandidate();
     		moves.push(new Move(precinctToMove, unassigned, d));

@@ -22,9 +22,9 @@ public class RandomSeeding implements SeedStrategy {
 
     @Override
     public void seed(State s) {
-    	District unassigned = s.getUnassignedDistrict();
-    	HashSet<Precinct> seeds = new HashSet<Precinct>();
-    	for (int i = 0; i < s.getNumDistricts();) {
+    	District unassigned = s.getUnassignedDistrict();    // ...
+    	HashSet<Precinct> seeds = new HashSet<Precinct>();  // separate random generation
+    	for (int i = 0; i < s.getNumDistricts();) {         // pass strategy 
     		int rand = ThreadLocalRandom.current().nextInt(unassigned.getNumPrecincts());
     		if (!seeds.contains(unassigned.getPrecinctById(rand))){
     			seeds.add(unassigned.getPrecinctById(rand));
@@ -41,4 +41,6 @@ public class RandomSeeding implements SeedStrategy {
     	});
     	s.setDistricts(districts);
     }
+    
+    // private methods
 }

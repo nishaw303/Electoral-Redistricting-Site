@@ -1,7 +1,7 @@
 /dist/
 /bin/
 /.settings/
-/.project/
-/.classpath/
+/.project
+/.classpath
 
 /nbproject/private/

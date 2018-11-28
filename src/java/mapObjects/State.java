@@ -7,8 +7,8 @@ package mapObjects;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 import algorithm.Move;
 import dataTypes.Representative;
@@ -77,5 +77,18 @@ public class State {
     
     public void setDistricts(ArrayList<District> districts) {
     	this.districts = districts;
+    }
+    
+    public District getRandomDistrict() {
+    	return this.districts.get(ThreadLocalRandom.current().nextInt(this.getNumDistricts()));
+    }
+    
+    public District getDistrict(int distID) {
+    	for (District d: districts) {
+    		if (distID == d.getID()) {
+    			return d;
+    		}
+    	}
+    	return null;
     }
 }
