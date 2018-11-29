@@ -10,5 +10,10 @@ package algorithm;
  * @author spitlord
  */
 public enum Metric {
-    
+    COMPACTNESS,
+    PARTISANFAIRNESS,
+    POPOULATIONEQUALITY,
+    CONSISTENCY,
+    GERRYMANDERING,
+    ALIGNMENT
 }

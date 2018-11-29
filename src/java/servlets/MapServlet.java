@@ -5,13 +5,22 @@
  */
 package servlets;
 
+import algorithm.Metric;
+import algorithm.ObjectiveFunction;
+import algorithm.RegionGrowing;
+import algorithm.SimulatedAnnealing;
+import mapObjects.State;
+import dataTypes.StateName;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import seeding.IncumbentSeeding;
+import seeding.RandomSeeding;
+import seeding.SeedStrategy;
 
 /**
  *
@@ -31,7 +40,7 @@ public class MapServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- //       response.setContentType("text/html;charset=UTF-8");
+        //       response.setContentType("text/html;charset=UTF-8");
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
@@ -72,48 +81,44 @@ public class MapServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        
-//       ObjectiveFunction objectiveFunction = new ObjectiveFunction();  
-//       
-//       
-//       //set metrics
-//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
-//       objectiveFunction.setMetricts(Metric.COMPACTNESS, request.getParameter("populationWeight"));
-//               
-//               
-//               request.getParameter("populationWeight"),
-//               request.getParameter("populationWeight"),
-//       );
-//       
-//       if( regionGrowingWasntRun ) {
-//           
-//           if ( seedsWerentPicked) {
-//               
-//           }
-//       }
-//       
-//       
-//        SimulatedAnealing simulatedAnealing = new SimulatedAnealing();
-        
-        
-       
-//       
 
+        boolean isLoaded = Boolean.valueOf(request.getParameter("isLoaded"));
+        if (!isLoaded) {
+            ObjectiveFunction objectiveFunction = new ObjectiveFunction(retrieveMetrics(request));
+            SeedStrategy seedStrategy = retrieveSeedingStrategy(request);
+            StateName stateName = StateName.valueOf(request.getParameter("stateName"));
+            RegionGrowing regionGrowing = new RegionGrowing(
+                    , // state manager? how to use? static!!!!!
+                    objectiveFunction,
+                    seedStrategy
+            );
+            regionGrowing.run();
+            SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(new State()); //  State manager
+        } else {
+            // ... 
+        }
+    }
 
-//       SeedStrategy s;
-//       if ( request.getParameter("seedStrategy").equals("randomS")) {
-//       }
-//            
-//       Algorithm algorithm = new Algorithm();
-//       algorithm.setObjectiveFunction(objectiveFunction);
-//       algorithm.run();
-//
-//        
-//        
-       
+    private Map retrieveMetrics(HttpServletRequest request) {
+        Map<Metric, Double> metrics = new HashMap();
+        metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
+        metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
+        metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("consistency")));
+        metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
+        metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
+        metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
+        return metrics;
+    }
 
-        processRequest(request, response);
+    private SeedStrategy retrieveSeedingStrategy(HttpServletRequest request) {
+        SeedStrategy seedStrategy = null;
+        if (request.getParameter("seedStrategy").equals("random")) {
+            seedStrategy = new RandomSeeding();
+        } 
+        else if (request.getParameter("seedStrategy").equals("incumbent")) {
+            seedStrategy = new IncumbentSeeding();//mhhh
+        }
+        return seedStrategy;
     }
 
     /**
