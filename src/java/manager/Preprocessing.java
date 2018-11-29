@@ -14,10 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mapObjects.State;
 
-/**
- *
- * @author spitlord
- */
+
 public class Preprocessing {
 
     public static State initializeStateFromFile(StateName name, String filePath) {
@@ -30,6 +27,8 @@ public class Preprocessing {
         } catch (IOException ex) {
             System.out.println("Could not load the file");
         }
+        
+        
         return null;
     }
 

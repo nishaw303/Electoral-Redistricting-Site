@@ -48,7 +48,7 @@ public class MapServlet extends HttpServlet {
 	}
 
 	private Map<Metric, Double> retrieveMetrics(HttpServletRequest request) {
-		Map<Metric, Double> metrics = new HashMap<Metric, Double>();
+		Map<Metric, Double> metrics = new HashMap<>();
 		metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
 		metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
 		metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("consistency")));
