@@ -23,6 +23,10 @@ public class Precinct {
 	public int getDistrictID() {
 		return districtID;
 	}
+	
+	public void setDistrictID(int districtID) {
+		this.districtID = districtID;
+	}
 
 	public boolean isBorder() {
 		return isBorder;
