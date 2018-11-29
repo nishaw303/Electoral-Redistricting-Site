@@ -6,8 +6,9 @@
 package algorithm;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
 import mapObjects.Precinct;
 import mapObjects.State;
 
@@ -32,7 +33,7 @@ public class ObjectiveFunction {
             this.metrics = metrics;
     }
 
-    public double calculateObjectiveFunction(HashSet<Precinct> precincts) {
+    public double calculateObjectiveFunction(Set<Precinct> precincts) {
             double OFV = 0;
             return OFV;
     }
