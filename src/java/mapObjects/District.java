@@ -8,6 +8,8 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import algorithm.ObjectiveFunction;
+
 public class District {
 
 	private int ID;
@@ -43,30 +45,52 @@ public class District {
 			precincts.remove(precinct.getID());
 			updatePopulation(population - precinct.getPopulation());
 			updateCandidates(precinct);
-			precinct.getNeighbors().forEach(neighbor -> {
-				if (neighbor.getDistrictID() != this.ID) {
-					this.candidates.remove(neighbor);
-				}
-			});
 			return true;
 		}
 		return false;
 	}
-	
-	public void updateCandidates(Precinct p) {
-		p.getNeighbors().forEach(neighbor -> {
-			if (neighbor.getDistrictID() != this.ID) {
-				this.candidates.add(neighbor);
+
+	public void updateCandidates(Precinct precinct) {
+		if (precinct.getDistrictID() == this.ID) {
+			precinct.getNeighbors().forEach(neighbor -> {
+				if (neighbor.getDistrictID() != this.ID) {
+					this.candidates.add(neighbor);
+				}
+			});
+			return;
+		}
+		for (Precinct neighbor : precinct.getNeighbors()) {
+			boolean hasNeighborInDistrict = false;
+			for (Precinct newNeighbor : neighbor.getNeighbors()) {
+				if (newNeighbor.getDistrictID() == this.ID) {
+					hasNeighborInDistrict = true;
+				}
 			}
-		});
-		
-		// TODO: add code for removing
+			if (!hasNeighborInDistrict) {
+				this.candidates.remove(neighbor);
+			}
+		}
+	}
+
+	public Precinct findMovablePrecinct(ObjectiveFunction of) {
+		Precinct bestP = null;
+		double bestOFV = 0;
+		for (Precinct p : candidates) {
+			precincts.put(p.getID(), p);
+			double currentOFV = of.calculateObjectiveFunctionValue(precincts);
+			if (currentOFV > bestOFV) {
+				bestOFV = currentOFV;
+				bestP = p;
+			}
+			precincts.remove(p.getID());
+		}
+		return bestP;
 	}
 
 	public PriorityQueue<Precinct> getCandidates() {
 		return candidates;
 	}
-	
+
 	protected void setPrecincts(Map<Integer, Precinct> precincts) {
 		this.precincts = precincts;
 	}
@@ -90,7 +114,7 @@ public class District {
 	public int getID() {
 		return ID;
 	}
-	
+
 	public int getPopulation() {
 		return population;
 	}
