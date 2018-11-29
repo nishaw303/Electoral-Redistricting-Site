@@ -1,7 +1,7 @@
 package algorithm;
 
+import java.util.Map;
 import java.util.Queue;
-import java.util.Set;
 
 import mapObjects.District;
 import mapObjects.Precinct;
@@ -50,18 +50,18 @@ public class SimulatedAnnealing extends Algorithm {
 
 	private Precinct findMovablePrecinct(District d) {
 		Queue<Precinct> candidates = d.getCandidates();
-		Set<Precinct> precincts = d.getPrecincts();
+		Map<Integer, Precinct> precincts = d.getPrecincts();
 		Precinct bestP = null;
 		double bestOFV = 0;
 		for (Precinct p : candidates) {
 			if (p.getDistrictID() != d.getID()) {
-				precincts.add(p);
+				precincts.put(p.getID(), p);
 				double currentOFV = objectiveFunction.calculateObjectiveFunction(precincts);
 				if (currentOFV > bestOFV) {
 					bestOFV = currentOFV;
 					bestP = p;
 				}
-				precincts.remove(p);
+				precincts.remove(p.getID());
 			}
 		}
 		return bestP;

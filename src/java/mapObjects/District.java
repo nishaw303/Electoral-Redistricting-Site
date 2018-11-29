@@ -1,7 +1,9 @@
 package mapObjects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,7 +12,7 @@ public class District {
 
 	private int ID;
 	private int stateID;
-	private Set<Precinct> precincts;
+	private Map<Integer, Precinct> precincts;
 	private int population;
 	private PriorityQueue<Precinct> candidates;
 	private Set<Precinct> seeds;
@@ -18,17 +20,18 @@ public class District {
 	public District(State s) {
 		this.stateID = s.getID();
 		this.ID = 0;
-		this.precincts = new HashSet<Precinct>();
+		this.precincts = new HashMap<Integer, Precinct>();
 		this.population = 0;
 		this.candidates = new PriorityQueue<Precinct>();
 	}
 
-	public Precinct getPrecinctById(int id) {
-		return null;
+	public Precinct getPrecinctById(int ID) {
+		return this.precincts.get(ID);
 	}
 
 	public boolean addPrecinct(Precinct precinct) {
-		if (precincts.add(precinct)) {
+		if (!precincts.containsKey(precinct.getID())) {
+			precincts.put(precinct.getID(), precinct);
 			updatePopulation(population + precinct.getPopulation());
 			precinct.setID(this.ID);
 			precinct.getNeighbors().forEach(neighbor -> {
@@ -41,10 +44,15 @@ public class District {
 		return false;
 	}
 
-	// Add logic to update candidates
 	public boolean removePrecinct(Precinct precinct) {
-		if (precincts.remove(precinct)) {
+		if (precincts.containsKey(precinct.getID())) {
+			precincts.remove(precinct.getID());
 			updatePopulation(population - precinct.getPopulation());
+			precinct.getNeighbors().forEach(neighbor -> {
+				if (neighbor.getDistrictID() != this.ID) {
+					this.candidates.remove(neighbor);
+				}
+			});
 			return true;
 		}
 		return false;
@@ -54,7 +62,7 @@ public class District {
 		return candidates;
 	}
 
-	public Set<Precinct> getPrecincts() {
+	public Map<Integer, Precinct> getPrecincts() {
 		return precincts;
 	}
 
