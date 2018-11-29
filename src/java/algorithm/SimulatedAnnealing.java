@@ -14,9 +14,10 @@ public class SimulatedAnnealing extends Algorithm {
 	protected static double noImprovementTolerance;
 	protected static double noImprovementThreshold;
 
-	public SimulatedAnnealing(State s) {
+	public SimulatedAnnealing(State s, ObjectiveFunction of) {
 		super();
 		this.currentState = s;
+		this.objectiveFunction = of;
 		SimulatedAnnealing.noImprovementTolerance = Double
 				.valueOf(GetProperties.getInstance().getValue("NoImprovementTolerance"));
 		SimulatedAnnealing.noImprovementThreshold = Double

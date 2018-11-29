@@ -5,6 +5,7 @@ import java.util.Set;
 
 import mapObjects.District;
 import mapObjects.Precinct;
+import mapObjects.State;
 import properties.GetProperties;
 import seeding.SeedStrategy;
 
@@ -13,8 +14,10 @@ public class RegionGrowing extends Algorithm {
 	private SeedStrategy seedStrategy;
 	private static double RegionGrowingThreshold;
 
-	public RegionGrowing(SeedStrategy seedStrategy) {
+	public RegionGrowing(State s, ObjectiveFunction of, SeedStrategy seedStrategy) {
 		super();
+		this.currentState = s;
+		this.objectiveFunction = of;
 		this.seedStrategy = seedStrategy;
 		RegionGrowing.RegionGrowingThreshold = Double
 				.parseDouble(GetProperties.getInstance().getValue("RegionGrowingThreshold"));
