@@ -31,12 +31,8 @@ public class District {
 		if (!precincts.containsKey(precinct.getID())) {
 			precincts.put(precinct.getID(), precinct);
 			updatePopulation(population + precinct.getPopulation());
-			precinct.setID(this.ID);
-			precinct.getNeighbors().forEach(neighbor -> {
-				if (neighbor.getDistrictID() != this.ID) {
-					this.candidates.add(neighbor);
-				}
-			});
+			precinct.setDistrictID(this.ID);
+			updateCandidates(precinct);
 			return true;
 		}
 		return false;
@@ -46,6 +42,7 @@ public class District {
 		if (precincts.containsKey(precinct.getID())) {
 			precincts.remove(precinct.getID());
 			updatePopulation(population - precinct.getPopulation());
+			updateCandidates(precinct);
 			precinct.getNeighbors().forEach(neighbor -> {
 				if (neighbor.getDistrictID() != this.ID) {
 					this.candidates.remove(neighbor);
@@ -54,6 +51,16 @@ public class District {
 			return true;
 		}
 		return false;
+	}
+	
+	public void updateCandidates(Precinct p) {
+		p.getNeighbors().forEach(neighbor -> {
+			if (neighbor.getDistrictID() != this.ID) {
+				this.candidates.add(neighbor);
+			}
+		});
+		
+		// TODO: add code for removing
 	}
 
 	public PriorityQueue<Precinct> getCandidates() {
