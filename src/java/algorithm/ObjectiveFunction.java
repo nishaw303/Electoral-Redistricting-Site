@@ -7,6 +7,7 @@ package algorithm;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import mapObjects.Precinct;
 import mapObjects.State;
 
@@ -15,11 +16,11 @@ import mapObjects.State;
  * @author spitlord
  */
 public class ObjectiveFunction {
-    private HashMap<Metric, Double> metrics;
+    private Map<Metric, Double> metrics;
     
     
     
-    public ObjectiveFunction(HashMap<Metric, Double> metrics) {
+    public ObjectiveFunction(Map<Metric, Double> metrics) {
             this.metrics = metrics;
     }
 
