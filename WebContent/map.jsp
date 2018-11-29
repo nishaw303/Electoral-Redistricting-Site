@@ -19,7 +19,7 @@
 
 
     <!-- our own stylesheet -->
-    <link rel="stylesheet" type="text/css" href="Resourses/Styles/home-style.css">
+    <link rel="stylesheet" type="text/css" href="Resources/Styles/home-style.css">
 
     <title>U.S. Redistricting</title>
     <meta name="viewport" content="initial-scale=1.0">
