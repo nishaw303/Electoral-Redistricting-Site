@@ -216,8 +216,8 @@
       <p>Server is currently active.<p>
     </div>
 
-    <script src="Resourses/Scripts/map.js"> </script>
-    
+    <script src="Resources/Scripts/map.js"> </script>
+   
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&callback=initMap"
     async defer></script>
 
