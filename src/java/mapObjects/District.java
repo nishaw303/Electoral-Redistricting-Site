@@ -8,6 +8,8 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import algorithm.ObjectiveFunction;
+
 public class District {
 
 	private int ID;
@@ -68,6 +70,21 @@ public class District {
 				this.candidates.remove(neighbor);
 			}
 		}
+	}
+
+	public Precinct findMovablePrecinct(ObjectiveFunction of) {
+		Precinct bestP = null;
+		double bestOFV = 0;
+		for (Precinct p : candidates) {
+			precincts.put(p.getID(), p);
+			double currentOFV = of.calculateObjectiveFunctionValue(precincts);
+			if (currentOFV > bestOFV) {
+				bestOFV = currentOFV;
+				bestP = p;
+			}
+			precincts.remove(p.getID());
+		}
+		return bestP;
 	}
 
 	public PriorityQueue<Precinct> getCandidates() {
