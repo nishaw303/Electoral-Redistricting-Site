@@ -5,10 +5,6 @@
  */
 package dataTypes;
 
-/**
- *
- * @author spitlord
- */
 public enum StateName {
     OHIO,
     OREGON,
