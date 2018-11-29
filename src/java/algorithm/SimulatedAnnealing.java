@@ -9,7 +9,7 @@ import mapObjects.State;
 import properties.GetProperties;
 
 public class SimulatedAnnealing extends Algorithm {
-	
+
 	protected double noImprovement;
 	protected static double noImprovementTolerance;
 	protected static double noImprovementThreshold;
@@ -17,8 +17,10 @@ public class SimulatedAnnealing extends Algorithm {
 	public SimulatedAnnealing(State s) {
 		super();
 		this.currentState = s;
-		this.noImprovementTolerance = Double.valueOf(GetProperties.getInstance().getValue("NoImprovementTolerance"));
-		this.noImprovementThreshold = Double.valueOf(GetProperties.getInstance().getValue("NoImprovementThreshold"));
+		SimulatedAnnealing.noImprovementTolerance = Double
+				.valueOf(GetProperties.getInstance().getValue("NoImprovementTolerance"));
+		SimulatedAnnealing.noImprovementThreshold = Double
+				.valueOf(GetProperties.getInstance().getValue("NoImprovementThreshold"));
 	}
 
 	@Override
@@ -31,13 +33,18 @@ public class SimulatedAnnealing extends Algorithm {
 				moves.push(new Move(precinctToMove, oldD, d));
 				d.addPrecinct(precinctToMove);
 				oldD.removePrecinct(precinctToMove);
+				double newOFV = this.objectiveFunction.calculateObjectiveFunction(d.getPrecincts());
+				if (compareToTolerance(checkImprovement(newOFV))) {
+					continue;
+				}
 			}
+			incrementNoImprovement();
 		}
 	}
 
 	@Override
 	protected boolean checkTerimanationConditions() {
-		return true;
+		return noImprovement > SimulatedAnnealing.noImprovementThreshold;
 	}
 
 	private Precinct findMovablePrecinct(District d) {
@@ -62,8 +69,16 @@ public class SimulatedAnnealing extends Algorithm {
 	private District selectDistrictToGrow() {
 		return this.currentState.getRandomDistrict();
 	}
-	
-	private int checkImprovement() {
-		return 0;
+
+	private double checkImprovement(double newOFV) {
+		return newOFV - this.currentObjectiveValue;
+	}
+
+	private boolean compareToTolerance(double improvement) {
+		return improvement > SimulatedAnnealing.noImprovementTolerance;
+	}
+
+	private void incrementNoImprovement() {
+		this.noImprovement++;
 	}
 }

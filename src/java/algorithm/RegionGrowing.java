@@ -11,12 +11,13 @@ import seeding.SeedStrategy;
 public class RegionGrowing extends Algorithm {
 
 	private SeedStrategy seedStrategy;
-	private double RegionGrowingThreshold;
+	private static double RegionGrowingThreshold;
 
 	public RegionGrowing(SeedStrategy seedStrategy) {
 		super();
 		this.seedStrategy = seedStrategy;
-		RegionGrowingThreshold = Double.parseDouble(GetProperties.getInstance().getValue("RegionGrowingThreshold"));
+		RegionGrowing.RegionGrowingThreshold = Double
+				.parseDouble(GetProperties.getInstance().getValue("RegionGrowingThreshold"));
 	}
 
 	@Override
