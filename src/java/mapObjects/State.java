@@ -2,32 +2,29 @@ package mapObjects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import algorithm.Move;
 import dataTypes.Representative;
-import dataTypes.ShortStateName;
 import dataTypes.StateName;
 
 public class State {
 
 	private StateName name;
-	private ShortStateName shortName;
-	private int ID;
 	private ArrayList<District> districts;
 	private District unassigned;
-	private Set<Precinct> neighborPrecincts;
 	private Set<Representative> representatives;
 	private int numPrecincts;
 	private int numDistricts;
 
-	public State(StateName name, ShortStateName shortName, int ID, Set<Precinct> precincts) {
+	public State(StateName name, Map<Integer, Precinct> precincts) {
 		this.name = name;
-		this.ID = ID;
 		this.numDistricts = 0;
 		this.numPrecincts = precincts.size();
-		this.unassigned = new District(this);
+		this.unassigned = new District();
+		this.unassigned.setPrecincts(precincts);
 	}
 
 	public boolean makeMove(Move move) {
@@ -40,6 +37,10 @@ public class State {
 
 	public int getNumPrecincts() {
 		return this.numPrecincts;
+	}
+	
+	public StateName getName() {
+		return this.name;
 	}
 
 	public boolean isAdjacenct(Precinct p1, Precinct p2) {
@@ -64,10 +65,6 @@ public class State {
 
 	public int getNumDistricts() {
 		return numDistricts;
-	}
-
-	public int getID() {
-		return this.ID;
 	}
 
 	public void addDistrict(District district) {

@@ -11,14 +11,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class District {
 
 	private int ID;
-	private int stateID;
 	private Map<Integer, Precinct> precincts;
 	private int population;
 	private PriorityQueue<Precinct> candidates;
 	private Set<Precinct> seeds;
 
-	public District(State s) {
-		this.stateID = s.getID();
+	public District() {
 		this.ID = 0;
 		this.precincts = new HashMap<Integer, Precinct>();
 		this.population = 0;
@@ -61,6 +59,10 @@ public class District {
 	public PriorityQueue<Precinct> getCandidates() {
 		return candidates;
 	}
+	
+	protected void setPrecincts(Map<Integer, Precinct> precincts) {
+		this.precincts = precincts;
+	}
 
 	public Map<Integer, Precinct> getPrecincts() {
 		return precincts;
@@ -81,11 +83,7 @@ public class District {
 	public int getID() {
 		return ID;
 	}
-
-	public int getStateID() {
-		return stateID;
-	}
-
+	
 	public int getPopulation() {
 		return population;
 	}
