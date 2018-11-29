@@ -30,6 +30,14 @@ public class State {
     private int numPrecincts;
     private int numDistricts;
     
+    public State(StateName name, ShortStateName shortName, int ID, Set<Precinct> precincts) {
+    	this.name = name;
+    	this.ID = ID;
+    	this.numDistricts = 0;
+    	this.numPrecincts = precincts.size();
+    	this.unassigned = new District(this);
+    }
+    
     public boolean makeMove(Move move) {
         return true;
     }
@@ -75,8 +83,12 @@ public class State {
     	return this.ID;
     }
     
-    public void setDistricts(ArrayList<District> districts) {
-    	this.districts = districts;
+    public void addDistrict(District district) {
+    	if (this.districts == null) {
+    		this.districts = new ArrayList<District>();
+    	}
+    	this.districts.add(district);
+    	district.setID(this.districts.size());
     }
     
     public District getRandomDistrict() {
