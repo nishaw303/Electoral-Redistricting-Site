@@ -98,13 +98,13 @@ function initAutocomplete() {
 	});
           
     var oregonLayer = new google.maps.Data();
-    oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Oregon.json');
+    oregonLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resources/Layers/Oregon.json');
  
     var ohioLayer = new google.maps.Data();
-    ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Ohio.json');
+    ohioLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resources/Layers/Ohio.json');
   
     var massachusettsLayer = new google.maps.Data();
-    massachusettsLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resourses/Layers/Massachusetts.json');
+    massachusettsLayer.loadGeoJson('https://raw.githubusercontent.com/spitlord/election/master/WebContent/Resources/Layers/Massachusetts.json');
  
     usaCtaLayer.addListener('click', function(event) {
     	var name = event.featureData.name;
