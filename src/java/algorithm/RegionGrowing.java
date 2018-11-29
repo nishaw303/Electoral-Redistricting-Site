@@ -10,7 +10,7 @@ import properties.PropertiesManager;
 import seeding.SeedStrategy;
 
 public class RegionGrowing extends Algorithm {
-
+	
 	private SeedStrategy seedStrategy;
 	private static double RegionGrowingThreshold;
 
@@ -19,7 +19,7 @@ public class RegionGrowing extends Algorithm {
 		this.currentState = s;
 		this.objectiveFunction = of;
 		this.seedStrategy = seedStrategy;
-		RegionGrowing.RegionGrowingThreshold = Double
+		RegionGrowingThreshold = Double
 				.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
 	}
 
