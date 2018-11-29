@@ -27,10 +27,15 @@ public class District {
 		return null;
 	}
 
-	// Add logic to update candidates
 	public boolean addPrecinct(Precinct precinct) {
 		if (precincts.add(precinct)) {
 			updatePopulation(population + precinct.getPopulation());
+			precinct.setID(this.ID);
+			precinct.getNeighbors().forEach(neighbor -> {
+				if (neighbor.getDistrictID() != this.ID) {
+					this.candidates.add(neighbor);
+				}
+			});
 			return true;
 		}
 		return false;

@@ -1,6 +1,5 @@
 package mapObjects;
 
-import java.awt.Point;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
@@ -11,13 +10,11 @@ public class Precinct {
 
 	private int ID;
 	private int districtID;
-	private String name;
 	private int population;
 	private double area;
 	private ArrayList<Precinct> neighbors;
 	private Map<Year, VotingData> votingData;
 	private boolean isBorder;
-	private ArrayList<Point> points;
 
 	public ArrayList<Precinct> getNeighbors() {
 		return neighbors;
@@ -43,23 +40,23 @@ public class Precinct {
 		return population;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public int getID() {
 		return ID;
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
 	@Override
 	public int hashCode() {
-		return ID * name.hashCode();
+		return ID * (int) area;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Precinct) {
-			if (this.ID == ((Precinct) o).ID && this.name == ((Precinct) o).name) {
+			if (this.ID == ((Precinct) o).ID && this.area == ((Precinct) o).area) {
 				return true;
 			}
 		}
