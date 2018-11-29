@@ -6,12 +6,19 @@ import java.util.Set;
 import mapObjects.District;
 import mapObjects.Precinct;
 import mapObjects.State;
+import properties.GetProperties;
 
 public class SimulatedAnnealing extends Algorithm {
+	
+	protected double noImprovement;
+	protected static double noImprovementTolerance;
+	protected static double noImprovementThreshold;
 
 	public SimulatedAnnealing(State s) {
 		super();
 		this.currentState = s;
+		this.noImprovementTolerance = Double.valueOf(GetProperties.getInstance().getValue("NoImprovementTolerance"));
+		this.noImprovementThreshold = Double.valueOf(GetProperties.getInstance().getValue("NoImprovementThreshold"));
 	}
 
 	@Override
@@ -54,5 +61,9 @@ public class SimulatedAnnealing extends Algorithm {
 
 	private District selectDistrictToGrow() {
 		return this.currentState.getRandomDistrict();
+	}
+	
+	private int checkImprovement() {
+		return 0;
 	}
 }

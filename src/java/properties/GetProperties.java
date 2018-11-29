@@ -7,12 +7,12 @@ public class GetProperties {
 
 	private static GetProperties instance = null;
 	private Properties properties;
-	
+
 	protected GetProperties() throws IOException {
 		properties = new Properties();
 		properties.load(getClass().getResourceAsStream("/resources/config.properties"));
 	}
-	
+
 	public static GetProperties getInstance() {
 		if (instance == null) {
 			try {
@@ -23,7 +23,7 @@ public class GetProperties {
 		}
 		return instance;
 	}
-	
+
 	public String getValue(String key) {
 		return properties.getProperty(key);
 	}
