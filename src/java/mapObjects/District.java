@@ -43,30 +43,37 @@ public class District {
 			precincts.remove(precinct.getID());
 			updatePopulation(population - precinct.getPopulation());
 			updateCandidates(precinct);
-			precinct.getNeighbors().forEach(neighbor -> {
-				if (neighbor.getDistrictID() != this.ID) {
-					this.candidates.remove(neighbor);
-				}
-			});
 			return true;
 		}
 		return false;
 	}
-	
-	public void updateCandidates(Precinct p) {
-		p.getNeighbors().forEach(neighbor -> {
-			if (neighbor.getDistrictID() != this.ID) {
-				this.candidates.add(neighbor);
+
+	public void updateCandidates(Precinct precinct) {
+		if (precinct.getDistrictID() == this.ID) {
+			precinct.getNeighbors().forEach(neighbor -> {
+				if (neighbor.getDistrictID() != this.ID) {
+					this.candidates.add(neighbor);
+				}
+			});
+			return;
+		}
+		for (Precinct neighbor : precinct.getNeighbors()) {
+			boolean hasNeighborInDistrict = false;
+			for (Precinct newNeighbor : neighbor.getNeighbors()) {
+				if (newNeighbor.getDistrictID() == this.ID) {
+					hasNeighborInDistrict = true;
+				}
 			}
-		});
-		
-		// TODO: add code for removing
+			if (!hasNeighborInDistrict) {
+				this.candidates.remove(neighbor);
+			}
+		}
 	}
 
 	public PriorityQueue<Precinct> getCandidates() {
 		return candidates;
 	}
-	
+
 	protected void setPrecincts(Map<Integer, Precinct> precincts) {
 		this.precincts = precincts;
 	}
@@ -90,7 +97,7 @@ public class District {
 	public int getID() {
 		return ID;
 	}
-	
+
 	public int getPopulation() {
 		return population;
 	}
