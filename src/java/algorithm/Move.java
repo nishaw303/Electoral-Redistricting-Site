@@ -8,7 +8,7 @@ public class Move {
 	private Precinct precinct;
 	private District sourceDistrict;
 	private District destinationDistrict;
-	private boolean isFinalized; // we keep this?
+	private boolean isFinalized;
 
 	public Move(Precinct precinct, District sourceDistrict, District destinationDistrict) {
 		this.precinct = precinct;
