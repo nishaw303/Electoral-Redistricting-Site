@@ -22,10 +22,11 @@ public class District {
     private Set<Precinct> precincts;
     private int population;
     private PriorityQueue<Precinct> candidates;
+    private Set<Precinct> seeds;
     
-    public District(State s, int ID) {
+    public District(State s) {
     	this.stateID = s.getID();
-    	this.ID = ID;
+    	this.ID = 0;
     	this.precincts = new HashSet<Precinct>();
     	this.population = 0;
     	this.candidates = new PriorityQueue<Precinct>();
@@ -102,5 +103,24 @@ public class District {
     
     public int getNumPrecincts() {
     	return precincts.size();
+    }
+    
+    public Set<Precinct> getSeeds() {
+    	if (seeds == null) {
+    		seeds = new HashSet<Precinct>();
+    	}
+    	return seeds;
+    }
+    
+    public boolean addSeed(Precinct seed) {
+    	if (this.getSeeds().contains(seed)){
+    		return false;
+    	}
+    	this.getSeeds().add(seed);
+    	return true;
+    }
+    
+    public void setID(int ID) {
+    	this.ID = ID;
     }
 }

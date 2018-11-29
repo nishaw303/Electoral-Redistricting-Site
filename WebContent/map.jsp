@@ -19,7 +19,7 @@
 
 
     <!-- our own stylesheet -->
-    <link rel="stylesheet" type="text/css" href="Resourses/Styles/home-style.css">
+    <link rel="stylesheet" type="text/css" href="Resources/Styles/home-style.css">
 
     <title>U.S. Redistricting</title>
     <meta name="viewport" content="initial-scale=1.0">
@@ -216,8 +216,8 @@
       <p>Server is currently active.<p>
     </div>
 
-    <script src="Resourses/Scripts/map.js"> </script>
-    
+    <script src="Resources/Scripts/map.js"> </script>
+   
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&callback=initMap"
     async defer></script>
 
