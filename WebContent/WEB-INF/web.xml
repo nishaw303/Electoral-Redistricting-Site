@@ -42,7 +42,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     
-    
+    <listener>
+        <listener-class>com.company.listeners.MapServletContextListener</listener-class>
+	</listener>
     
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

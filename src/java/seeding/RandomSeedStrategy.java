@@ -14,7 +14,7 @@ public class RandomSeedStrategy implements SeedStrategy {
 		int numDistricts = s.getNumDistricts();
 		getSeedsRandomly(unassigned, numDistricts);
 		for (Precinct seed : unassigned.getSeeds()) {
-			District d = new District(s);
+			District d = new District();
 			s.addDistrict(d);
 			d.addPrecinct(seed);
 			unassigned.removePrecinct(seed);

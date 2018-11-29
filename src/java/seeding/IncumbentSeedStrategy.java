@@ -15,7 +15,7 @@ public class IncumbentSeedStrategy implements SeedStrategy {
 		District unassigned = s.getUnassignedDistrict();
 		getSeedsByRep(unassigned, reps);
 		for (Precinct seed : unassigned.getSeeds()) {
-			District d = new District(s);
+			District d = new District();
 			s.addDistrict(d);
 			d.addPrecinct(seed);
 			unassigned.removePrecinct(seed);

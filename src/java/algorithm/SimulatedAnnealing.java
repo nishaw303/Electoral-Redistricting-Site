@@ -6,7 +6,7 @@ import java.util.Queue;
 import mapObjects.District;
 import mapObjects.Precinct;
 import mapObjects.State;
-import properties.GetProperties;
+import properties.PropertiesManager;
 
 public class SimulatedAnnealing extends Algorithm {
 
@@ -19,9 +19,9 @@ public class SimulatedAnnealing extends Algorithm {
 		this.currentState = s;
 		this.objectiveFunction = of;
 		SimulatedAnnealing.noImprovementTolerance = Double
-				.valueOf(GetProperties.getInstance().getValue("NoImprovementTolerance"));
+				.valueOf(PropertiesManager.getInstance().getValue("NoImprovementTolerance"));
 		SimulatedAnnealing.noImprovementThreshold = Double
-				.valueOf(GetProperties.getInstance().getValue("NoImprovementThreshold"));
+				.valueOf(PropertiesManager.getInstance().getValue("NoImprovementThreshold"));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class SimulatedAnnealing extends Algorithm {
 				moves.push(new Move(precinctToMove, oldD, d));
 				d.addPrecinct(precinctToMove);
 				oldD.removePrecinct(precinctToMove);
-				double newOFV = this.objectiveFunction.calculateObjectiveFunction(d.getPrecincts());
+				double newOFV = this.objectiveFunction.calculateObjectiveFunctionValue(d.getPrecincts());
 				if (compareToTolerance(checkImprovement(newOFV))) {
 					continue;
 				}
@@ -56,7 +56,7 @@ public class SimulatedAnnealing extends Algorithm {
 		for (Precinct p : candidates) {
 			if (p.getDistrictID() != d.getID()) {
 				precincts.put(p.getID(), p);
-				double currentOFV = objectiveFunction.calculateObjectiveFunction(precincts);
+				double currentOFV = objectiveFunction.calculateObjectiveFunctionValue(precincts);
 				if (currentOFV > bestOFV) {
 					bestOFV = currentOFV;
 					bestP = p;

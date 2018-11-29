@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import mapObjects.District;
 import mapObjects.Precinct;
 import mapObjects.State;
-import properties.GetProperties;
+import properties.PropertiesManager;
 import seeding.SeedStrategy;
 
 public class RegionGrowing extends Algorithm {
@@ -20,7 +20,7 @@ public class RegionGrowing extends Algorithm {
 		this.objectiveFunction = of;
 		this.seedStrategy = seedStrategy;
 		RegionGrowing.RegionGrowingThreshold = Double
-				.parseDouble(GetProperties.getInstance().getValue("RegionGrowingThreshold"));
+				.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class RegionGrowing extends Algorithm {
 		double bestOFV = 0;
 		for (Precinct p : candidates) {
 			precincts.put(p.getID(), p);
-			double currentOFV = objectiveFunction.calculateObjectiveFunction(precincts);
+			double currentOFV = objectiveFunction.calculateObjectiveFunctionValue(precincts);
 			if (currentOFV > bestOFV) {
 				bestOFV = currentOFV;
 				bestP = p;

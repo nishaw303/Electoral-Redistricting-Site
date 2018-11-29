@@ -19,9 +19,9 @@ public class State {
 	private int numPrecincts;
 	private int numDistricts;
 
-	public State(StateName name, Map<Integer, Precinct> precincts) {
+	public State(StateName name, Map<Integer, Precinct> precincts, int numDistricts) {
 		this.name = name;
-		this.numDistricts = 0;
+		this.numDistricts = numDistricts;
 		this.numPrecincts = precincts.size();
 		this.unassigned = new District();
 		this.unassigned.setPrecincts(precincts);

@@ -1,46 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package manager;
 
-import dataTypes.StateName;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+
+import dataTypes.StateName;
 import mapObjects.State;
 
-/**
- *
- * @author spitlord
- */
 public class StateManager {
-    
-    // sets have no get-like methods
-    private HashMap<StateName, State> loadedStates;
 
-    public HashMap<StateName, State> getStates() {
-        return loadedStates;
-    }
-    
-    public State getState(StateName name) {
-        return loadedStates.get(name);
-    }
-    
-    
-    
-    public void loadStates() {
-      
-        
-    }
-    
-    
-     public State initializeState(StateName name) {
-        State state = new State();
-        return state;
-    }
+	private static StateManager instance = null;
+	private Map<StateName, State> loadedStates;
 
+	protected StateManager() {
+		loadedStates = new HashMap<StateName, State>();
+	}
 
-    
+	public static StateManager getInstance() {
+		if (instance == null) {
+			instance = new StateManager();
+		}
+		return instance;
+	}
+
+	public Map<StateName, State> getStates() {
+		return loadedStates;
+	}
+
+	public State getState(StateName name) {
+		if (loadedStates.containsKey(name)) {
+			return loadedStates.get(name);
+		}
+		return this.initializeState(name);
+	}
+
+	private State initializeState(StateName name) {
+		EntityManager em = MapEntityManagerFactory.getInstance().getEntityManagerFactory().createEntityManager();
+		State s = em.find(State.class, name);
+		em.close();
+		return s;
+	}
+
 }

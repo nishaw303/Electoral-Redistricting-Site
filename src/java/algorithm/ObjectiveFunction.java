@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mapObjects.Precinct;
-import mapObjects.State;
 
 public class ObjectiveFunction {
 
@@ -15,43 +14,43 @@ public class ObjectiveFunction {
 	}
 
 	public void setWeight(Metric metric, double val) {
-		metrics.put(metric, val);
+		this.metrics.put(metric, val);
 	}
 
 	public void setMetrics(HashMap<Metric, Double> metrics) {
 		this.metrics = metrics;
 	}
 
-	public double calculateObjectiveFunction(Map<Integer, Precinct> precincts) {
-		double OFV = 0;
-		return OFV;
+	public double calculateObjectiveFunctionValue(Map<Integer, Precinct> precincts) {
+		return metrics.get(Metric.COMPACTNESS) * this.calcCompactness(precincts)
+				+ metrics.get(Metric.ALIGNMENT) * this.calcAlignment(precincts)
+				+ metrics.get(Metric.CONSISTENCY) * this.calcConsistency(precincts)
+				+ metrics.get(Metric.GERRYMANDERING) * this.calcGerrymandering(precincts)
+				+ metrics.get(Metric.PARTISANFAIRNESS) * this.calcPartisanFairness(precincts)
+				+ metrics.get(Metric.POPOULATIONEQUALITY) * this.calcPopulationEquality(precincts);
 	}
 
-	public double calculateObjectiveValue(State state) {
+	private double calcCompactness(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
-	public double calcCompactness(State state) {
+	private double calcPopulationEquality(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
-	public double calcPopulationEquality(State state) {
+	private double calcPartisanFairness(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
-	public double calcPartisanFairness(State state) {
+	private double calcConsistency(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
-	public double calcConsistency(State state) {
+	private double calcGerrymandering(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
-	public double calcGerrymandering(State state) {
-		return 0;
-	}
-
-	public double calcAlignment(State state) {
+	private double calcAlignment(Map<Integer, Precinct> precincts) {
 		return 0;
 	}
 
