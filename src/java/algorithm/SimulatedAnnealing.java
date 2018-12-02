@@ -7,57 +7,57 @@ import properties.PropertiesManager;
 
 public class SimulatedAnnealing extends Algorithm {
 
-    protected double noImprovement;
-    protected static double noImprovementTolerance;
-    protected static double noImprovementThreshold;
+	protected double noImprovement;
+	protected static double noImprovementTolerance;
+	protected static double noImprovementThreshold;
 
-    public SimulatedAnnealing(State s, ObjectiveFunction of) {
-        super();
-        this.currentState = s;
-        this.objectiveFunction = of;
-        SimulatedAnnealing.noImprovementTolerance = Double
-                .valueOf(PropertiesManager.getInstance().getValue("NoImprovementTolerance"));
-        SimulatedAnnealing.noImprovementThreshold = Double
-                .valueOf(PropertiesManager.getInstance().getValue("NoImprovementThreshold"));
-    }
+	public SimulatedAnnealing(State s, ObjectiveFunction of) {
+		super();
+		this.currentState = s;
+		this.objectiveFunction = of;
+		SimulatedAnnealing.noImprovementTolerance = Double
+				.valueOf(PropertiesManager.getInstance().getValue("NoImprovementTolerance"));
+		SimulatedAnnealing.noImprovementThreshold = Double
+				.valueOf(PropertiesManager.getInstance().getValue("NoImprovementThreshold"));
+	}
 
-    @Override
-    public void run() {
-        while (this.checkTerimanationConditions() != true) {
-            District d = this.selectDistrictToGrow();
-            Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
-            if (precinctToMove != null) {
-                District oldD = currentState.getDistrict(precinctToMove.getDistrictID());
-                moves.push(new Move(precinctToMove, oldD, d));
-                d.addPrecinct(precinctToMove);
-                oldD.removePrecinct(precinctToMove);
-                double newOFV = this.objectiveFunction.calculateObjectiveFunctionValue(d.getPrecincts());
-                if (compareToTolerance(checkImprovement(newOFV))) {
-                    continue;
-                }
-            }
-            incrementNoImprovement();
-        }
-    }
+	@Override
+	public void run() {
+		while (this.checkTerimanationConditions() != true) {
+			District d = this.selectDistrictToGrow();
+			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
+			if (precinctToMove != null) {
+				District oldD = currentState.getDistrict(precinctToMove.getDistrictID());
+				moves.push(new Move(precinctToMove, oldD, d));
+				d.addPrecinct(precinctToMove);
+				oldD.removePrecinct(precinctToMove);
+				double newOFV = this.objectiveFunction.calculateObjectiveFunctionValue(d.getPrecincts());
+				if (compareToTolerance(checkImprovement(newOFV))) {
+					continue;
+				}
+			}
+			incrementNoImprovement();
+		}
+	}
 
-    @Override
-    protected boolean checkTerimanationConditions() {
-        return noImprovement > SimulatedAnnealing.noImprovementThreshold;
-    }
+	@Override
+	protected boolean checkTerimanationConditions() {
+		return noImprovement > SimulatedAnnealing.noImprovementThreshold;
+	}
 
-    private District selectDistrictToGrow() {
-        return this.currentState.getRandomDistrict();
-    }
+	private District selectDistrictToGrow() {
+		return this.currentState.getRandomDistrict();
+	}
 
-    private double checkImprovement(double newOFV) {
-        return newOFV - this.currentObjectiveValue;
-    }
+	private double checkImprovement(double newOFV) {
+		return newOFV - this.currentObjectiveValue;
+	}
 
-    private boolean compareToTolerance(double improvement) {
-        return improvement > SimulatedAnnealing.noImprovementTolerance;
-    }
+	private boolean compareToTolerance(double improvement) {
+		return improvement > SimulatedAnnealing.noImprovementTolerance;
+	}
 
-    private void incrementNoImprovement() {
-        this.noImprovement++;
-    }
+	private void incrementNoImprovement() {
+		this.noImprovement++;
+	}
 }
