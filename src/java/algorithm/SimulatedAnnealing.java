@@ -1,8 +1,5 @@
 package algorithm;
 
-import java.util.Map;
-import java.util.Queue;
-
 import mapObjects.District;
 import mapObjects.Precinct;
 import mapObjects.State;
@@ -28,7 +25,7 @@ public class SimulatedAnnealing extends Algorithm {
 	public void run() {
 		while (this.checkTerimanationConditions() != true) {
 			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = this.findMovablePrecinct(d);
+			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
 			if (precinctToMove != null) {
 				District oldD = currentState.getDistrict(precinctToMove.getDistrictID());
 				moves.push(new Move(precinctToMove, oldD, d));
@@ -46,25 +43,6 @@ public class SimulatedAnnealing extends Algorithm {
 	@Override
 	protected boolean checkTerimanationConditions() {
 		return noImprovement > SimulatedAnnealing.noImprovementThreshold;
-	}
-
-	private Precinct findMovablePrecinct(District d) {
-		Queue<Precinct> candidates = d.getCandidates();
-		Map<Integer, Precinct> precincts = d.getPrecincts();
-		Precinct bestP = null;
-		double bestOFV = 0;
-		for (Precinct p : candidates) {
-			if (p.getDistrictID() != d.getID()) {
-				precincts.put(p.getID(), p);
-				double currentOFV = objectiveFunction.calculateObjectiveFunctionValue(precincts);
-				if (currentOFV > bestOFV) {
-					bestOFV = currentOFV;
-					bestP = p;
-				}
-				precincts.remove(p.getID());
-			}
-		}
-		return bestP;
 	}
 
 	private District selectDistrictToGrow() {

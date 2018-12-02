@@ -27,9 +27,13 @@ public class Precinct {
         return neighbors;
     }
 
-    public int getDistrictID() {
-        return districtID;
-    }
+	public int getDistrictID() {
+		return districtID;
+	}
+	
+	public void setDistrictID(int districtID) {
+		this.districtID = districtID;
+	}
 
     public boolean isBorder() {
         return isBorder;

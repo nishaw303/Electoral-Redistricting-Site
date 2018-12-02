@@ -1,8 +1,5 @@
 package algorithm;
 
-import java.util.Map;
-import java.util.PriorityQueue;
-
 import mapObjects.District;
 import mapObjects.Precinct;
 import mapObjects.State;
@@ -10,7 +7,7 @@ import properties.PropertiesManager;
 import seeding.SeedStrategy;
 
 public class RegionGrowing extends Algorithm {
-
+	
 	private SeedStrategy seedStrategy;
 	private static double RegionGrowingThreshold;
 
@@ -19,7 +16,7 @@ public class RegionGrowing extends Algorithm {
 		this.currentState = s;
 		this.objectiveFunction = of;
 		this.seedStrategy = seedStrategy;
-		RegionGrowing.RegionGrowingThreshold = Double
+		RegionGrowingThreshold = Double
 				.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
 	}
 
@@ -36,7 +33,7 @@ public class RegionGrowing extends Algorithm {
 		}
 		while (this.checkTerimanationConditions() != true) {
 			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = this.findBestMovablePrecinct(d);
+			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
 			moves.push(new Move(precinctToMove, unassigned, d));
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
@@ -47,23 +44,6 @@ public class RegionGrowing extends Algorithm {
 	protected boolean checkTerimanationConditions() {
 		District unassigned = this.currentState.getUnassignedDistrict();
 		return unassigned.getPrecincts().isEmpty();
-	}
-
-	private Precinct findBestMovablePrecinct(District d) {
-		PriorityQueue<Precinct> candidates = d.getCandidates();
-		Map<Integer, Precinct> precincts = d.getPrecincts();
-		Precinct bestP = null;
-		double bestOFV = 0;
-		for (Precinct p : candidates) {
-			precincts.put(p.getID(), p);
-			double currentOFV = objectiveFunction.calculateObjectiveFunctionValue(precincts);
-			if (currentOFV > bestOFV) {
-				bestOFV = currentOFV;
-				bestP = p;
-			}
-			precincts.remove(p.getID());
-		}
-		return bestP;
 	}
 
 	private District selectDistrictToGrow() {

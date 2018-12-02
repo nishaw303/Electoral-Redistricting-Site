@@ -14,6 +14,6 @@ createAdjacencyListFromGeoJSON('Massachusetts.json',
 
 
 
-updatingGeoJson.createMassachussets()
-updatingGeoJson.createOhio()
-updatingGeoJson.createOregon()
+updatingGeoJson.createState('Ohio');
+updatingGeoJson.createState('Massachusetts');
+updatingGeoJson.createState('Oregon');

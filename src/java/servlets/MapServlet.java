@@ -43,7 +43,6 @@ public class MapServlet extends HttpServlet {
 					StateManager.getInstance().getState(stateName), objectiveFunction);
 			simulatedAnnealing.run();
 		} else {
-			// ...
 		}
 	}
 
@@ -60,9 +59,9 @@ public class MapServlet extends HttpServlet {
 
 	private SeedStrategy retrieveSeedingStrategy(HttpServletRequest request) {
 		SeedStrategy seedStrategy = null;
-		if (request.getParameter("seedStrategy").equals("random")) {
+		if (request.getParameter("seedStrategy").equalsIgnoreCase("random")) {
 			seedStrategy = new RandomSeedStrategy();
-		} else if (request.getParameter("seedStrategy").equals("incumbent")) {
+		} else if (request.getParameter("seedStrategy").equalsIgnoreCase("incumbent")) {
 			seedStrategy = new IncumbentSeedStrategy();
 		}
 		return seedStrategy;
