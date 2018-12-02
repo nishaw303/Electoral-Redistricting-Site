@@ -3,7 +3,6 @@ package mapObjects;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
-
 import dataTypes.VotingData;
 
 public class Precinct {
@@ -15,7 +14,7 @@ public class Precinct {
     private ArrayList<Precinct> neighbors;
     private Map<Year, VotingData> votingData;
     private boolean isBorder;
-    
+
     public Precinct(int ID, int area, int population) {
         this.ID = ID;
         this.area = area;
@@ -27,13 +26,13 @@ public class Precinct {
         return neighbors;
     }
 
-	public int getDistrictID() {
-		return districtID;
-	}
-	
-	public void setDistrictID(int districtID) {
-		this.districtID = districtID;
-	}
+    public int getDistrictID() {
+        return districtID;
+    }
+
+    public void setDistrictID(int districtID) {
+        this.districtID = districtID;
+    }
 
     public boolean isBorder() {
         return isBorder;

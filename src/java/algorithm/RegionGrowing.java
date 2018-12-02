@@ -7,50 +7,50 @@ import properties.PropertiesManager;
 import seeding.SeedStrategy;
 
 public class RegionGrowing extends Algorithm {
-	
-	private SeedStrategy seedStrategy;
-	private static double RegionGrowingThreshold;
 
-	public RegionGrowing(State s, ObjectiveFunction of, SeedStrategy seedStrategy) {
-		super();
-		this.currentState = s;
-		this.objectiveFunction = of;
-		this.seedStrategy = seedStrategy;
-		RegionGrowingThreshold = Double
-				.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
-	}
+    private SeedStrategy seedStrategy;
+    private static double RegionGrowingThreshold;
 
-	@Override
-	public void run() {
-		seedStrategy.seed(currentState);
-		District unassigned = currentState.getUnassignedDistrict();
-		while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() * RegionGrowingThreshold) {
-			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = d.getRandomCandidate();
-			moves.push(new Move(precinctToMove, unassigned, d));
-			d.addPrecinct(precinctToMove);
-			unassigned.removePrecinct(precinctToMove);
-		}
-		while (this.checkTerimanationConditions() != true) {
-			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
-			moves.push(new Move(precinctToMove, unassigned, d));
-			d.addPrecinct(precinctToMove);
-			unassigned.removePrecinct(precinctToMove);
-		}
-	}
+    public RegionGrowing(State s, ObjectiveFunction of, SeedStrategy seedStrategy) {
+        super();
+        this.currentState = s;
+        this.objectiveFunction = of;
+        this.seedStrategy = seedStrategy;
+        RegionGrowing.RegionGrowingThreshold = Double
+                .parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
+    }
 
-	@Override
-	protected boolean checkTerimanationConditions() {
-		District unassigned = this.currentState.getUnassignedDistrict();
-		return unassigned.getPrecincts().isEmpty();
-	}
+    @Override
+    public void run() {
+        seedStrategy.seed(currentState);
+        District unassigned = currentState.getUnassignedDistrict();
+        while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() * RegionGrowingThreshold) {
+            District d = this.selectDistrictToGrow();
+            Precinct precinctToMove = d.getRandomCandidate();
+            moves.push(new Move(precinctToMove, unassigned, d));
+            d.addPrecinct(precinctToMove);
+            unassigned.removePrecinct(precinctToMove);
+        }
+        while (this.checkTerimanationConditions() != true) {
+            District d = this.selectDistrictToGrow();
+            Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
+            moves.push(new Move(precinctToMove, unassigned, d));
+            d.addPrecinct(precinctToMove);
+            unassigned.removePrecinct(precinctToMove);
+        }
+    }
 
-	private District selectDistrictToGrow() {
-		return this.currentState.getLowestPolulationDistrict();
-	}
+    @Override
+    protected boolean checkTerimanationConditions() {
+        District unassigned = this.currentState.getUnassignedDistrict();
+        return unassigned.getPrecincts().isEmpty();
+    }
 
-	public void setSeedStrategy(SeedStrategy seedStrategy) {
-		this.seedStrategy = seedStrategy;
-	}
+    private District selectDistrictToGrow() {
+        return this.currentState.getLowestPolulationDistrict();
+    }
+
+    public void setSeedStrategy(SeedStrategy seedStrategy) {
+        this.seedStrategy = seedStrategy;
+    }
 }
