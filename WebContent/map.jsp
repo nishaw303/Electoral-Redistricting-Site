@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
 
         <!-- GoogleAPI jQuery CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -22,8 +24,6 @@
         <link rel="stylesheet" type="text/css" href="Resources/Styles/home-style.css">
 
         <title>U.S. Redistricting</title>
-        <meta name="viewport" content="initial-scale=1.0">
-        <meta charset="utf-8">
     </head>
     <body>
         <div id="map"></div>
@@ -212,13 +212,13 @@
             <p>/Console log</p>
             <p>Server is currently active.<p>
         </div>
-
+      
+        <script src="Resources/Scripts/properties.json"></script>
         <script src="Resources/Scripts/map.js"></script>
+        <script src="Resources/Scripts/controls.js"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&callback=initMap"
-        async defer></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&libraries=places&callback=initAutocomplete"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&libraries=places&callback=initialize"
         async defer></script>
     </body>
 </html>
