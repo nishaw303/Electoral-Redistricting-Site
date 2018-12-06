@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -213,7 +214,7 @@
             <p>Server is currently active.<p>
         </div>
       
-        <script src="Resources/Scripts/properties.json"></script>
+        <script src="Resources/Scripts/properties.js"></script>
         <script src="Resources/Scripts/map.js"></script>
         <script src="Resources/Scripts/controls.js"></script>
 
