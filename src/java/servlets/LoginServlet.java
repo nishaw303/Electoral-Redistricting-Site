@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (Queries.userExists(username, password)) {
+        if (Queries.userLogin(username, password)) {
             session.setAttribute("username", username);
             response.sendRedirect("/election/map.jsp");
         } else {
