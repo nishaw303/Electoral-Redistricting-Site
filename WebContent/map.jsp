@@ -209,7 +209,7 @@
 
         </div>
         <div id="console">
-            <p>Welcome, ${sessionScope.username} <p>
+            <p>Welcome, ${sessionScope.username}<p>
             <p>/Console log</p>
             <p>Server is currently active.<p>
         </div>

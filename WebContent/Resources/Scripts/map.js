@@ -41,17 +41,17 @@ function initMap() {
  
  
     
-    var oregonLayer = new google.maps.Data();
-    oregonLayer.loadGeoJson(properties.oregonPrecinctsLayer);
-    var oregonDistrictsLayer = new google.maps.Data();
-    oregonDistrictsLayer.loadGeoJson(properties.oregonDistrictsLayer);
-    oregonDistrictsLayer.setMap(map)
+    var orLayer = new google.maps.Data();
+    orLayer.loadGeoJson(properties.oregonPrecinctsLayer);
+    var orDistrictsLayer = new google.maps.Data();
+    orDistrictsLayer.loadGeoJson(properties.orDistrictsLayer);
+    orDistrictsLayer.setMap(map)
     
-    var ohioPrecinctsLayer = new google.maps.Data();
-    ohioPrecinctsLayer.loadGeoJson(properties.ohioPrecinctsLayer);
+    var ohPrecinctsLayer = new google.maps.Data();
+    ohPrecinctsLayer.loadGeoJson(properties.ohPrecinctsLayer);
   
-    var massachusettsPrecinctsLayer = new google.maps.Data();
-    massachusettsPrecinctsLayer.loadGeoJson(properties.massachusettsPrecinctsLayer);
+    var maPrecinctsLayer = new google.maps.Data();
+    maPrecinctsLayer.loadGeoJson(properties.maPrecinctsLayer);
  
           
     google.maps.event.addListener(map, 'click', function(event) {
