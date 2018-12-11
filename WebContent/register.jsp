@@ -14,27 +14,41 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         <!-- Our stylesheet -->
-        <link rel="stylesheet" type="text/css" href="Resources/Styles/style.css">
+        <link rel="stylesheet" type="text/css" href="Resourses/Styles/style.css">
 
         <style>
-            .login-form {
+            .register-form {
                 width: 500px;
                 margin: 30px;
                 padding: 20px;
                 border-radius: 5px;
                 background-color: lightgray;
             }
+
         </style>
 
-        <title>Login</title>
+        <title>Register</title>
 
     </head>
 
     <body>
-        <div class="login-form">
-            <h2 class="title">Login</h2>
+        <div class="register-form">
+            <h2 class="title">Register</h2>
 
-            <form method="post" action="login">
+            <form action="register" method="post">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="
+                           " placeholder="First Name" required="required">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="email" placeholder="email" required="required">
+                </div>
 
                 <div class="form-group">
                     <div class="input-group">
@@ -49,20 +63,22 @@
                         <input type="password" class="form-control" name="password" placeholder="Password" required="required">
                     </div>
                 </div>
-                                
-                <div class="error-msg">
-                <%
-					String error = (String)request.getAttribute("error");  
-					if (error != null)          
-						out.println("<font color=red size=12px>"+ error +"</font>");
-				%>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Register">
                 </div>
 
-                <label>Don't have an account? <a href="register.html">Register.</a></label>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg" onclick="window.location.href ='map.jsp'" value="Login">
+                <div class="error-msg">
+                    <%
+                        String error = (String) request.getAttribute("registrationError");
+                        if (error != null) {
+                            out.println("<font color=red size=12px>" + error + "</font>");
+                        }
+                    %>
                 </div>
+
+
             </form>
         </div>
+
     </body>
 </HTML>
