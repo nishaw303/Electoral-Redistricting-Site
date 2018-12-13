@@ -24,6 +24,17 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
     </servlet-mapping>
     
      <servlet>
+        <servlet-name>updating</servlet-name>
+        <servlet-class>servlets.UpdateServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>updating</servlet-name>
+        <url-pattern>/updating</url-pattern>
+    </servlet-mapping>
+
+
+     <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>servlets.RegisterServlet</servlet-class>
     </servlet>

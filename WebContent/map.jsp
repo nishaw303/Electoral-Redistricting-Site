@@ -187,23 +187,23 @@
         </div>
 
         <div id="user-controls">
-            <button type="button" class="btn btn-default disabled" title="Save Redistricting" onclick="window.alert('You must be signed in to use this feature!');">
+            <button type="button" class="btn btn-default disabled" title="Save Redistricting" onclick="save();">
                 <i class="far fa-save"></i>
             </button>
 
-            <button type="button" class="btn btn-default disabled" title="Load Redistricting" onclick="window.alert('You must be signed in to use this feature!');">
+            <button type="button" class="btn btn-default disabled" title="Load Redistricting" onclick="load();">
                 <i class="fas fa-upload"></i>
             </button>
 
-            <button type="button" class="btn btn-default disabled" title="View Saved List" onclick="window.alert('You must be signed in to use this feature!');">
+            <button type="button" class="btn btn-default disabled" title="View Saved List" onclick="viewSaved();">
                 <i class="fas fa-list-ul"></i>
             </button>
 
-            <button type="button" class="btn btn-default" title="Pause Algorithm" onclick="window.alert('Pausing algorithm...');">
+            <button type="button" class="btn btn-default" title="Pause Algorithm" onclick="pause();">
                 <i class="far fa-pause-circle"></i>
             </button>
 
-            <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="window.alert('Cancelling algorithm...');">
+            <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="cancel();">
                 <i class="far fa-times-circle"></i>
             </button>
 
@@ -213,7 +213,7 @@
             <p>/Console log</p>
             <p>Server is currently active.<p>
         </div>
-      
+
         <script src="Resources/Scripts/properties.js"></script>
         <script src="Resources/Scripts/map.js"></script>
         <script src="Resources/Scripts/controls.js"></script>
