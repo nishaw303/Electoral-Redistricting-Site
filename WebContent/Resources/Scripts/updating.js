@@ -11,7 +11,6 @@ function suka() {
                 var feature = currentLayer.getFeatureById(jsonObject.id);
          currentLayer.overrideStyle(feature, {fillColor: 'lime'});
 
-                
             },
             error: function (error) {
                 alert(error);
