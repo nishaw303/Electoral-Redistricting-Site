@@ -38,9 +38,14 @@ public class MapServlet extends HttpServlet {
 			StateName stateName = StateName.valueOf(request.getParameter("stateName"));
 			RegionGrowing regionGrowing = new RegionGrowing(StateManager.getInstance().getState(stateName),
 					objectiveFunction, seedStrategy);
-			regionGrowing.run();
+                        
+                        // now all servlets have access to the algorithms
+                        request.getSession().setAttribute("regionGrowing", regionGrowing);
+                        
+			regionGrowing.run(); 
 			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(
 					StateManager.getInstance().getState(stateName), objectiveFunction);
+                        request.getSession().setAttribute("simulatedAnnealing", simulatedAnnealing);    
 			simulatedAnnealing.run();
 		} else {
 		}

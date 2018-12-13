@@ -15,13 +15,14 @@ import mapObjects.State;
 
 public class Preprocessing {
 
-    public static State initializeStateFromFile(StateName name, String serializationFile, String adjacencyFile) {
+      public static State initializeStateFromFile(StateName name, String serializationFile, String adjacencyFile) {
         Gson j = new Gson();
         String string;
         try {
             string = new String(Files.readAllBytes(Paths.get(serializationFile)));
             State state = j.fromJson(string, State.class);
             initializePrecinctNeighbors(adjacencyFile, state);
+            return state;
         } catch (IOException ex) {
             System.out.println("Could not load the file");
         }
@@ -35,8 +36,10 @@ public class Preprocessing {
         Type type = new TypeToken<Map<Integer, ArrayList<Integer>>>() {
         }.getType();
         Map<Integer, ArrayList<Integer>> neighborsMap = j.fromJson(string, type);
+
         neighborsMap.forEach((key, list) -> {
             Precinct p = s.getUnassignedDistrict().getPrecinctById(key);
+            p.setNeighbors(new ArrayList<>());
             list.forEach(neighborID -> {
                 p.getNeighbors().add(s.getUnassignedDistrict().getPrecinctById(neighborID));
             });

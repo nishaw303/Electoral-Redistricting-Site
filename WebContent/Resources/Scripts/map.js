@@ -62,5 +62,17 @@ function initMap() {
     
 }
 
+
+
+
+function movePrecinct(layer) {} // update the color of one precinct
+
+
+
+function chooseColors(number) {
+    var colors = []
+    return colors;
+}
+
   
 
