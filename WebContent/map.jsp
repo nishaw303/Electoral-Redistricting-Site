@@ -217,6 +217,7 @@
         <script src="Resources/Scripts/properties.js"></script>
         <script src="Resources/Scripts/map.js"></script>
         <script src="Resources/Scripts/controls.js"></script>
+        <script src="Resources/Scripts/updating.js"></script>
 
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCrjByEUtH5awpWcjFJqLBB7W8npgKKGo&libraries=places&callback=initialize"

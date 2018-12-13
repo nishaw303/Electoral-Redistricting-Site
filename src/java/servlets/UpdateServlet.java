@@ -5,18 +5,32 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mapObjects.Precinct;
 
-public class UpdateServlet extends HttpServlet{
+public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
+        Gson g = new Gson();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        
+        Suka s = new Suka();
+        s.id = (int)(Math.random() * 1000);
+        resp.getWriter().write(g.toJson(s));
     }
+    
+    class Suka {
+        int id;
+    }
+    
+    
     
     
     
