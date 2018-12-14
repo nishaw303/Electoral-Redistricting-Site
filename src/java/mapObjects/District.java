@@ -108,14 +108,6 @@ public class District {
 		this.population = population;
 	}
 
-	public double getPerimeter() {
-		return 0;
-	}
-
-	public double getArea() {
-		return 0;
-	}
-
 	public int getID() {
 		return ID;
 	}

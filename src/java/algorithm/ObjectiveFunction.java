@@ -1,12 +1,14 @@
 package algorithm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import dataTypes.Party;
 import mapObjects.District;
 import mapObjects.Point;
 import mapObjects.Precinct;
@@ -135,17 +137,59 @@ public class ObjectiveFunction {
 
 	// State level
 	private double calcPopulationEquality(State state) {
-		return 0;
-	}
-
-	// State level
-	private double calcPartisanFairness(State state) {
-		return 0;
+		int totalPop = 0;
+		double[] normalized = new double[state.getNumDistricts() + 1];
+		for (int i = 1; i <= state.getNumDistricts(); i++) {
+			totalPop += state.getDistrict(i).getPopulation();
+			normalized[i] = state.getDistrict(i).getPopulation();
+		}
+		int maxDeviation = (int) (totalPop / state.getNumDistricts() * 1.005);
+		int perfectPopulation = totalPop / state.getNumDistricts();
+		for (int i = 1; i < normalized.length; i++) {
+			double value = Math.abs(normalized[i] - perfectPopulation) / (maxDeviation - perfectPopulation);
+			normalized[i] = value > 1 ? 1 : value;
+		}
+		return this.metrics.get(Metric.POPOULATIONEQUALITY) * Arrays.stream(normalized).average().getAsDouble();
 	}
 	
 	// State level
-	private double calcEfficiencyGap(District d) {
-		return 0;
+	private double calcEfficiencyGap(State state) {
+		double[] efficiencyGaps = new double[state.getNumDistricts() + 1];
+		for (int i = 1; i <= state.getNumDistricts(); i++) {
+			int totalDem = 0;
+			int totalRep = 0;
+			for (Precinct p : state.getDistrict(i).getPrecincts().values()) {
+				double tempDem = p.getVotingData().getPartResults(Party.DEMOCRATIC) / 100;
+				double tempRep = p.getVotingData().getPartResults(Party.REPUBLICAN) / 100;
+				if (tempDem + tempRep > 1) {
+					double overage = (tempDem + tempRep) - 1;
+					tempDem = tempDem - overage;
+					tempRep = tempRep - overage;
+				}
+				totalDem += (int) (p.getPopulation() * 0.55) * tempDem;
+				totalRep += (int) (p.getPopulation() * 0.55) * tempRep;
+			}
+			// Negative means Rep win, Positive means Dem win
+			int difference = totalDem - totalRep;
+			int wastedDem = 0;
+			int wastedRep = 0;
+			if (difference < 0) {
+				wastedDem = totalDem;
+				wastedRep = totalRep - totalDem;
+			}
+			else {
+				wastedDem = totalRep;
+				wastedRep = totalDem - totalRep;
+			}
+			efficiencyGaps[i] = Math.abs((wastedDem - wastedRep) / (totalDem + totalRep) - 1);
+		}
+		double[] normalized = new double[efficiencyGaps.length];
+		for (int i = 1; i < normalized.length; i++) {
+			normalized[i] = (efficiencyGaps[i] - Arrays.stream(efficiencyGaps).min().getAsDouble()) / (
+					Arrays.stream(efficiencyGaps).max().getAsDouble() - 
+					Arrays.stream(efficiencyGaps).min().getAsDouble());
+		}
+		return this.metrics.get(Metric.EFFICIENCYGAP) * Arrays.stream(normalized).average().getAsDouble();
 	}
 
 }
