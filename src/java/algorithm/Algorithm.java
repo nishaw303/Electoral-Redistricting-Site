@@ -14,5 +14,14 @@ public abstract class Algorithm {
 	abstract public void run();
 
 	abstract protected boolean checkTerimanationConditions();
+        
+        public Algorithm() {
+            moves = new Stack<>();
+        }
 
+    public Stack<Move> getMoves() {
+        return moves;
+    }
+
+        
 }

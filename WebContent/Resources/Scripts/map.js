@@ -77,6 +77,7 @@ function initMap() {
     	}
     });
     
+    
 
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);

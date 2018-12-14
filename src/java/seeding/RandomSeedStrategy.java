@@ -19,6 +19,7 @@ public class RandomSeedStrategy implements SeedStrategy {
 			d.addPrecinct(seed);
 			unassigned.removePrecinct(seed);
 		}
+               
 	}
 
 	private Precinct pickRandomSeed(District unassigned) {

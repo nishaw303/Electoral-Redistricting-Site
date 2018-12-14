@@ -2,6 +2,7 @@ package mapObjects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -38,6 +39,11 @@ public class State {
 	public int getNumPrecincts() {
 		return this.numPrecincts;
 	}
+
+    public void setNumPrecincts(int numPrecincts) {
+        this.numPrecincts = numPrecincts;
+    }
+        
 	
 	public StateName getName() {
 		return this.name;
@@ -54,9 +60,7 @@ public class State {
 	}
 
 	public District getLowestPolulationDistrict() {
-		return Collections.min(districts, (District d1, District d2) -> {
-			return ((Integer) d1.getPopulation()).compareTo(d2.getPopulation());
-		});
+		return Collections.min(districts, Comparator.comparingInt(District::getPopulation));
 	}
 
 	public Set<Representative> getRepresentatives() {
@@ -80,6 +84,9 @@ public class State {
 	}
 
 	public District getDistrict(int distID) {
+		if (distID == 0) {
+			return this.getUnassignedDistrict();
+		}
 		for (District d : districts) {
 			if (distID == d.getID()) {
 				return d;
@@ -87,8 +94,20 @@ public class State {
 		}
 		return null;
 	}
+
+    public void setName(StateName name) {
+        this.name = name;
+    }
+        
+        
 	
 	public ArrayList<District> getDistricts() {
 		return this.districts;
 	}
+
+    public void setNumDistricts(int numDistricts) {
+        this.numDistricts = numDistricts;
+    }
+        
+        
 }

@@ -5,10 +5,16 @@ public class VotingData {
     private int year;
     private Map<Integer, Double> data;
     
-    // 0 dem // 1 rep
-      
-   ///+ getResults(): Map<Party, Integer>
-   ///+ getElectionType(et: ElectionType): Map<Party, Integer>
-   //getPartyResults(party: Party): Integer
-   ///+ getYear(): Year
+    public Map<Integer, Double> getResults() {
+    	return this.data;
+    }
+    
+    public double getPartResults(Party party) {
+    	if (party == Party.DEMOCRATIC) {
+    		return data.get(0);
+    	}
+    	else {
+    		return data.get(1);
+    	}
+    }
 }

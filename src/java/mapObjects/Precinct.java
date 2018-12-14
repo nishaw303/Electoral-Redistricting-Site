@@ -5,7 +5,7 @@ import java.util.Map;
 
 import dataTypes.VotingData;
 
-public class Precinct {
+public class Precinct implements Comparable{
 
     private int ID;
     private int districtID;
@@ -78,4 +78,24 @@ public class Precinct {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return ID + " " + districtID + " "  + population + " " + area + " "  + neighbors + " " + votingData;
+        
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o == this) return 0;
+        if (o instanceof Precinct) {
+            Precinct p = (Precinct) o;
+            if (this.population > p.population) {
+                return 1;
+            }
+        }
+        return -1;
+    }
+    
+    
 }

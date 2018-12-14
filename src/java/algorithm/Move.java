@@ -49,4 +49,19 @@ public class Move {
 		return this.isFinalized;
 	}
 
+    @Override
+    public String toString() {
+        return "precinctID: " + precinct.getID() + "s: " + sourceDistrict.getID() + "  d: "  +destinationDistrict.getID();
+    }
+        
+    public Object convertToJson() {
+        Object a = new Object () {
+            int precinct = this.precinct;
+            int sourceDistrict = this.sourceDistrict;
+            int destinationDistrict = this.precinct;
+        };
+        return a;
+    }
+        
+
 }
