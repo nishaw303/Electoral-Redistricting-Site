@@ -63,11 +63,16 @@ public class ObjectiveFunction {
 	public double calculateObjectiveFunctionValue(State state, Move move) {
 		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
 			// Move is from Region Growing algorithm
+			return this.calcCompactnessWeighted(move.getDestinationDistrict()) +
+					this.calcPopulationEquality(state) +
+					this.calcEfficiencyGap(state);
 		}
 		else {
 			// Move is from Simulated Annealing algorithm
+			return this.calcCompactness(state) + 
+					this.calcPopulationEquality(state) + 
+					this.calcEfficiencyGap(state);
 		}
-		return 0;
 	}
 
 	// District level
@@ -75,15 +80,28 @@ public class ObjectiveFunction {
 		int counter = 0;
 		double[] totals = {0, 0, 0};
 		for (District d : state.getDistricts()) {
-			totals[0] += this.calcCompPP(d);
-			totals[1] += this.calcCompSchwartz(d);
-			totals[2] += this.calcCompReock(d);
+			double[] arr = calcCompactness(d);
+			totals[0] += arr[0];
+			totals[1] += arr[1];
+			totals[2] += arr[2];
 			counter++;
 		}
 		return this.metrics.get(Metric.COMPACTNESS) * (
 				this.metrics.get(Metric.POLTSBY_POPPER) * totals[0] / counter +
 				this.metrics.get(Metric.SCHWARTZBERG) * totals[1] / counter+
 				this.metrics.get(Metric.REOCK) * totals[2] / counter);
+	}
+	
+	private double[] calcCompactness(District d) {
+		return new double[]{this.calcCompPP(d), this.calcCompSchwartz(d), this.calcCompReock(d)};
+	}
+	
+	private double calcCompactnessWeighted(District d) {
+		double[] temp = this.calcCompactness(d);
+		return this.metrics.get(Metric.COMPACTNESS) * (
+				this.metrics.get(Metric.POLTSBY_POPPER) * temp[0] +
+				this.metrics.get(Metric.SCHWARTZBERG) * temp[1] +
+				this.metrics.get(Metric.REOCK) * temp[2]);
 	}
 	
 	private class PointsAndArea {
