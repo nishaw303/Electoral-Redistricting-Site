@@ -234,11 +234,12 @@ function getInfo(precinct) {
 	  '</div>'+
 	  '<h1 id="firstHeading" class="firstHeading"> ' + currYear + '</h1>'+
 	  '<div id="bodyContent">'+
-	  '<p><b>Democrat:</b>' + feature.VotingData.democrat + '%<span class="democrat box"></span></p>'+
-	  '<p><b>Republican:</b>' + feature.VotingData.republican + '%<span class="republican box"></span></p>'+
+	  '<p><b>Democrat:</b>' + feature.VotingData1['0'] + '%<span class="democrat box"></span></p>'+
+	  '<p><b>Republican:</b>' + feature.VotingData1['1'] + '%<span class="republican box"></span></p>'+
 	  '<hr></hr>'+
 	  '<p><b>Black:</b>' + feature.DemographicData.black + '%<span class="black box"></span></p>'+
 	  '<p><b>White:</b>' + feature.DemographicData.white + '%<span class="white box"></span></p>'+
+	  '<p><b>White:</b>' + feature.DemographicData.asian + '%<span class="asian box"></span></p>'+
 	  '<p><b>Other:</b>' + feature.DemographicData.other + '%<span class="other box"></span></p>'+
 	  '</div>'+
 	  '</div>';
@@ -247,8 +248,7 @@ function getInfo(precinct) {
 }
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
-function displayMoves() {
-	var moves = getMoves();
+function displayMoves(moves) {
 	if (moves != -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
