@@ -12,7 +12,7 @@ public class Precinct {
     private int population;
     private double area;
     private ArrayList<Precinct> neighbors;
-    private Map<Integer, VotingData> votingData;
+    private VotingData votingData;
     private ArrayList<Point> points;
     private boolean isBorder;
     
@@ -40,7 +40,7 @@ public class Precinct {
         return isBorder;
     }
 
-    public Map<Integer, VotingData> getVotingData() {
+    public VotingData getVotingData() {
         return votingData;
     }
 

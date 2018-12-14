@@ -44,13 +44,13 @@ function initMap() {
 
     var orPrecinctLayer = new google.maps.Data();
     orPrecinctLayer.loadGeoJson(properties.orPrecinctsLayer);
-    orPrecinctLayer.setMap(map);
+//    orPrecinctLayer.setMap(map);
     currentLayer = orPrecinctLayer;
 
 
     var orDistrictsLayer = new google.maps.Data();
     orDistrictsLayer.loadGeoJson(properties.orDistrictsLayer);
-//    orDistrictsLayer.setMap(map)
+    orDistrictsLayer.setMap(map)
 
     var ohPrecinctsLayer = new google.maps.Data();
     ohPrecinctsLayer.loadGeoJson(properties.ohPrecinctsLayer);

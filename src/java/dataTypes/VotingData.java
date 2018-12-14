@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class VotingData {  
     private int year;
-    private Map<Party, Integer> data;
+    private Map<Integer, Double> data;
     
     // 0 dem // 1 rep
       
