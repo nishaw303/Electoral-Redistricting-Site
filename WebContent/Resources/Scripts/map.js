@@ -63,9 +63,6 @@ function initMap() {
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);
 
-    var orDistrictsLayer = new google.maps.Data();
-    orDistrictsLayer.loadGeoJson(properties.orDistrictsLayer);
-    orDistrictsLayer.setMap(map)
     ohLayer = new google.maps.Data();
     ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
 
@@ -188,6 +185,7 @@ function setCurrentLayer(selectedState) {
 		  var precinct = feature.event;
 		  infowindow.close(map, precinct);
 	});
+
 }
 
 function getInfo(precinct) {
