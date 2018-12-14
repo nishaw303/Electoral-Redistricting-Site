@@ -10,7 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import algorithm.Move;
 import dataTypes.Representative;
 import dataTypes.StateName;
-import java.util.Comparator;
 
 public class State {
 
@@ -85,6 +84,9 @@ public class State {
 	}
 
 	public District getDistrict(int distID) {
+		if (distID == 0) {
+			return this.getUnassignedDistrict();
+		}
 		for (District d : districts) {
 			if (distID == d.getID()) {
 				return d;

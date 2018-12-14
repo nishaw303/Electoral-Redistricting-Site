@@ -7,7 +7,7 @@ import properties.PropertiesManager;
 import seeding.SeedStrategy;
 
 public class RegionGrowing extends Algorithm {
-	
+
 	private SeedStrategy seedStrategy;
 	private static double RegionGrowingThreshold;
 
@@ -16,8 +16,7 @@ public class RegionGrowing extends Algorithm {
 		this.currentState = s;
 		this.objectiveFunction = of;
 		this.seedStrategy = seedStrategy;
-		RegionGrowingThreshold = Double
-				.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
+		RegionGrowingThreshold = Double.parseDouble(PropertiesManager.getInstance().getValue("RegionGrowingThreshold"));
 	}
 
 	@Override
@@ -33,10 +32,7 @@ public class RegionGrowing extends Algorithm {
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
 		}
-                int jjj =0;
-                   
 		while (this.checkTerimanationConditions() != true) {
-                    
 			District d = this.selectDistrictToGrow();
 			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
 			Move tempMove = new Move(precinctToMove, unassigned, d);
@@ -44,7 +40,6 @@ public class RegionGrowing extends Algorithm {
 			moves.push(tempMove);
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
-                        System.out.println(jjj++); 
 		}
 	}
 
