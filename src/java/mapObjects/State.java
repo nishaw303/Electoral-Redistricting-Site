@@ -87,4 +87,8 @@ public class State {
 		}
 		return null;
 	}
+	
+	public ArrayList<District> getDistricts() {
+		return this.districts;
+	}
 }

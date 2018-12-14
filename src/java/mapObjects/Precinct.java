@@ -1,6 +1,5 @@
 package mapObjects;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -13,8 +12,17 @@ public class Precinct {
     private int population;
     private double area;
     private ArrayList<Precinct> neighbors;
-    private Map<Year, VotingData> votingData;
+    private Map<Integer, VotingData> votingData;
+    private ArrayList<Point> points;
     private boolean isBorder;
+    
+    public void setPoints(ArrayList<Point> points) {
+    	this.points = points;
+    }
+    
+    public ArrayList<Point> getPoints() {
+    	return this.points;
+    }
 
     public ArrayList<Precinct> getNeighbors() {
         return neighbors;
@@ -32,7 +40,7 @@ public class Precinct {
         return isBorder;
     }
 
-    public Map<Year, VotingData> getVotingData() {
+    public Map<Integer, VotingData> getVotingData() {
         return votingData;
     }
 
