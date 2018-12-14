@@ -2,6 +2,7 @@ package mapObjects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -54,9 +55,7 @@ public class State {
 	}
 
 	public District getLowestPolulationDistrict() {
-		return Collections.min(districts, (District d1, District d2) -> {
-			return ((Integer) d1.getPopulation()).compareTo(d2.getPopulation());
-		});
+		return Collections.min(districts, Comparator.comparingInt(District::getPopulation));
 	}
 
 	public Set<Representative> getRepresentatives() {
