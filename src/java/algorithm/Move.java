@@ -8,12 +8,13 @@ public class Move {
 	private Precinct precinct;
 	private District sourceDistrict;
 	private District destinationDistrict;
-	private boolean isFinalized; // we keep this?
+	private boolean isFinalized;
 
 	public Move(Precinct precinct, District sourceDistrict, District destinationDistrict) {
 		this.precinct = precinct;
 		this.sourceDistrict = sourceDistrict;
 		this.destinationDistrict = destinationDistrict;
+		this.isFinalized = false;
 	}
 
 	public Precinct getPrecinct() {
@@ -42,6 +43,10 @@ public class Move {
 
 	public void setIsFinalized(boolean isFinalized) {
 		this.isFinalized = isFinalized;
+	}
+	
+	public boolean getIsFinalized() {
+		return this.isFinalized;
 	}
 
 }

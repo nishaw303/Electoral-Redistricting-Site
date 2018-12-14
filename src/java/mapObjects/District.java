@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import algorithm.Move;
 import algorithm.ObjectiveFunction;
 
 public class District {
@@ -72,17 +73,21 @@ public class District {
 		}
 	}
 
-	public Precinct findMovablePrecinct(ObjectiveFunction of) {
+	public Precinct findMovablePrecinct(State state, ObjectiveFunction of) {
 		Precinct bestP = null;
 		double bestOFV = 0;
 		for (Precinct p : candidates) {
-			precincts.put(p.getID(), p);
-			double currentOFV = of.calculateObjectiveFunctionValue(precincts);
+			int tempID = p.getDistrictID();
+			state.getDistrict(tempID).removePrecinct(p);
+			this.addPrecinct(p);
+			Move tempMove = new Move(p, state.getDistrict(tempID), state.getDistrict(p.getDistrictID()));
+			double currentOFV = of.calculateObjectiveFunctionValue(state, tempMove);
 			if (currentOFV > bestOFV) {
 				bestOFV = currentOFV;
 				bestP = p;
 			}
-			precincts.remove(p.getID());
+			this.removePrecinct(p);
+			state.getDistrict(tempID).addPrecinct(p);
 		}
 		return bestP;
 	}

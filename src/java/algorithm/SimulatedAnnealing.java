@@ -25,16 +25,20 @@ public class SimulatedAnnealing extends Algorithm {
 	public void run() {
 		while (this.checkTerimanationConditions() != true) {
 			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
+			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
 			if (precinctToMove != null) {
 				District oldD = currentState.getDistrict(precinctToMove.getDistrictID());
-				moves.push(new Move(precinctToMove, oldD, d));
+				Move tempMove = new Move(precinctToMove, oldD, d);
 				d.addPrecinct(precinctToMove);
 				oldD.removePrecinct(precinctToMove);
-				double newOFV = this.objectiveFunction.calculateObjectiveFunctionValue(d.getPrecincts());
+				double newOFV = this.objectiveFunction.calculateObjectiveFunctionValue(currentState, tempMove);
 				if (compareToTolerance(checkImprovement(newOFV))) {
+					tempMove.setIsFinalized(true);
+					moves.push(tempMove);
 					continue;
 				}
+				d.removePrecinct(precinctToMove);
+				oldD.addPrecinct(precinctToMove);
 			}
 			incrementNoImprovement();
 		}
