@@ -42,6 +42,10 @@
                     <button type="button" class="btn btn-default" title="About/FAQ" onclick="window.location.href = 'faq.html'">
                         <i class="fas fa-question-circle"></i>
                     </button>
+                    
+                    <button type="button" class="btn btn-default" title="State Constitution" onclick="window.location.href = 'const.html'">
+                        <i class="fas fa-file-alt"></i>
+                    </button>
                 </div>
 
                 <div id="customize-panel">

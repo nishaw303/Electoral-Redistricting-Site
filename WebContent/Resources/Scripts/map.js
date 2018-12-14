@@ -31,43 +31,71 @@ function initMap() {
     // styling map:
     usaLayer.setStyle({
     	fillColor: 'silver',
-        opacity: 0.3
-    })
+    	strokeWeight: 1,
+    	fillOpacity: 0.3
+    });
+    
+    usaLayer.forEach(function(feature) {
+    	if(feature.getProperty('name') == "Oregon" |
+        		feature.getProperty('name') == "Ohio" |
+        		feature.getProperty('name') == "Massachusetts") {
+    		console.log("yes");
+            usaLayer.overrideStyle(feature, {fillOpacity: 0.8});
+        }
+    });
+
 
     // sets selected state
 	usaLayer.addListener('click', function(event) {
 		var state = event.feature;
+//		usaLayer.overrideStyle(function(feature) {
+//			if (feature == state) {
+//				usaLayer.overrideStyle(selected, {strokeWidth: 3});
+//			}
+//		})
+		usaLayer.overrideStyle(selected, {strokeWidth: 3});
 		setSelected(state);
 	
 	});
     
     // styling a particular feature:
-//    usaLayer.addListener('mouseover', function(event) {
-//        selected = event.feature;
-//        usaLayer.setStyle(function(feature) {
-//            if(feature == selected) {
-//                usaLayer.overrideStyle(selected, {fillColor: 'green'});
-//            }
-//        });
-//    });
-//
-//    usaLayer.addListener('mouseout', function(event) {
-//    	selected = event.feature;
-//    	usaLayer.setStyle(function(feature) {
-//    		if (feature == selected) {
-//    			usaLayer.revertStyle();
-//    		}
-//    	})
-//    });
+    usaLayer.addListener('mouseover', function(event) {
+        selected = event.feature;
+        
+            if(selected.getProperty('name') != selectedState && 
+            		(selected.getProperty('name') == "Oregon" |
+            		selected.getProperty('name') == "Ohio" |
+            		selected.getProperty('name') == "Massachusetts")) {
+                usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.8});
+            }
+    });
+
+    usaLayer.addListener('mouseout', function(event) {
+    	selected = event.feature;
+    	if (selected.getProperty('name') != selectedState) {
+    		usaLayer.revertStyle(selected);
+    	}
+    });
+    
+    
 
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);
+    orLayer.setStyle({
+    	strokeWeight: 1	
+    });
 
     ohLayer = new google.maps.Data();
     ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
+    ohLayer.setStyle({
+    	strokeWeight: 1	
+    });
 
     maLayer = new google.maps.Data();
     maLayer.loadGeoJson(properties.maPrecinctsLayer);
+    maLayer.setStyle({
+    	strokeWeight: 1	
+    });
 
     google.maps.event.addListener(map, 'click', function(event) {
     	console.log(event.latLng.lat(),event.latLng.lng());
@@ -130,35 +158,45 @@ function deleteFile(filename) {
 }
 
 function setSelected(state) {
-	if (state != selectedState) {
-		if (selectedState != null) {
-			selectedState.revertStyle();
+	if (selectedState != null) {
+		if (state != selectedState) {
+			//map.data.revertStyle();
 		}
-		selectedState = state.getProperty('name'); // setting global variable
-		map.data.overrideStyle(state, {strokeWeight: 3}); // adds border to selected state
-		setCurrentLayer(selectedState);
 	}
+	selectedState = state.getProperty('name'); // setting global variable
+	setCurrentLayer(selectedState);
+	
   // change color, border, zoom, pan, etc of selected state as necessary
 }
 
 function setCurrentLayer(selectedState) {
   if (selectedState == "Oregon") {
 	  currentLayer = orLayer;
+	  maLayer.setMap(null);
+	  orLayer.setMap(null);
 	  orLayer.setMap(map);
+
   } else if (selectedState == "Ohio") {
 	  currentLayer = ohLayer;
+	  maLayer.setMap(null);
+	  orLayer.setMap(null);
 	  ohLayer.setMap(map);
-  } else if (selectedState == "Massachussetts") {
+
+  } else if (selectedState == "Massachusetts") {
 	  currentLayer = maLayer;
+	  ohLayer.setMap(null);
+	  orLayer.setMap(null);
 	  maLayer.setMap(map);
+
   }
+  
+  console.log("current layer set to: " + selectedState)
 
   // info popup upon clicking a precinct
   var contentString = '<div id="content">'+
   '<div id="siteNotice">'+
   '</div>'+
   '<h1 id="firstHeading" class="firstHeading">2016</h1>'+
-  '<hr></hr>'+
   '<div id="bodyContent">'+
   '<p><b>Democrat:</b> 50% <span class="democrat box"></span></p>'+
   '<p><b>Republican:</b> 50% <span class="republican box"></span></p>'+
@@ -173,17 +211,19 @@ function setCurrentLayer(selectedState) {
 		content: contentString,
 		maxWidth: 200
 	});
+	
 
 	currentLayer.addListener('mouseover', function(event) {
-		var precinct = feature.event;
+		var precinct = event.feature;
 		//var contentString = getInfo(precinct);
 		//infowindow.setContent(contentString);
-		infowindow.open(map, precinct);
+		  infowindow.setPosition(event.latLng);
+		infowindow.open(map);
 	});
 
 	currentLayer.addListener('mouseout', function(event) {
-		  var precinct = feature.event;
-		  infowindow.close(map, precinct);
+		  var precinct = event.feature;
+		  infowindow.close(map);
 	});
 
 }
@@ -193,7 +233,6 @@ function getInfo(precinct) {
 	  '<div id="siteNotice">'+
 	  '</div>'+
 	  '<h1 id="firstHeading" class="firstHeading"> ' + currYear + '</h1>'+
-	  '<hr></hr>'+
 	  '<div id="bodyContent">'+
 	  '<p><b>Democrat:</b>' + feature.VotingData.democrat + '%<span class="democrat box"></span></p>'+
 	  '<p><b>Republican:</b>' + feature.VotingData.republican + '%<span class="republican box"></span></p>'+
