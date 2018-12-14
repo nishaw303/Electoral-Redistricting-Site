@@ -1,10 +1,12 @@
 package dataTypes;
-import java.time.Year;
 import java.util.Map;
 
 public class VotingData {  
-    private Year year;
-    private Map<ElectionType, Map<Party, Integer>> data;
+    private int year;
+    private Map<Party, Integer> data;
+    
+    // 0 dem // 1 rep
+      
    ///+ getResults(): Map<Party, Integer>
    ///+ getElectionType(et: ElectionType): Map<Party, Integer>
    //getPartyResults(party: Party): Integer
