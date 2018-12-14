@@ -72,18 +72,20 @@ public class MapServlet extends HttpServlet {
 
         ArrayList<MovesShort> moves = new ArrayList();
         for (int i = 0; i < regionGrowing.getMoves().size(); i++) {
-            Move x = regionGrowing.getMoves().get(i);
-//             MovesShort a = new MoveShort(x.get)
-             
-            
+             Move x = regionGrowing.getMoves().get(i);
+             MovesShort a = new MovesShort(
+                     x.getPrecinct().getID(),
+                     x.getSourceDistrict().getID(),
+                     x.getDestinationDistrict().getID()
+          );
+             moves.add(a);
         }
       
-        System.out.println(regionGrowing.getMoves().toString());
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         int a = 10;
-        response.getWriter().write((new Gson()).toJson(a));
+        response.getWriter().write((new Gson()).toJson(moves));
 //        System.out.println();
 //			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(
 //					StateManager.getInstance().getState(stateName), objectiveFunction);
