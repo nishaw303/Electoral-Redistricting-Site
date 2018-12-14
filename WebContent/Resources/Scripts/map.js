@@ -32,7 +32,8 @@ function initMap() {
     usaLayer.setStyle({
     	fillColor: 'silver',
     	strokeWeight: 1,
-    	fillOpacity: 0.3
+    	fillOpacity: 0.9
+        
     });
     
     usaLayer.forEach(function(feature) {
@@ -53,7 +54,7 @@ function initMap() {
 //				usaLayer.overrideStyle(selected, {strokeWidth: 3});
 //			}
 //		})
-		usaLayer.overrideStyle(selected, {strokeWidth: 3});
+		//usaLayer.overrideStyle(selected, {strokeWidth: 3});
 		setSelected(state);
 	
 	});
@@ -62,12 +63,12 @@ function initMap() {
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
         
-            if(selected.getProperty('name') != selectedState && 
-            		(selected.getProperty('name') == "Oregon" |
-            		selected.getProperty('name') == "Ohio" |
-            		selected.getProperty('name') == "Massachusetts")) {
-                usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.8});
-            }
+//            if(selected.getProperty('name') != selectedState && 
+//            		(selected.getProperty('name') == "Oregon" |
+//            		selected.getProperty('name') == "Ohio" |
+//            		selected.getProperty('name') == "Massachusetts")) {
+//                usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.8});
+//            }
     });
 
     usaLayer.addListener('mouseout', function(event) {
@@ -190,7 +191,7 @@ function setCurrentLayer(selectedState) {
 
   }
   
-  console.log("current layer set to: " + selectedState)
+  console.log("current layer set to: " + selectedState);
 
   // info popup upon clicking a precinct
   var contentString = '<div id="content">'+
@@ -213,7 +214,7 @@ function setCurrentLayer(selectedState) {
 	});
 	
 
-	currentLayer.addListener('mouseover', function(event) {
+	orLayer.addListener('mouseover', function(event) {
 		var precinct = event.feature;
 		//var contentString = getInfo(precinct);
 		//infowindow.setContent(contentString);
@@ -221,7 +222,7 @@ function setCurrentLayer(selectedState) {
 		infowindow.open(map);
 	});
 
-	currentLayer.addListener('mouseout', function(event) {
+	orLayer.addListener('mouseout', function(event) {
 		  var precinct = event.feature;
 		  infowindow.close(map);
 	});
@@ -247,12 +248,13 @@ function getInfo(precinct) {
 }
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
-function displayMoves() {
-	var moves = getMoves();
+var i = 0;
+var interval;
+function displayMoves(moves) {
+    interval = setInterval(showPrecinctMove, 200, moves);
+	
 	if (moves != -1) {
-		moves.forEach(move => {
-			showMovePrecinct(move);
-		});
+            setInterval()
 	}
 }
 
@@ -279,17 +281,21 @@ function getMoves(numMoves) {
   return moves;
 }
 
-function showMovePrecinct(move) {
+function showMovePrecinct(moves) {
+  var move = moves[i];
   var srcID = move.sourceDistrict;
   var destID = move.destinationDistrict;
   var precinctID = move.precinct;
 
-  var feature = currentLayer.getFeatureById(precinctID);
+  var feature = orLayer.getFeatureById(precinctID);
   if (destID <= colors.length) {
-	  var newColor = colors[destID];
   } else {
 	  var newColor = colors[destID - (destID-colors.length)];
   }
-  currentLayer.setStyle(feature, {fillColor: newColor});
+  orLayer.setStyle(feature, {fillColor: newColor});
+  i++;
+  if (i > 1200) {
+      clearInterval(interval);
+  }
 
 }
