@@ -132,7 +132,7 @@ public class ObjectiveFunction {
 	private double calcPerimeter(ArrayList<Point> points) {
 		ConcaveHull concaveHull = new ConcaveHull();
 		ArrayList<Point> hull = concaveHull.calculateConcaveHull(points, 3);
-		double perimeter = concaveHull.euclideanDistance(hull.get(0), hull.get(hull.size()));
+		double perimeter = concaveHull.euclideanDistance(hull.get(0), hull.get(hull.size()-1));
 		for (int i = 0; i < hull.size() - 1; i++) {
 			perimeter += concaveHull.euclideanDistance(hull.get(i), hull.get(i + 1));
 		}
