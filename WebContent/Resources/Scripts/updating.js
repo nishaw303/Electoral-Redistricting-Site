@@ -7,7 +7,8 @@
             type: 'POST',
             dataType: 'json',
             success: function (jsonObject) {
-//                console.log(jsonObject.id);
+                
+               console.log(jsonObject);
 //                var feature = currentLayer.getFeatureById(jsonObject.id);
 //         currentLayer.overrideStyle(feature, {fillColor: 'lime'});
 

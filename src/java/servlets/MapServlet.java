@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import algorithm.Metric;
+import algorithm.Move;
+import algorithm.MovesShort;
 import algorithm.ObjectiveFunction;
 import algorithm.RegionGrowing;
-import algorithm.SimulatedAnnealing;
 import com.google.gson.Gson;
 import dataTypes.StateName;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import manager.MapEntityManagerFactory;
 import manager.StateManager;
 import mapObjects.State;
@@ -67,14 +69,16 @@ public class MapServlet extends HttpServlet {
 //        request.getSession().setAttribute("regionGrowing", regionGrowing);
         
         regionGrowing.run();
-        System.out.println("completed??!!");
-        System.out.println(regionGrowing.getMoves().size());
-        
-//        for (int i = 0; i < regionGrowing.getMoves().size(); i++) {
-//             System.out.println(regionGrowing.getMoves().get(i));
-//            
-//        }
-//     
+
+        ArrayList<MovesShort> moves = new ArrayList();
+        for (int i = 0; i < regionGrowing.getMoves().size(); i++) {
+            Move x = regionGrowing.getMoves().get(i);
+//             MovesShort a = new MoveShort(x.get)
+             
+            
+        }
+      
+        System.out.println(regionGrowing.getMoves().toString());
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -108,6 +112,7 @@ public class MapServlet extends HttpServlet {
         metrics.put(Metric.CONSISTENCY, 0.3);
         metrics.put(Metric.GERRYMANDERING, 0.3);
         metrics.put(Metric.ALIGNMENT, 0.3);
+        metrics.put(Metric.EFFICIENCYGAP, 0.3);
         return metrics;
     }
     

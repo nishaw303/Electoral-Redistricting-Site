@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import dataTypes.Party;
+import java.util.concurrent.ThreadLocalRandom;
 import mapObjects.District;
 import mapObjects.Point;
 import mapObjects.Precinct;
@@ -61,19 +62,19 @@ public class ObjectiveFunction {
 	}
 
 	public double calculateObjectiveFunctionValue(State state, Move move) {
-            System.out.println(state.getUnassignedDistrict().getID());
-            System.out.println(move.getSourceDistrict().getID());
 		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
 			// Move is from Region Growing algorithm
-			return this.calcCompactnessWeighted(move.getDestinationDistrict()) +
-					this.calcPopulationEquality(state) +
-					this.calcEfficiencyGap(state);
+                        System.out.print("Calculating...");
+			return /*this.calcCompactnessWeighted(move.getDestinationDistrict())*/ +
+                                ThreadLocalRandom.current().nextDouble(1);/* +
+                                        this.calcPopulationEquality(state) +
+					this.calcEfficiencyGap(state);*/
 		}
 		else {
 			// Move is from Simulated Annealing algorithm
-			return this.calcCompactness(state) + 
+			return ThreadLocalRandom.current().nextDouble(1);/*this.calcCompactness(state) + 
 					this.calcPopulationEquality(state) + 
-					this.calcEfficiencyGap(state);
+					this.calcEfficiencyGap(state);*/
 		}
 	}
 
@@ -95,7 +96,7 @@ public class ObjectiveFunction {
 	}
 	
 	private double[] calcCompactness(District d) {
-		return new double[]{this.calcCompPP(d), this.calcCompSchwartz(d), this.calcCompReock(d)};
+		return new double[]{this.calcCompPP(d), /*this.calcCompSchwartz(d)*/0, /*this.calcCompReock(d)*/0};
 	}
 	
 	private double calcCompactnessWeighted(District d) {
@@ -132,7 +133,7 @@ public class ObjectiveFunction {
 	private double calcPerimeter(ArrayList<Point> points) {
 		ConcaveHull concaveHull = new ConcaveHull();
 		ArrayList<Point> hull = concaveHull.calculateConcaveHull(points, 3);
-		double perimeter = concaveHull.euclideanDistance(hull.get(0), hull.get(hull.size()-1));
+		double perimeter = concaveHull.euclideanDistance(hull.get(0), hull.get(hull.size() - 1));
 		for (int i = 0; i < hull.size() - 1; i++) {
 			perimeter += concaveHull.euclideanDistance(hull.get(i), hull.get(i + 1));
 		}
