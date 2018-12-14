@@ -1,4 +1,26 @@
+
+
+
+   function request() {
+        $.ajax({
+            url: 'calculate',
+            type: 'POST',
+            dataType: 'json',
+            success: function (jsonObject) {
+//                console.log(jsonObject.id);
+//                var feature = currentLayer.getFeatureById(jsonObject.id);
+//         currentLayer.overrideStyle(feature, {fillColor: 'lime'});
+
+            },
+            error: function (error) {
+                alert("error");
+            }
+        });
+    }
 //
+//
+//
+////
 //function suka() {
 //
 //    function request() {
@@ -26,7 +48,4 @@
 //
 //};
 
-
-
-setTimeout(suka, 7000);
 

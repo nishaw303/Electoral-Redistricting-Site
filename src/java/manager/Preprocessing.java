@@ -22,6 +22,8 @@ public class Preprocessing {
             string = new String(Files.readAllBytes(Paths.get(serializationFile)));
             State state = j.fromJson(string, State.class);
             initializePrecinctNeighbors(adjacencyFile, state);
+            state.setName(name);
+            state.setNumPrecincts(state.getUnassignedDistrict().getPrecincts().size());
             return state;
         } catch (IOException ex) {
             System.out.println("Could not load the file");

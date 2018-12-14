@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import algorithm.Move;
 import dataTypes.Representative;
 import dataTypes.StateName;
+import java.util.Comparator;
 
 public class State {
 
@@ -38,6 +39,11 @@ public class State {
 	public int getNumPrecincts() {
 		return this.numPrecincts;
 	}
+
+    public void setNumPrecincts(int numPrecincts) {
+        this.numPrecincts = numPrecincts;
+    }
+        
 	
 	public StateName getName() {
 		return this.name;
@@ -54,9 +60,7 @@ public class State {
 	}
 
 	public District getLowestPolulationDistrict() {
-		return Collections.min(districts, (District d1, District d2) -> {
-			return ((Integer) d1.getPopulation()).compareTo(d2.getPopulation());
-		});
+		return Collections.min(districts, Comparator.comparingInt(District::getPopulation));
 	}
 
 	public Set<Representative> getRepresentatives() {
@@ -87,8 +91,20 @@ public class State {
 		}
 		return null;
 	}
+
+    public void setName(StateName name) {
+        this.name = name;
+    }
+        
+        
 	
 	public ArrayList<District> getDistricts() {
 		return this.districts;
 	}
+
+    public void setNumDistricts(int numDistricts) {
+        this.numDistricts = numDistricts;
+    }
+        
+        
 }

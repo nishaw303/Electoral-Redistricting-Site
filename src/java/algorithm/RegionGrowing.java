@@ -33,7 +33,10 @@ public class RegionGrowing extends Algorithm {
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
 		}
+                int jjj =0;
+                   
 		while (this.checkTerimanationConditions() != true) {
+                    
 			District d = this.selectDistrictToGrow();
 			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
 			Move tempMove = new Move(precinctToMove, unassigned, d);
@@ -41,6 +44,7 @@ public class RegionGrowing extends Algorithm {
 			moves.push(tempMove);
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
+                        System.out.println(jjj++); 
 		}
 	}
 

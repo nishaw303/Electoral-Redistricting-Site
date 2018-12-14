@@ -59,6 +59,8 @@ public class ObjectiveFunction {
 	}
 
 	public double calculateObjectiveFunctionValue(State state, Move move) {
+            System.out.println(state.getUnassignedDistrict().getID());
+            System.out.println(move.getSourceDistrict().getID());
 		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
 			// Move is from Region Growing algorithm
 		}

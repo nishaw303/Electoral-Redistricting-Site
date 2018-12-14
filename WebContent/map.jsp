@@ -45,7 +45,7 @@
                 </div>
 
                 <div id="customize-panel">
-                    <form class="form" id="options-form" action="calculate" method="post">
+                    <form class="form" id="options-form">
                         <h1>Redistricting Metrics</h1>
                         <div class="form-group row" id="state">
                             <label class="control-label col-sm-4" for="state">
@@ -169,8 +169,10 @@
                                 <span  class="slider_label"></span></p>
                         </div>
 
-                        <button id="submit-btn" type="submit" onclick="window.alert('Please make sure weights add up to 1!');" class="btn btn-success">CALCULATE</button>
+<!--                        <button id="submit-btn" type="submit" onclick="request();" class="btn btn-success">CALCULATE</button>-->
                     </form>
+                    
+                    <button id="submit-btn" type="submit" onclick="request();" class="btn btn-success">CALCULATE</button>
                 </div> <!-- end customize panel div -->
 
                 <div id="user-settings-panel" style="display:none;"> <!-- will be displayed if user presses user button -->

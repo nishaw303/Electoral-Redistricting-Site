@@ -42,23 +42,23 @@ function initMap() {
 	});
     
     // styling a particular feature:
-    usaLayer.addListener('mouseover', function(event) {
-        selected = event.feature;
-        usaLayer.setStyle(function(feature) {
-            if(feature == selected) {
-                usaLayer.overrideStyle(selected, {fillColor: 'green'});
-            }
-        });
-    });
-
-    usaLayer.addListener('mouseout', function(event) {
-    	selected = event.feature;
-    	usaLayer.setStyle(function(feature) {
-    		if (feature == selected) {
-    			usaLayer.revertStyle();
-    		}
-    	})
-    });
+//    usaLayer.addListener('mouseover', function(event) {
+//        selected = event.feature;
+//        usaLayer.setStyle(function(feature) {
+//            if(feature == selected) {
+//                usaLayer.overrideStyle(selected, {fillColor: 'green'});
+//            }
+//        });
+//    });
+//
+//    usaLayer.addListener('mouseout', function(event) {
+//    	selected = event.feature;
+//    	usaLayer.setStyle(function(feature) {
+//    		if (feature == selected) {
+//    			usaLayer.revertStyle();
+//    		}
+//    	})
+//    });
 
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);

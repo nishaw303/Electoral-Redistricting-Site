@@ -16,14 +16,14 @@ public class District {
 	private int ID;
 	private Map<Integer, Precinct> precincts;
 	private int population;
-	private PriorityQueue<Precinct> candidates;
+	private ArrayList<Precinct> candidates;
 	private Set<Precinct> seeds;
 
 	public District() {
 		this.ID = 0;
 		this.precincts = new HashMap<Integer, Precinct>();
 		this.population = 0;
-		this.candidates = new PriorityQueue<Precinct>();
+		this.candidates = new ArrayList<Precinct>();
 	}
 
 	public Precinct getPrecinctById(int ID) {
@@ -31,7 +31,7 @@ public class District {
 	}
 
 	public boolean addPrecinct(Precinct precinct) {
-		if (!precincts.containsKey(precinct.getID())) {
+		if (!precincts.containsValue(precinct)) {
 			precincts.put(precinct.getID(), precinct);
 			updatePopulation(population + precinct.getPopulation());
 			precinct.setDistrictID(this.ID);
@@ -75,24 +75,32 @@ public class District {
 
 	public Precinct findMovablePrecinct(State state, ObjectiveFunction of) {
 		Precinct bestP = null;
-		double bestOFV = 0;
-		for (Precinct p : candidates) {
+		double bestOFV = -1;
+                ArrayList<Precinct> candidateClone = new ArrayList<>(candidates);
+		for (Precinct p : candidateClone) {
 			int tempID = p.getDistrictID();
-			state.getDistrict(tempID).removePrecinct(p);
+                        District src = null;
+                        if (tempID == 0) {
+                            src = state.getUnassignedDistrict();
+                        }
+                        else {
+                            src = state.getDistrict(tempID);
+                        }
+                        src.removePrecinct(p);
 			this.addPrecinct(p);
-			Move tempMove = new Move(p, state.getDistrict(tempID), state.getDistrict(p.getDistrictID()));
+			Move tempMove = new Move(p, src, state.getDistrict(p.getDistrictID()));
 			double currentOFV = of.calculateObjectiveFunctionValue(state, tempMove);
 			if (currentOFV > bestOFV) {
 				bestOFV = currentOFV;
 				bestP = p;
 			}
 			this.removePrecinct(p);
-			state.getDistrict(tempID).addPrecinct(p);
+			src.addPrecinct(p);
 		}
 		return bestP;
 	}
 
-	public PriorityQueue<Precinct> getCandidates() {
+	public ArrayList<Precinct> getCandidates() {
 		return candidates;
 	}
 
@@ -125,14 +133,7 @@ public class District {
 	}
 
 	public Precinct getRandomCandidate() {
-		ArrayList<Precinct> cache = new ArrayList<Precinct>();
-		int rand = ThreadLocalRandom.current().nextInt(this.candidates.size());
-		for (int i = 0; i < rand; i++) {
-			cache.add(this.candidates.poll());
-		}
-		Precinct p = this.candidates.poll();
-		this.candidates.addAll(cache);
-		return p;
+		return this.candidates.get(ThreadLocalRandom.current().nextInt(this.candidates.size()));
 	}
 
 	public int getNumPrecincts() {
@@ -147,6 +148,7 @@ public class District {
 	}
 
 	public boolean addSeed(Precinct seed) {
+                this.getSeeds();
 		if (this.getSeeds().contains(seed)) {
 			return false;
 		}
