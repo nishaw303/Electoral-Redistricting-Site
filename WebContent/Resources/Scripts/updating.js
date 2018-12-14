@@ -28,5 +28,5 @@
 
 
 
-setTimeout(suka, 7000);
+//setTimeout(suka, 7000);
 
