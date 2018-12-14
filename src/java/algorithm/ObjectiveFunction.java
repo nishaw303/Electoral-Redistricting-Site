@@ -3,7 +3,9 @@ package algorithm;
 import java.util.HashMap;
 import java.util.Map;
 
+import mapObjects.District;
 import mapObjects.Precinct;
+import mapObjects.State;
 
 public class ObjectiveFunction {
 
@@ -21,36 +23,47 @@ public class ObjectiveFunction {
 		this.metrics = metrics;
 	}
 
-	public double calculateObjectiveFunctionValue(Map<Integer, Precinct> precincts) {
-		return metrics.get(Metric.COMPACTNESS) * this.calcCompactness(precincts)
-				+ metrics.get(Metric.ALIGNMENT) * this.calcAlignment(precincts)
-				+ metrics.get(Metric.CONSISTENCY) * this.calcConsistency(precincts)
-				+ metrics.get(Metric.GERRYMANDERING) * this.calcGerrymandering(precincts)
-				+ metrics.get(Metric.PARTISANFAIRNESS) * this.calcPartisanFairness(precincts)
-				+ metrics.get(Metric.POPOULATIONEQUALITY) * this.calcPopulationEquality(precincts);
+	public double calculateObjectiveFunctionValue(State state, Move move) {
+		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
+			
+		}
+		else {
+			
+		}
 	}
 
-	private double calcCompactness(Map<Integer, Precinct> precincts) {
+	// District level
+	private double calcCompactness(District d) {
 		return 0;
 	}
 
-	private double calcPopulationEquality(Map<Integer, Precinct> precincts) {
+	// State level
+	private double calcPopulationEquality(State state) {
 		return 0;
 	}
 
-	private double calcPartisanFairness(Map<Integer, Precinct> precincts) {
+	// State level
+	private double calcPartisanFairness(State state) {
+		return 0;
+	}
+	
+	// State level
+	private double calcEfficiencyGap(District d) {
 		return 0;
 	}
 
-	private double calcConsistency(Map<Integer, Precinct> precincts) {
+	// 
+	private double calcConsistency(District d) {
 		return 0;
 	}
 
-	private double calcGerrymandering(Map<Integer, Precinct> precincts) {
+	// 
+	private double calcGerrymandering(District d) {
 		return 0;
 	}
 
-	private double calcAlignment(Map<Integer, Precinct> precincts) {
+	// 
+	private double calcAlignment(District d) {
 		return 0;
 	}
 

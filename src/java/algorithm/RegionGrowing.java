@@ -27,14 +27,18 @@ public class RegionGrowing extends Algorithm {
 		while (unassigned.getPrecincts().size() > currentState.getNumPrecincts() * RegionGrowingThreshold) {
 			District d = this.selectDistrictToGrow();
 			Precinct precinctToMove = d.getRandomCandidate();
-			moves.push(new Move(precinctToMove, unassigned, d));
+			Move tempMove = new Move(precinctToMove, unassigned, d);
+			tempMove.setIsFinalized(true);
+			moves.push(tempMove);
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
 		}
 		while (this.checkTerimanationConditions() != true) {
 			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = d.findMovablePrecinct(objectiveFunction);
-			moves.push(new Move(precinctToMove, unassigned, d));
+			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
+			Move tempMove = new Move(precinctToMove, unassigned, d);
+			tempMove.setIsFinalized(true);
+			moves.push(tempMove);
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
 		}
