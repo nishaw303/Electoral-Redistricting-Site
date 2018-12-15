@@ -20,85 +20,331 @@ function initMap() {
     // initializing a map
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: 37.09024, lng: -95.712891}, // approximate center of US
-	  zoom: 4 // 0 = most zoomed out
+	  zoom: 4, // 0 = most zoomed out
+	  styles: [
+		  {
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#f5f5f5"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "geometry.stroke",
+			    "stylers": [
+			      {
+			        "color": "#000000"
+			      },
+			      {
+			        "visibility": "on"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.icon",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#616161"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.text.stroke",
+			    "stylers": [
+			      {
+			        "color": "#f5f5f5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#000000"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative.land_parcel",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#bdbdbd"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "landscape.natural",
+			    "elementType": "geometry.fill",
+			    "stylers": [
+			      {
+			        "color": "#f3f3f5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "landscape.natural.terrain",
+			    "elementType": "geometry.fill",
+			    "stylers": [
+			      {
+			        "color": "#c2c5c7"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#eeeeee"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "labels.text",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.business",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#e5e5e5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#ffffff"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "elementType": "labels.icon",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.arterial",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.highway",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#dadada"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.highway",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#616161"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.local",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit.line",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#e5e5e5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit.station",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#eeeeee"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#c9c9c9"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "geometry.fill",
+			    "stylers": [
+			      {
+			        "color": "#e2edf5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  }
+			]
 	});
+
 
     // creating a layer
     usaLayer = new google.maps.Data();
-    usaLayer.loadGeoJson(properties.usaLayer);
-    usaLayer.setMap(map);
+    usaLayer.loadGeoJson(properties.usaLayer, {}, function(features) {
+    	usaLayer.forEach(function(feature) {
+	    	if(feature.getProperty('name') == "Oregon" | feature.getProperty('name') == "Ohio" 
+	    		| feature.getProperty('name') == "Massachusetts") {
+	            usaLayer.overrideStyle(feature, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+	        }
+    	});
+    });
 
-    // styling map:
+    //globally styling map, revertStyle will revert ovverriden styles back to this.
     usaLayer.setStyle({
-    	fillColor: 'silver',
-    	strokeWeight: 1,
-    	fillOpacity: 0.3
+    	strokeWeight: 0,
+    	fillOpacity: 0
     });
     
-    usaLayer.forEach(function(feature) {
-    	if(feature.getProperty('name') == "Oregon" |
-        		feature.getProperty('name') == "Ohio" |
-        		feature.getProperty('name') == "Massachusetts") {
-    		console.log("yes");
-            usaLayer.overrideStyle(feature, {fillOpacity: 0.8});
-        }
-    });
+    usaLayer.setMap(map);
 
 
     // sets selected state
 	usaLayer.addListener('click', function(event) {
+    	// console.log(event.latLng.lat(),event.latLng.lng());
 		var state = event.feature;
-//		usaLayer.overrideStyle(function(feature) {
-//			if (feature == state) {
-//				usaLayer.overrideStyle(selected, {strokeWidth: 3});
-//			}
-//		})
-		usaLayer.overrideStyle(selected, {strokeWidth: 3});
-		setSelected(state);
-	
+		usaLayer.revertStyle(state);
+		if (state != selectedState) {			
+			setSelected(state);
+		}
 	});
     
-    // styling a particular feature:
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
-        
-            if(selected.getProperty('name') != selectedState && 
-            		(selected.getProperty('name') == "Oregon" |
-            		selected.getProperty('name') == "Ohio" |
-            		selected.getProperty('name') == "Massachusetts")) {
-                usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.8});
-            }
+        if (selected != selectedState) {
+        	usaLayer.revertStyle(selected);
+        	usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
+        }
     });
 
     usaLayer.addListener('mouseout', function(event) {
     	selected = event.feature;
-    	if (selected.getProperty('name') != selectedState) {
+    	if (selected != selectedState) {
     		usaLayer.revertStyle(selected);
+    		if(selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio" 
+    			| selected.getProperty('name') == "Massachusetts") {
+                usaLayer.overrideStyle(selected, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+            }
+
     	}
     });
     
-    
-
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);
     orLayer.setStyle({
-    	strokeWeight: 1	
+    	fillColor: 'lightblue',
+    	fillOpacity: 0.4,
+    	strokeWeight: 1
     });
 
     ohLayer = new google.maps.Data();
     ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
     ohLayer.setStyle({
-    	strokeWeight: 1	
+    	fillColor: 'lightblue',
+    	fillOpacity: 0.4,
+    	strokeWeight: 1
     });
 
     maLayer = new google.maps.Data();
     maLayer.loadGeoJson(properties.maPrecinctsLayer);
     maLayer.setStyle({
-    	strokeWeight: 1	
-    });
-
-    google.maps.event.addListener(map, 'click', function(event) {
-    	console.log(event.latLng.lat(),event.latLng.lng());
+    	fillColor: 'lightblue',
+    	fillOpacity: 0.4,
+    	strokeWeight: 1
     });
 
 	return map;
@@ -158,31 +404,24 @@ function deleteFile(filename) {
 }
 
 function setSelected(state) {
-	if (selectedState != null) {
-		if (state != selectedState) {
-			//map.data.revertStyle();
-		}
-	}
-	selectedState = state.getProperty('name'); // setting global variable
+	selectedState = state; // setting global variable
 	setCurrentLayer(selectedState);
-	
-  // change color, border, zoom, pan, etc of selected state as necessary
 }
 
 function setCurrentLayer(selectedState) {
-  if (selectedState == "Oregon") {
+  if (selectedState.getProperty('name') == "Oregon") {
 	  currentLayer = orLayer;
 	  maLayer.setMap(null);
-	  orLayer.setMap(null);
+	  ohLayer.setMap(null);
 	  orLayer.setMap(map);
 
-  } else if (selectedState == "Ohio") {
+  } else if (selectedState.getProperty('name') == "Ohio") {
 	  currentLayer = ohLayer;
 	  maLayer.setMap(null);
 	  orLayer.setMap(null);
 	  ohLayer.setMap(map);
 
-  } else if (selectedState == "Massachusetts") {
+  } else if (selectedState.getProperty('name') == "Massachusetts") {
 	  currentLayer = maLayer;
 	  ohLayer.setMap(null);
 	  orLayer.setMap(null);
@@ -190,7 +429,7 @@ function setCurrentLayer(selectedState) {
 
   }
   
-  console.log("current layer set to: " + selectedState)
+  console.log("current layer set to: " + selectedState.getProperty('name'));
 
   // info popup upon clicking a precinct
   var contentString = '<div id="content">'+
@@ -212,16 +451,16 @@ function setCurrentLayer(selectedState) {
 		maxWidth: 200
 	});
 	
-
-	currentLayer.addListener('mouseover', function(event) {
+	
+	orLayer.addListener('mouseover', function(event) {
 		var precinct = event.feature;
-		//var contentString = getInfo(precinct);
-		//infowindow.setContent(contentString);
+		  //var contentString = getInfo(precinct);
+		  //infowindow.setContent(contentString);
 		  infowindow.setPosition(event.latLng);
-		infowindow.open(map);
+		  infowindow.open(map);
 	});
 
-	currentLayer.addListener('mouseout', function(event) {
+	orLayer.addListener('mouseout', function(event) {
 		  var precinct = event.feature;
 		  infowindow.close(map);
 	});
