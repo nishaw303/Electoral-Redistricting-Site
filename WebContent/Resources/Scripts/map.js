@@ -1,6 +1,6 @@
 // *** GLOBAL VARIABLES ***
-var colors = ['#A2A79E', '#2B2D42', '#8D99AE', '#C5D5E8', '#476C9B',
-	'#EAE8FF','#DFDCE1', '#ADACB5', '#2D3142', '#B0D7FF'];
+var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1', 
+			  '#36413E', '#F7B538', '#DB7C26', '#780116', '#F48484', '#CDE2BA'];
 var currYear;
 var selectedState = null;
 var currentLayer;
