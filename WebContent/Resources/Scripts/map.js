@@ -6,19 +6,20 @@ var selectedState = null;
 var currentLayer;
 var map;
 var usaLayer;
-var orLayer;
+//var orLayer;
 var ohLayer;
 var maLayer;
 
 // **** MAPS API FUNCTIONS ******
 function initialize() {
     map = initMap();
+    o();
     initSearchBox(map);
 }
 
 function initMap() {
     // initializing a map
-	map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: 37.09024, lng: -95.712891}, // approximate center of US
 	  zoom: 4 // 0 = most zoomed out
 	});
@@ -27,206 +28,116 @@ function initMap() {
     usaLayer = new google.maps.Data();
     usaLayer.loadGeoJson(properties.usaLayer);
     usaLayer.setMap(map);
+    
+    console.log(usaLayer.getFeatureById('10'));
+    console.log(usaLayer.getFeatureById(15))
+    
 
     // styling map:
-    usaLayer.setStyle({
-    	fillColor: 'silver',
-    	strokeWeight: 1,
-    	fillOpacity: 0.9
-        
-    });
+//    usaLayer.setStyle({
+//    	fillColor: 'silver',
+//    	strokeWeight: 1,
+//    	fillOpacity: 0.3
+//    });
     
-    usaLayer.forEach(function(feature) {
-    	if(feature.getProperty('name') == "Oregon" |
-        		feature.getProperty('name') == "Ohio" |
-        		feature.getProperty('name') == "Massachusetts") {
-    		console.log("yes");
-            usaLayer.overrideStyle(feature, {fillOpacity: 0.8});
-        }
-    });
+//    usaLayer.forEach(function(feature) {
+//    	if(feature.getProperty('name') == "Oregon" |
+//        		feature.getProperty('name') == "Ohio" |
+//        		feature.getProperty('name') == "Massachusetts") {
+//    		console.log("yes");
+//            usaLayer.overrideStyle(feature, {fillOpacity: 0.8});
+//        }
+//    });
 
 
     // sets selected state
-	usaLayer.addListener('click', function(event) {
-		var state = event.feature;
-//		usaLayer.overrideStyle(function(feature) {
-//			if (feature == state) {
-//				usaLayer.overrideStyle(selected, {strokeWidth: 3});
-//			}
-//		})
-		//usaLayer.overrideStyle(selected, {strokeWidth: 3});
-		setSelected(state);
-	
-	});
+//	usaLayer.addListener('click', function(event) {
+//		var state = event.feature;
+////		usaLayer.overrideStyle(function(feature) {
+////			if (feature == state) {
+////				usaLayer.overrideStyle(selected, {strokeWidth: 3});
+////			}
+////		})
+//		usaLayer.overrideStyle(selected, {strokeWidth: 3});
+//		setSelected(state);
+//	
+//	});
     
     // styling a particular feature:
-    usaLayer.addListener('mouseover', function(event) {
-        selected = event.feature;
-        
+//    usaLayer.addListener('mouseover', function(event) {
+//        selected = event.feature;
+//        
 //            if(selected.getProperty('name') != selectedState && 
 //            		(selected.getProperty('name') == "Oregon" |
 //            		selected.getProperty('name') == "Ohio" |
 //            		selected.getProperty('name') == "Massachusetts")) {
 //                usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.8});
 //            }
-    });
+//    });
 
-    usaLayer.addListener('mouseout', function(event) {
-    	selected = event.feature;
-    	if (selected.getProperty('name') != selectedState) {
-    		usaLayer.revertStyle(selected);
-    	}
-    });
+//    usaLayer.addListener('mouseout', function(event) {
+//    	selected = event.feature;
+//    	if (selected.getProperty('name') != selectedState) {
+//    		usaLayer.revertStyle(selected);
+//    	}
+//    });
     
     
 
-    orLayer = new google.maps.Data();
+    var orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);
-    orLayer.setStyle({
-    	strokeWeight: 1	
-    });
+//    orLayer.setStyle({
+//    	strokeWeight: 1	
+//    });
+    orLayer.setMap(map);
+     console.log(orLayer.getFeatureById(3));
+    
+    
 
-    ohLayer = new google.maps.Data();
-    ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
-    ohLayer.setStyle({
-    	strokeWeight: 1	
-    });
-
-    maLayer = new google.maps.Data();
-    maLayer.loadGeoJson(properties.maPrecinctsLayer);
-    maLayer.setStyle({
-    	strokeWeight: 1	
-    });
-
-    google.maps.event.addListener(map, 'click', function(event) {
-    	console.log(event.latLng.lat(),event.latLng.lng());
-    });
-
-	return map;
-
-}
+    
 
 
-// ** PREFERENCE MANAGEMENT **
-function saveWeights() {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
-}
-
-function loadWeights() {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
-
-}
-
-function viewSaved() {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
-}
-
-// *** MAP CONTROL FUNCTIONS **
-function pause() {
-  window.alert('Pausing algorithm...');
-}
-
-function play() {
-
-}
-
-function stop() {
-  window.alert('Cancelling algorithm...');
-
-}
-
-function save() {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
-
-}
-
-function load(filename) {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
-}
-
-function deleteFile(filename) {
-
-}
-
-function setSelected(state) {
-	if (selectedState != null) {
-		if (state != selectedState) {
-			//map.data.revertStyle();
-		}
-	}
-	selectedState = state.getProperty('name'); // setting global variable
-	setCurrentLayer(selectedState);
-	
-  // change color, border, zoom, pan, etc of selected state as necessary
-}
-
-function setCurrentLayer(selectedState) {
-  if (selectedState == "Oregon") {
-	  currentLayer = orLayer;
-	  maLayer.setMap(null);
-	  orLayer.setMap(null);
-	  orLayer.setMap(map);
-
-  } else if (selectedState == "Ohio") {
-	  currentLayer = ohLayer;
-	  maLayer.setMap(null);
-	  orLayer.setMap(null);
-	  ohLayer.setMap(map);
-
-  } else if (selectedState == "Massachusetts") {
-	  currentLayer = maLayer;
-	  ohLayer.setMap(null);
-	  orLayer.setMap(null);
-	  maLayer.setMap(map);
-
-  }
   
-  console.log("current layer set to: " + selectedState);
 
   // info popup upon clicking a precinct
-  var contentString = '<div id="content">'+
-  '<div id="siteNotice">'+
-  '</div>'+
-  '<h1 id="firstHeading" class="firstHeading">2016</h1>'+
-  '<div id="bodyContent">'+
-  '<p><b>Democrat:</b> 50% <span class="democrat box"></span></p>'+
-  '<p><b>Republican:</b> 50% <span class="republican box"></span></p>'+
-  '<hr></hr>'+
-  '<p><b>Black:</b> 30% <span class="black box"></span></p>'+
-  '<p><b>White:</b> 55% <span class="white box"></span></p>'+
-  '<p><b>Other:</b> 5% <span class="other box"></span></p>'+
-  '</div>'+
-  '</div>';
+//  var contentString = '<div id="content">'+
+//  '<div id="siteNotice">'+
+//  '</div>'+
+//  '<h1 id="firstHeading" class="firstHeading">2018</h1>'+
+//  '<div id="bodyContent">'+
+//  '<p><b>Democrat:</b> 43% <span class="democrat box"></span></p>'+
+//  '<p><b>Republican:</b> 57% <span class="republican box"></span></p>'+
+//  '<hr></hr>'+
+//  '<p><b>Black:</b> 30% <span class="black box"></span></p>'+
+//  '<p><b>White:</b> 55% <span class="white box"></span></p>'+
+//  '<p><b>Other:</b> 5% <span class="other box"></span></p>'+
+//  '</div>'+
+//  '</div>';
 
-	var infowindow = new google.maps.InfoWindow({
-		content: contentString,
-		maxWidth: 200
-	});
+//	var infowindow = new google.maps.InfoWindow({
+//		content: contentString,
+//		maxWidth: 200
+//	});
 	
+//
+//	orLayer.addListener('mouseover', function(event) {
+//		var precinct = event.feature;
+//		//var contentString = getInfo(precinct);
+//		//infowindow.setContent(contentString);
+//		  infowindow.setPosition(event.latLng);
+//		infowindow.open(map);
+//	});
 
-	orLayer.addListener('mouseover', function(event) {
-		var precinct = event.feature;
-		//var contentString = getInfo(precinct);
-		//infowindow.setContent(contentString);
-		  infowindow.setPosition(event.latLng);
-		infowindow.open(map);
-	});
+//	orLayer.addListener('mouseout', function(event) {
+//		  var precinct = event.feature;
+//		  infowindow.close(map);
+//	});
+        return map;
 
-	orLayer.addListener('mouseout', function(event) {
-		  var precinct = event.feature;
-		  infowindow.close(map);
-	});
+}
 
+function o() {
+//    console.log(orLayer.getFeatureById(3));
 }
 
 function getInfo(precinct) {
@@ -235,28 +146,29 @@ function getInfo(precinct) {
 	  '</div>'+
 	  '<h1 id="firstHeading" class="firstHeading"> ' + currYear + '</h1>'+
 	  '<div id="bodyContent">'+
-	  '<p><b>Democrat:</b>' + feature.VotingData.democrat + '%<span class="democrat box"></span></p>'+
-	  '<p><b>Republican:</b>' + feature.VotingData.republican + '%<span class="republican box"></span></p>'+
+	  '<p><b>Democrat:</b>' + feature.VotingData1['0'] + '%<span class="democrat box"></span></p>'+
+	  '<p><b>Republican:</b>' + feature.VotingData1['1'] + '%<span class="republican box"></span></p>'+
 	  '<hr></hr>'+
 	  '<p><b>Black:</b>' + feature.DemographicData.black + '%<span class="black box"></span></p>'+
 	  '<p><b>White:</b>' + feature.DemographicData.white + '%<span class="white box"></span></p>'+
+	  '<p><b>White:</b>' + feature.DemographicData.asian + '%<span class="asian box"></span></p>'+
 	  '<p><b>Other:</b>' + feature.DemographicData.other + '%<span class="other box"></span></p>'+
 	  '</div>'+
 	  '</div>';
 
 	return contentString;
 }
-
-//*** ALGORITHM UPDATE FUNCTIONS ***
 var i = 0;
 var interval;
+//*** ALGORITHM UPDATE FUNCTIONS ***
 function displayMoves(moves) {
-    interval = setInterval(showPrecinctMove, 200, moves);
-	
-	if (moves != -1) {
-            setInterval()
+    i = 0;
+    interval = setInterval(showMovePrecinct,
+        300, moves);
+     
+			
 	}
-}
+
 
 function getMoves(numMoves) {
   var moves = -1;
@@ -283,19 +195,20 @@ function getMoves(numMoves) {
 
 function showMovePrecinct(moves) {
   var move = moves[i];
+  console.log(move);
   var srcID = move.sourceDistrict;
   var destID = move.destinationDistrict;
   var precinctID = move.precinct;
 
-  var feature = orLayer.getFeatureById(precinctID);
+  var feature = currentLayer.getFeatureById(precinctID);
   if (destID <= colors.length) {
+	  var newColor = colors[destID];
+          console.log(newColor);
   } else {
 	  var newColor = colors[destID - (destID-colors.length)];
   }
-  orLayer.setStyle(feature, {fillColor: newColor});
+  currentLayer.setStyle(feature, {fillColor: newColor,fillOpacity:0.8});
   i++;
-  if (i > 1200) {
-      clearInterval(interval);
-  }
+  if (i > 700) crearInterval(interval);
 
 }

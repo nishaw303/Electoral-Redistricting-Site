@@ -7,19 +7,18 @@
             type: 'POST',
             dataType: 'json',
             success: function (jsonObject) {
-                
-               console.log(jsonObject);
+                console.log(jsonObject)
+               displayMoves(jsonObject);
+               
 //                var feature = currentLayer.getFeatureById(jsonObject.id);
 //         currentLayer.overrideStyle(feature, {fillColor: 'lime'});
 
             },
             error: function (error) {
-                alert("error");
+//                alert("error");
             }
         });
     }
-//
-//
 //
 ////
 //function suka() {
@@ -45,7 +44,7 @@
 //    }
 //
 //    var i = 0;
-//    var interval = setInterval(request, 250);
+//    var interval = setInterval(request, 2000);
 //
 //};
 

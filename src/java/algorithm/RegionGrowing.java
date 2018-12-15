@@ -11,6 +11,7 @@ public class RegionGrowing extends Algorithm {
 
 	private SeedStrategy seedStrategy;
 	private static double RegionGrowingThreshold;
+        public static boolean complete;
 
 	public RegionGrowing(State s, ObjectiveFunction of, SeedStrategy seedStrategy) {
 		super();
@@ -33,16 +34,16 @@ public class RegionGrowing extends Algorithm {
 			d.addPrecinct(precinctToMove);
 			unassigned.removePrecinct(precinctToMove);
 		}
-		while (this.checkTerimanationConditions() != true) {
-			District d = this.selectDistrictToGrow();
-			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
-			Move tempMove = new Move(precinctToMove, unassigned, d);
-			tempMove.setIsFinalized(true);
-			moves.push(tempMove);
-			d.addPrecinct(precinctToMove);
-			unassigned.removePrecinct(precinctToMove);
-		}
-                System.out.println(currentState.getUnassignedDistrict().getPrecincts().size());
+//		while (this.checkTerimanationConditions() != true) {
+//			District d = this.selectDistrictToGrow();
+//			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
+//			Move tempMove = new Move(precinctToMove, unassigned, d);
+//			tempMove.setIsFinalized(true);
+//			moves.push(tempMove);
+//			d.addPrecinct(precinctToMove);
+//			unassigned.removePrecinct(precinctToMove);
+//		}
+                complete = true;
 	}
 
 	@Override
@@ -72,4 +73,9 @@ public class RegionGrowing extends Algorithm {
 	public void setSeedStrategy(SeedStrategy seedStrategy) {
 		this.seedStrategy = seedStrategy;
 	}
+
+    public boolean isComplete() {
+        return complete;
+    }
+        
 }
