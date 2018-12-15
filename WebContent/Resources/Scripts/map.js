@@ -298,8 +298,10 @@ function initMap() {
     	// console.log(event.latLng.lat(),event.latLng.lng());
 		var state = event.feature;
 		usaLayer.revertStyle(state);
-		if (state != selectedState) {			
-			setSelected(state);
+		if (state != selectedState && (state.getProperty('name') == "Oregon" 
+			| state.getProperty('name') == "Ohio" | state.getProperty('name') == "Massachusetts")) {
+                usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+    			setSelected(state);	
 		}
 	});
     
