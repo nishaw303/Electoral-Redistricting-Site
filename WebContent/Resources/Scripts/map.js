@@ -526,25 +526,28 @@ function updateMapManager() {
         	} else clearInterval(interval);   
         },
         error: function (error) {
-            console.log("Moves still in progress");
+            console.log("request failed in update map manager");
         }
     });
 }
-    
+    // TODO: add pause logic to pause interval 
     interval = setInterval(request, 500);
  }
 
 function displayMoves() {
-	var moves = getMoves(10);
-	if (moves != -1) {
+	var moves = getMoves();
+	
+	if (moves == -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
 		});
 	}
+	
 }
 
+
   // get 10 from backend
-  function getMoves(numMoves) {
+  function getMoves() {
 	  var moves = -1;
       $.ajax({
           url: 'updating',
@@ -554,10 +557,10 @@ function displayMoves() {
               moves = jsonObject;
           },
           error: function (error) {
-              alert("Moves still in progress");
+              alert("oooooo");
           }
       });
-      
+      if (moves = -1) alert("moves -1!")
       return moves;
    }
 
