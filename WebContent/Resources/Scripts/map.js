@@ -489,7 +489,53 @@ function getInfo(precinct) {
 }
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
-function displayMoves(moves) {
+function startAlgorithm() {
+	// initialize algorithm
+	function request() {
+        $.ajax({
+            url: 'calculate',
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) { 
+               console.log(response);
+               updateMapManager();
+            },
+            error: function (error) {
+                console.log("Could not initialize algorithm.");
+            }
+        });
+	}	
+	request();
+}
+
+
+function updateMapManager() {
+	var interval;
+	
+    function request() {
+    	$.ajax({
+   
+        url: 'updating',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+        	if (!response.done) {
+        		if (response.movesReady) {
+        			displayMoves();
+        		}
+        	} else clearInterval(interval);   
+        },
+        error: function (error) {
+            console.log("Moves still in progress");
+        }
+    });
+}
+    
+    interval = setInterval(request, 500);
+ }
+
+function displayMoves() {
+	var moves = getMoves(10);
 	if (moves != -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
@@ -497,10 +543,9 @@ function displayMoves(moves) {
 	}
 }
 
-function getMoves(numMoves) {
-  var moves = -1;
   // get 10 from backend
-  function request() {
+  function getMoves(numMoves) {
+	  var moves = -1;
       $.ajax({
           url: 'updating',
           type: 'GET',
@@ -512,13 +557,9 @@ function getMoves(numMoves) {
               alert("Moves still in progress");
           }
       });
+      
+      return moves;
    }
-
-  // var i = 0;
-  // var interval = setInterval(request, 250);
-  request();
-  return moves;
-}
 
 function showMovePrecinct(move) {
   var srcID = move.sourceDistrict;
