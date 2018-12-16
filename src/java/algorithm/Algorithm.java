@@ -11,6 +11,7 @@ public abstract class Algorithm {
 	protected State currentState;
 	protected Stack<Move> moves;
         protected int sp;
+        private boolean complete;
 
 	abstract public void run();
 
@@ -32,12 +33,13 @@ public abstract class Algorithm {
     public void setSp(int sp) {
         this.sp = sp;
     }
-    
-    
-    
-   
-    
-    
 
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
         
 }

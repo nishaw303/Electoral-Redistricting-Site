@@ -173,10 +173,9 @@
                                 <span  class="slider_label"></span></p>
                         </div>
 
-                       <button id="submit-btn" type="submit" onclick="updateMapManager();" class="btn btn-success">CALCULATE</button>
+                       <button id="submit-btn" type="button" onclick="startAlgorithm();" class="btn btn-success">CALCULATE</button>
                     </form>
                     
-                    <button id="submit-btn" type="submit" onclick="request();" class="btn btn-success">CALCULATE</button>
                 </div> <!-- end customize panel div -->
 
                 <div id="user-settings-panel" style="display:none;"> <!-- will be displayed if user presses user button -->

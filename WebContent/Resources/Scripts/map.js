@@ -501,6 +501,7 @@ function startAlgorithm() {
                updateMapManager();
             },
             error: function (error) {
+                console.log(error);
                 console.log("Could not initialize algorithm.");
             }
         });
@@ -515,10 +516,11 @@ function updateMapManager() {
     function request() {
     	$.ajax({
    
-        url: 'updating',
+        url: 'update',
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            console.log(response);
         	if (!response.done) {
         		if (response.movesReady) {
         			displayMoves();
@@ -531,13 +533,13 @@ function updateMapManager() {
     });
 }
     // TODO: add pause logic to pause interval 
-    interval = setInterval(request, 500);
+    interval = setInterval(request, 2000);
  }
 
 function displayMoves() {
 	var moves = getMoves();
 	
-	if (moves == -1) {
+	if (moves != -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
 		});

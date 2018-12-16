@@ -18,40 +18,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UpdateServlet extends HttpServlet {
-    
+
     public static final int MAX_MOVES_SENT = 10;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         Algorithm algorithm = (Algorithm) req.getSession().getAttribute("algorithm");
-        
-        ArrayList<MovesShort> moves = new ArrayList();
-        
-        Stack<Move> stack = algorithm.getMoves();
-        int sp = algorithm.getSp();
-        int difference = stack.size() - sp;
-        int numMoves = difference < MAX_MOVES_SENT ? difference : MAX_MOVES_SENT;
-        
-        for (int i = 0; i < difference; i++) {
-            moves.add(MovesShort.toShort(stack.get(sp+ i)));
+        UpdateObject object;
+        if (algorithm == null) {
+            object = new UpdateObject(false, false, null);
         } 
-        algorithm.setSp(algorithm.getSp() + difference);
-        
+        else {
+            ArrayList<MovesShort> moves = new ArrayList();
+            Stack<Move> stack = algorithm.getMoves();
+            if (algorithm.isComplete() && algorithm.getSp() >= stack.size()) {
+                object = new UpdateObject(true, false, null);
+            } else {
+                int sp = algorithm.getSp();
+                int difference = stack.size() - sp;
+                if (difference == 0) {
+                    object = new UpdateObject(false, false, null);
+                }
+                int numMoves = difference < MAX_MOVES_SENT ? difference : MAX_MOVES_SENT;
+                for (int i = 0; i < difference; i++) {
+                    moves.add(MovesShort.toShort(stack.get(sp + i)));
+                }
+                algorithm.setSp(algorithm.getSp() + difference);
+                object = new UpdateObject(false, true, moves);
+            }
+
+        }
+        writeResponse(resp, object);
+    }
+
+    public static void writeResponse(HttpServletResponse resp, UpdateObject object) throws IOException {
         Gson g = new Gson();
-        
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(g.toJson(moves));
+        resp.getWriter().write(g.toJson(object));
+
     }
-    
-    
-    
-    
-  
-    
-    
-    
-    
-    
+
 }
