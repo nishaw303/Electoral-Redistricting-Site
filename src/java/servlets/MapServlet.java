@@ -35,12 +35,10 @@ public class MapServlet extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println("enter this dumb servlets");
-         System.out.println("enter this dumb servlets");
-          System.out.println("araygo");
+        System.out.println("enter this dumb servlets");
+        System.out.println("araygo");
         Toolkit.getDefaultToolkit().beep();
         
-        MapEntityManagerFactory.getInstance()
-                .setEntityManagerFactory((EntityManagerFactory) getServletContext().getAttribute("emf"));
         ObjectiveFunction objectiveFunction = new ObjectiveFunction(retrieveMetrics(request));
         SeedStrategy seedStrategy = new RandomSeedStrategy(); 
 //retrieveSeedingStrategy(request);
@@ -66,7 +64,7 @@ public class MapServlet extends HttpServlet {
 
 
         // now all servlets have access to the algorithms
-//        request.getSession().setAttribute("regionGrowing", regionGrowing);
+        
         
         regionGrowing.run();
 
@@ -80,6 +78,8 @@ public class MapServlet extends HttpServlet {
           );
              moves.add(a);
         }
+        
+        request.getSession().setAttribute("algorithm", regionGrowing);
       
         
         response.setContentType("application/json");

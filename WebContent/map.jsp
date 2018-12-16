@@ -173,7 +173,7 @@
                                 <span  class="slider_label"></span></p>
                         </div>
 
-<!--                        <button id="submit-btn" type="submit" onclick="request();" class="btn btn-success">CALCULATE</button>-->
+                       <button id="submit-btn" type="submit" onclick="updateMapManager();" class="btn btn-success">CALCULATE</button>
                     </form>
                     
                     <button id="submit-btn" type="submit" onclick="request();" class="btn btn-success">CALCULATE</button>

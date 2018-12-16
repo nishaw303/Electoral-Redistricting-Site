@@ -22,6 +22,12 @@ public class MovesShort {
         this.destinationDistrictID = destinationDistrictID;
     }
     
-    
+    public static MovesShort toShort(Move m) {
+        return new MovesShort(
+                m.getPrecinct().getID(),
+                m.getSourceDistrict().getID(),
+                m.getDestinationDistrict().getID()
+        );
+    }
     
 }
