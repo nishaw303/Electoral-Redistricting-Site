@@ -278,7 +278,7 @@ function initMap() {
     usaLayer = new google.maps.Data();
     usaLayer.loadGeoJson(properties.usaLayer, {}, function(features) {
     	usaLayer.forEach(function(feature) {
-	    	if(feature.getProperty('name') == "Oregon" | feature.getProperty('name') == "Ohio" 
+	    	if(feature.getProperty('name') == "Oregon" | feature.getProperty('name') == "Ohio"
 	    		| feature.getProperty('name') == "Massachusetts") {
 	            usaLayer.overrideStyle(feature, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
 	        }
@@ -299,13 +299,16 @@ function initMap() {
     	// console.log(event.latLng.lat(),event.latLng.lng());
 		var state = event.feature;
 		usaLayer.revertStyle(state);
-		if (state != selectedState && (state.getProperty('name') == "Oregon" 
+		if (state != selectedState && (state.getProperty('name') == "Oregon"
 			| state.getProperty('name') == "Ohio" | state.getProperty('name') == "Massachusetts")) {
-                usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
-    			setSelected(state);	
+          usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+					var latLng = new google.maps.LatLng(state.lat, state.lon);
+    			map.setCenter(latLng);
+					map.setZoom(6);
+    			setSelected(state);
 		}
 	});
-    
+
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
         if (selected != selectedState) {
@@ -318,14 +321,14 @@ function initMap() {
     	selected = event.feature;
     	if (selected != selectedState) {
     		usaLayer.revertStyle(selected);
-    		if(selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio" 
+    		if(selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio"
     			| selected.getProperty('name') == "Massachusetts") {
                 usaLayer.overrideStyle(selected, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
             }
 
     	}
     });
-    
+
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer, {}, function(features){
         orLayer.forEach(function(feature) {
@@ -520,7 +523,7 @@ function startAlgorithm() {
             url: 'calculate',
             type: 'POST',
             dataType: 'json',
-            success: function (response) { 
+            success: function (response) {
                console.log(response);
                console.log("hello?? number 10");
             },
@@ -529,7 +532,7 @@ function startAlgorithm() {
                 console.log("Could not initialize algorithm.");
             }
         });
-	}	
+	}
 	request();
         console.log('response happened bbbbb');
 }
@@ -540,7 +543,8 @@ function updateMapManager() {
     function request() {
         console.log("entered 2nd request"); 
     	$.ajax({
-   
+
+
         url: 'update',
         type: 'GET',
         dataType: 'json',
@@ -550,7 +554,7 @@ function updateMapManager() {
         		if (response.movesReady) {
         			displayMoves(response.moves);
         		}
-        	} else clearInterval(interval);   
+        	} else clearInterval(interval);
         },
         error: function (error) {
             console.log("request failed in update map manager");
@@ -568,7 +572,7 @@ function displayMoves(moves) {
 			showMovePrecinct(move);
 		});
 	}
-	
+
 }
 
 
