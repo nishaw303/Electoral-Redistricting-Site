@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-default" title="About/FAQ" onclick="window.location.href = 'faq.html'">
                         <i class="fas fa-question-circle"></i>
                     </button>
-                    
+
                     <button type="button" class="btn btn-default" title="State Constitution" onclick="window.location.href = 'const.html'">
                         <i class="fas fa-file-alt"></i>
                     </button>
@@ -57,9 +57,9 @@
                             </label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="state" name="state">
+                                    <option name="Oregon" value="OR">Oregon</option>
                                     <option name="Massachusetts" value="MA">Massachusets</option>
                                     <option name="Ohio" value="OH">Ohio</option>
-                                    <option name="Oregon" value="OR">Oregon</option>
                                 </select>
                             </div>
                         </div>
@@ -83,8 +83,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" id="electionYear">
-                            <label class="control-label col-sm-4" for="year">
+                        <div class="form-group row" id="seed">
+                            <label class="control-label col-sm-4" for="seedStrategy">
                                 Seed Strategy
                             </label>
                             <div class="col-sm-7">
@@ -205,7 +205,7 @@
             </button>
 
             <button type="button" class="btn btn-default" title="Pause Algorithm" onclick="pause();">
-                <i class="far fa-pause-circle"></i>
+                <span id="pauseicon"><i class="far fa-pause-circle"></i></span>
             </button>
 
             <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="stop();">
