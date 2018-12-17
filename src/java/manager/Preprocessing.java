@@ -26,7 +26,6 @@ public class Preprocessing {
             state.setNumPrecincts(state.getUnassignedDistrict().getPrecincts().size());
             return state;
         } catch (IOException ex) {
-            System.out.println("Could not load the file");
         }
 
         return null;

@@ -21,6 +21,11 @@ public class State {
 	private int numPrecincts;
 	private int numDistricts;
 
+    public State() {
+    }
+        
+        
+
 	public State(StateName name, Map<Integer, Precinct> precincts, int numDistricts) {
 		this.name = name;
 		this.numDistricts = numDistricts;
@@ -118,6 +123,12 @@ public class State {
     public void setNumDistricts(int numDistricts) {
         this.numDistricts = numDistricts;
     }
+
+    public void setUnassigned(District unassigned) {
+        this.unassigned = unassigned;
+    }
+    
+    
     
     @Override
     public String toString() {
@@ -126,4 +137,10 @@ public class State {
     			+ this.numDistricts + "\n    Unassigned: " 
     			+ this.unassigned.toString();
     }
+
+    public void setDistricts(ArrayList<District> districts) {
+        this.districts = districts;
+    }
+    
+    
 }

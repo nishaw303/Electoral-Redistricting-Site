@@ -87,6 +87,8 @@ public class ObjectiveFunction {
 	public double calculateObjectiveFunctionValue(State state, District d) {
 		return this.calcCompactnessWeighted(d) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
 	}
+        
+
 
 	// District level
 	public double calcCompactness(State state) {

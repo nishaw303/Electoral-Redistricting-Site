@@ -1,6 +1,7 @@
 // *** GLOBAL VARIABLES ***
-var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1', 
-			  '#36413E', '#F7B538', '#DB7C26', '#780116', '#F48484', '#CDE2BA'];
+//var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1', 
+//			  '#36413E', '#F7B538', '#DB7C26', '#780116', '#F48484', '#CDE2BA'];
+var colors = ['#ff5a5f', '#ff5a5f', '#cc8726', '#009eb7', '#833c9e', '#209949', '#5FBB66'] //['#ff5a5f', '#3c3c3c', '#cc8726', '#009eb7', '#833c9e', '#79B4A9', '#5F4B66', '#56667A', '#8797AF', '#2C1320'];
 var currYear;
 var selectedState = null;
 var currentLayer;
@@ -290,7 +291,7 @@ function initMap() {
     	fillOpacity: 0
     });
     
-    usaLayer.setMap(map);
+//    usaLayer.setMap(map);;
 
 
     // sets selected state
@@ -308,8 +309,8 @@ function initMap() {
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
         if (selected != selectedState) {
-        	usaLayer.revertStyle(selected);
-        	usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
+        	//usaLayer.revertStyle(selected);
+        	//usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
         }
     });
 
@@ -326,28 +327,39 @@ function initMap() {
     });
     
     orLayer = new google.maps.Data();
-    orLayer.loadGeoJson(properties.orPrecinctsLayer);
+    orLayer.loadGeoJson(properties.orPrecinctsLayer, {}, function(features){
+        orLayer.forEach(function(feature) {
+            orLayer.overrideStyle(feature, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
+
+        })
+    });
     orLayer.setStyle({
-    	fillColor: 'lightblue',
-    	fillOpacity: 0.4,
+    	//fillColor: 'lightblue',
+    	//fillOpacity: 0.4,
     	strokeWeight: 1
     });
+    
+    orLayer.setMap(map)
+    orLayer.addListener('click', function(event) {
+        console.log(event.feature.getId());
+    });
+    currentLayer = orLayer;
 
-    ohLayer = new google.maps.Data();
-    ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
-    ohLayer.setStyle({
-    	fillColor: 'lightblue',
-    	fillOpacity: 0.4,
-    	strokeWeight: 1
-    });
-
-    maLayer = new google.maps.Data();
-    maLayer.loadGeoJson(properties.maPrecinctsLayer);
-    maLayer.setStyle({
-    	fillColor: 'lightblue',
-    	fillOpacity: 0.4,
-    	strokeWeight: 1
-    });
+//    ohLayer = new google.maps.Data();
+//    ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
+//    ohLayer.setStyle({
+//    	fillColor: 'lightblue',
+//    	fillOpacity: 0.4,
+//    	strokeWeight: 1
+//    });
+//
+//    maLayer = new google.maps.Data();
+//    maLayer.loadGeoJson(properties.maPrecinctsLayer);
+//    maLayer.setStyle({
+//    	fillColor: 'lightblue',
+//    	fillOpacity: 0.4,
+//    	strokeWeight: 1
+//    });
 
 	return map;
 
@@ -376,7 +388,19 @@ function viewSaved() {
 
 // *** MAP CONTROL FUNCTIONS **
 function pause() {
-  window.alert('Pausing algorithm...');
+    if (inProgress) {
+        if (paused) {
+            document.getElementById("updatemsg").innerHTML = "Algorithm is resumed.";
+            updateMapManager();
+        }
+        else {
+            document.getElementById("updatemsg").innerHTML = "Algorithm is paused.";
+            clearInterval(interval);  
+        }
+        paused = !paused;
+        
+    }
+  
 }
 
 function play() {
@@ -384,7 +408,11 @@ function play() {
 }
 
 function stop() {
-  window.alert('Cancelling algorithm...');
+  inProgress = false; 
+  paused = false;
+  clearInterval(interval);
+ 
+  
 
 }
 
@@ -413,23 +441,24 @@ function setSelected(state) {
 function setCurrentLayer(selectedState) {
   if (selectedState.getProperty('name') == "Oregon") {
 	  currentLayer = orLayer;
-	  maLayer.setMap(null);
-	  ohLayer.setMap(null);
+//	  maLayer.setMap(null);
+//	  ohLayer.setMap(null);
 	  orLayer.setMap(map);
+      }
 
-  } else if (selectedState.getProperty('name') == "Ohio") {
-	  currentLayer = ohLayer;
-	  maLayer.setMap(null);
-	  orLayer.setMap(null);
-	  ohLayer.setMap(map);
-
-  } else if (selectedState.getProperty('name') == "Massachusetts") {
-	  currentLayer = maLayer;
-	  ohLayer.setMap(null);
-	  orLayer.setMap(null);
-	  maLayer.setMap(map);
-
-  }
+//  } else if (selectedState.getProperty('name') == "Ohio") {
+//	  currentLayer = ohLayer;
+//	  maLayer.setMap(null);
+//	  orLayer.setMap(null);
+//	  ohLayer.setMap(map);
+//
+//  } else if (selectedState.getProperty('name') == "Massachusetts") {
+//	  currentLayer = maLayer;
+//	  ohLayer.setMap(null);
+//	  orLayer.setMap(null);
+//	  maLayer.setMap(map);
+//
+//  }
   
   console.log("current layer set to: " + selectedState.getProperty('name'));
 
@@ -454,18 +483,7 @@ function setCurrentLayer(selectedState) {
 	});
 	
 	
-	orLayer.addListener('mouseover', function(event) {
-		var precinct = event.feature;
-		  //var contentString = getInfo(precinct);
-		  //infowindow.setContent(contentString);
-		  infowindow.setPosition(event.latLng);
-		  infowindow.open(map);
-	});
-
-	orLayer.addListener('mouseout', function(event) {
-		  var precinct = event.feature;
-		  infowindow.close(map);
-	});
+//	
 
 }
 
@@ -490,7 +508,13 @@ function getInfo(precinct) {
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
 function startAlgorithm() {
+        inProgress = true;
+        document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
+
 	// initialize algorithm
+        console.log('aoeuaoeu');
+        updateMapManager();
+        
 	function request() {
         $.ajax({
             url: 'calculate',
@@ -498,7 +522,7 @@ function startAlgorithm() {
             dataType: 'json',
             success: function (response) { 
                console.log(response);
-               updateMapManager();
+               console.log("hello?? number 10");
             },
             error: function (error) {
                 console.log(error);
@@ -507,13 +531,14 @@ function startAlgorithm() {
         });
 	}	
 	request();
+        console.log('response happened bbbbb');
 }
 
 
 function updateMapManager() {
-	var interval;
 	
     function request() {
+        console.log("entered 2nd request"); 
     	$.ajax({
    
         url: 'update',
@@ -523,7 +548,7 @@ function updateMapManager() {
             console.log(response);
         	if (!response.done) {
         		if (response.movesReady) {
-        			displayMoves();
+        			displayMoves(response.moves);
         		}
         	} else clearInterval(interval);   
         },
@@ -533,11 +558,10 @@ function updateMapManager() {
     });
 }
     // TODO: add pause logic to pause interval 
-    interval = setInterval(request, 2000);
+    interval = setInterval(request, 1000);
  }
 
-function displayMoves() {
-	var moves = getMoves();
+function displayMoves(moves) {
 	
 	if (moves != -1) {
 		moves.forEach(move => {
@@ -548,35 +572,19 @@ function displayMoves() {
 }
 
 
-  // get 10 from backend
-  function getMoves() {
-	  var moves = -1;
-      $.ajax({
-          url: 'updating',
-          type: 'GET',
-          dataType: 'json',
-          success: function (jsonObject) {
-              moves = jsonObject;
-          },
-          error: function (error) {
-              alert("oooooo");
-          }
-      });
-      if (moves = -1) alert("moves -1!")
-      return moves;
-   }
-
 function showMovePrecinct(move) {
-  var srcID = move.sourceDistrict;
-  var destID = move.destinationDistrict;
-  var precinctID = move.precinct;
+  console.log("moving precum mmm yuummi");  
+  var destID = move.destinationDistrictID;
 
-  var feature = currentLayer.getFeatureById(precinctID);
-  if (destID <= colors.length) {
-	  var newColor = colors[destID];
-  } else {
-	  var newColor = colors[destID - (destID-colors.length)];
-  }
-  currentLayer.setStyle(feature, {fillColor: newColor});
+  var feature = currentLayer.getFeatureById(move.precinctID);
+
+//  var newColor = 'purple';
+  var newColor = colors[destID]
+//  if (destID <= colors.length) {
+//	  newColor = colors[destID];
+//  } else {
+//	  newColor = colors[destID - (destID-colors.length)];
+//  }
+  currentLayer.overrideStyle(feature, {fillColor: newColor, fillOpacity: 0.4});
 
 }
