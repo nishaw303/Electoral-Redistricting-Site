@@ -44,24 +44,24 @@ public class Move {
 	public void setIsFinalized(boolean isFinalized) {
 		this.isFinalized = isFinalized;
 	}
-	
+
 	public boolean getIsFinalized() {
 		return this.isFinalized;
 	}
 
-    @Override
-    public String toString() {
-        return "precinctID: " + precinct.getID() + "s: " + sourceDistrict.getID() + "  d: "  +destinationDistrict.getID();
-    }
-        
-    public Object convertToJson() {
-        Object a = new Object () {
-            int precinct = this.precinct;
-            int sourceDistrict = this.sourceDistrict;
-            int destinationDistrict = this.precinct;
-        };
-        return a;
-    }
-        
+	@Override
+	public String toString() {
+		return "precinctID: " + precinct.getID() + " Source: " + sourceDistrict.getID() + " Destination: "
+				+ destinationDistrict.getID();
+	}
+
+	public Object convertToJson() {
+		Object a = new Object() {
+			int precinct = this.precinct;
+			int sourceDistrict = this.sourceDistrict;
+			int destinationDistrict = this.precinct;
+		};
+		return a;
+	}
 
 }

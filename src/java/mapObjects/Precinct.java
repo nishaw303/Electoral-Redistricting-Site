@@ -1,7 +1,6 @@
 package mapObjects;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import dataTypes.VotingData;
 

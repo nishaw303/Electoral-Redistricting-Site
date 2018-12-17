@@ -1,8 +1,11 @@
 package seeding;
 
+import java.util.Stack;
+
+import algorithm.Move;
 import mapObjects.State;
 
 public interface SeedStrategy {
 
-	public void seed(State s);
+	public Stack<Move> seed(State s);
 }

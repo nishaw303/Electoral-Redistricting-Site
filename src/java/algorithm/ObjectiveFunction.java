@@ -2,14 +2,12 @@ package algorithm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import dataTypes.Party;
-import java.util.concurrent.ThreadLocalRandom;
 import mapObjects.District;
 import mapObjects.Point;
 import mapObjects.Precinct;
@@ -17,38 +15,47 @@ import mapObjects.State;
 
 public class ObjectiveFunction {
 
-	private Map<Metric, Double> metrics;
+	public Map<Metric, Double> metrics;
 
 	public ObjectiveFunction(Map<Metric, Double> metrics) {
 		this.metrics = metrics;
 		normalizeMetrics();
 	}
-	
+
 	public void normalizeMetrics() {
-		Map<Metric, Double> metrics = new HashMap<Metric, Double>(this.metrics);
+		Map<Metric, Double> metrics = new HashMap<Metric, Double>();
 		Map<Metric, Double> normalizedMetrics = new HashMap<Metric, Double>();
-		Map<Metric, Double> compactnessMetrics = new HashMap<Metric, Double> ();
-		
-		compactnessMetrics.put(Metric.POLTSBY_POPPER, metrics.remove(Metric.POLTSBY_POPPER));
-		compactnessMetrics.put(Metric.SCHWARTZBERG, metrics.remove(Metric.SCHWARTZBERG));
-		compactnessMetrics.put(Metric.REOCK, metrics.remove(Metric.REOCK));
-		
+		Map<Metric, Double> compactnessMetrics = new HashMap<Metric, Double>();
+
+		metrics.put(Metric.COMPACTNESS, this.metrics.get(Metric.COMPACTNESS));
+		metrics.put(Metric.EFFICIENCYGAP, this.metrics.get(Metric.EFFICIENCYGAP));
+		metrics.put(Metric.POPOULATIONEQUALITY, this.metrics.get(Metric.POPOULATIONEQUALITY));
+		compactnessMetrics.put(Metric.POLTSBY_POPPER, this.metrics.get(Metric.POLTSBY_POPPER));
+		compactnessMetrics.put(Metric.SCHWARTZBERG, this.metrics.get(Metric.SCHWARTZBERG));
+		compactnessMetrics.put(Metric.REOCK, this.metrics.get(Metric.REOCK));
+
+		double total = 0;
 		Iterator<Entry<Metric, Double>> it = metrics.entrySet().iterator();
 		while (it.hasNext()) {
-			Entry<Metric, Double> pair = it.next();
-			double normalized = (pair.getValue() - Collections.max(metrics.values())) / (
-					Collections.max(metrics.values()) - Collections.min(metrics.values()));
-			normalizedMetrics.put(pair.getKey(), normalized);
+			total += it.next().getValue();
 		}
-		
+		it = metrics.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Metric, Double> pair = it.next();
+			normalizedMetrics.put(pair.getKey(), pair.getValue() / total);
+		}
+
+		total = 0;
+		it = compactnessMetrics.entrySet().iterator();
+		while (it.hasNext()) {
+			total += it.next().getValue();
+		}
 		it = compactnessMetrics.entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<Metric, Double> pair = it.next();
-			double normalized = (pair.getValue() - Collections.max(compactnessMetrics.values())) / (
-					Collections.max(compactnessMetrics.values()) - Collections.min(compactnessMetrics.values()));
-			normalizedMetrics.put(pair.getKey(), normalized);
+			normalizedMetrics.put(pair.getKey(), pair.getValue() / total);
 		}
-		
+
 		this.metrics = normalizedMetrics;
 	}
 
@@ -64,24 +71,27 @@ public class ObjectiveFunction {
 	public double calculateObjectiveFunctionValue(State state, Move move) {
 		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
 			// Move is from Region Growing algorithm
-                        System.out.print("Calculating...");
-			return /*this.calcCompactnessWeighted(move.getDestinationDistrict())*/ +
-                                ThreadLocalRandom.current().nextDouble(1);/* +
-                                        this.calcPopulationEquality(state) +
-					this.calcEfficiencyGap(state);*/
-		}
-		else {
+			return this.calcCompactnessWeighted(move.getDestinationDistrict()) + this.calcPopulationEquality(state)
+					+ this.calcEfficiencyGap(state);
+			// ThreadLocalRandom.current().nextDouble(1);
+		} else {
 			// Move is from Simulated Annealing algorithm
-			return ThreadLocalRandom.current().nextDouble(1);/*this.calcCompactness(state) + 
-					this.calcPopulationEquality(state) + 
-					this.calcEfficiencyGap(state);*/
+			return calculateObjectiveFunctionValue(state);
 		}
 	}
 
+	public double calculateObjectiveFunctionValue(State state) {
+		return this.calcCompactness(state) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
+	}
+
+	public double calculateObjectiveFunctionValue(State state, District d) {
+		return this.calcCompactnessWeighted(d) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
+	}
+
 	// District level
-	private double calcCompactness(State state) {
+	public double calcCompactness(State state) {
 		int counter = 0;
-		double[] totals = {0, 0, 0};
+		double[] totals = { 0, 0, 0 };
 		for (District d : state.getDistricts()) {
 			double[] arr = calcCompactness(d);
 			totals[0] += arr[0];
@@ -89,92 +99,96 @@ public class ObjectiveFunction {
 			totals[2] += arr[2];
 			counter++;
 		}
-		return this.metrics.get(Metric.COMPACTNESS) * (
-				this.metrics.get(Metric.POLTSBY_POPPER) * totals[0] / counter +
-				this.metrics.get(Metric.SCHWARTZBERG) * totals[1] / counter+
-				this.metrics.get(Metric.REOCK) * totals[2] / counter);
+		return this.metrics.get(Metric.COMPACTNESS) * (this.metrics.get(Metric.POLTSBY_POPPER) * totals[0] / counter
+				+ this.metrics.get(Metric.SCHWARTZBERG) * totals[1] / counter
+				+ this.metrics.get(Metric.REOCK) * totals[2] / counter);
 	}
-	
-	private double[] calcCompactness(District d) {
-		return new double[]{this.calcCompPP(d), /*this.calcCompSchwartz(d)*/0, /*this.calcCompReock(d)*/0};
+
+	public double[] calcCompactness(District d) {
+		return new double[] { this.calcCompPP(d), this.calcCompSchwartz(d), this.calcCompReock(d) };
 	}
-	
-	private double calcCompactnessWeighted(District d) {
+
+	public double calcCompactnessWeighted(District d) {
 		double[] temp = this.calcCompactness(d);
-		return this.metrics.get(Metric.COMPACTNESS) * (
-				this.metrics.get(Metric.POLTSBY_POPPER) * temp[0] +
-				this.metrics.get(Metric.SCHWARTZBERG) * temp[1] +
-				this.metrics.get(Metric.REOCK) * temp[2]);
+		return this.metrics.get(Metric.COMPACTNESS) * (this.metrics.get(Metric.POLTSBY_POPPER) * temp[0]
+				+ this.metrics.get(Metric.SCHWARTZBERG) * temp[1] + this.metrics.get(Metric.REOCK) * temp[2]);
 	}
-	
-	private class PointsAndArea {
+
+	public class PointsAndArea {
+
 		ArrayList<Point> points;
 		double area;
-		
+
 		public PointsAndArea(ArrayList<Point> points, int area) {
 			this.points = points;
-			this.area = area;
+			this.area = area * 0.0001;
 		}
 	}
-	
-	private PointsAndArea calcPointsAndArea(District d) {
+
+	public PointsAndArea calcPointsAndArea(District d) {
 		int totalArea = 0;
 		ArrayList<Point> allPoints = new ArrayList<Point>();
 		Iterator<Entry<Integer, Precinct>> it = d.getPrecincts().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Integer, Precinct> pair = it.next();
 			totalArea += pair.getValue().getArea();
-			allPoints.addAll(pair.getValue().getPoints());
-			it.remove();
+			allPoints.addAll(new ArrayList<Point>(pair.getValue().getPoints()));
 		}
 		return new PointsAndArea(allPoints, totalArea);
 	}
-	
-	private double calcPerimeter(ArrayList<Point> points) {
+
+	public double calcPerimeter(ArrayList<Point> points) {
 		ConcaveHull concaveHull = new ConcaveHull();
-		ArrayList<Point> hull = concaveHull.calculateConcaveHull(points, 3);
+		ArrayList<Point> hull = ConvexHull.convexHull(points);
+		// ArrayList<Point> hull = concaveHull.calculateConcaveHull(points, 3);
 		double perimeter = concaveHull.euclideanDistance(hull.get(0), hull.get(hull.size() - 1));
 		for (int i = 0; i < hull.size() - 1; i++) {
-			perimeter += concaveHull.euclideanDistance(hull.get(i), hull.get(i + 1));
+			double distance = concaveHull.euclideanDistance(hull.get(i), hull.get(i + 1));
+			perimeter += distance;
 		}
 		return perimeter;
 	}
-	
-	private double calcCompPP(District d) {
+
+	public double calcCompPP(District d) {
 		PointsAndArea pa = calcPointsAndArea(d);
-		return 4 * Math.PI * (pa.area / Math.pow(calcPerimeter(pa.points), 2));
+		double perimeter = calcPerimeter(pa.points);
+		return (4 * Math.PI * pa.area) / Math.pow(perimeter, 2);
 	}
-	
-	private double calcCompSchwartz(District d) {
+
+	public double calcCompSchwartz(District d) {
 		PointsAndArea pa = calcPointsAndArea(d);
 		double C = 2 * Math.PI * Math.sqrt(pa.area / Math.PI);
 		return 1 / (calcPerimeter(pa.points) / C);
 	}
-	
-	private double calcCompReock(District d) {
+
+	public double calcCompReock(District d) {
 		PointsAndArea pa = calcPointsAndArea(d);
 		return pa.area / SmallestEnclosingCircle.makeCircle(pa.points).getArea();
 	}
 
 	// State level
-	private double calcPopulationEquality(State state) {
-		int totalPop = 0;
+	public double calcPopulationEquality(State state) {
+		double totalPop = 0;
 		double[] normalized = new double[state.getNumDistricts() + 1];
 		for (int i = 1; i <= state.getNumDistricts(); i++) {
 			totalPop += state.getDistrict(i).getPopulation();
 			normalized[i] = state.getDistrict(i).getPopulation();
 		}
-		int maxDeviation = (int) (totalPop / state.getNumDistricts() * 1.005);
-		int perfectPopulation = totalPop / state.getNumDistricts();
+		double maxDeviation = (int) ((totalPop / state.getNumDistricts()) * 1.005);
+		double perfectPop = totalPop / state.getNumDistricts();
 		for (int i = 1; i < normalized.length; i++) {
-			double value = Math.abs(normalized[i] - perfectPopulation) / (maxDeviation - perfectPopulation);
+			double value = Math.abs(normalized[i] - perfectPop) / (maxDeviation - perfectPop);
 			normalized[i] = value > 1 ? 1 : value;
 		}
-		return this.metrics.get(Metric.POPOULATIONEQUALITY) * Arrays.stream(normalized).average().getAsDouble();
+		double total = 0;
+		for (double d : normalized) {
+			total += d;
+		}
+		return this.metrics.get(Metric.POPOULATIONEQUALITY) * total / state.getDistricts().size();
 	}
-	
+
 	// State level
-	private double calcEfficiencyGap(State state) {
+	public double calcEfficiencyGap(State state) {
 		double[] efficiencyGaps = new double[state.getNumDistricts() + 1];
 		for (int i = 1; i <= state.getNumDistricts(); i++) {
 			int totalDem = 0;
@@ -197,8 +211,7 @@ public class ObjectiveFunction {
 			if (difference < 0) {
 				wastedDem = totalDem;
 				wastedRep = totalRep - totalDem;
-			}
-			else {
+			} else {
 				wastedDem = totalRep;
 				wastedRep = totalDem - totalRep;
 			}
@@ -206,9 +219,9 @@ public class ObjectiveFunction {
 		}
 		double[] normalized = new double[efficiencyGaps.length];
 		for (int i = 1; i < normalized.length; i++) {
-			normalized[i] = (efficiencyGaps[i] - Arrays.stream(efficiencyGaps).min().getAsDouble()) / (
-					Arrays.stream(efficiencyGaps).max().getAsDouble() - 
-					Arrays.stream(efficiencyGaps).min().getAsDouble());
+			normalized[i] = (efficiencyGaps[i] - Arrays.stream(efficiencyGaps).min().getAsDouble())
+					/ (Arrays.stream(efficiencyGaps).max().getAsDouble()
+							- Arrays.stream(efficiencyGaps).min().getAsDouble());
 		}
 		return this.metrics.get(Metric.EFFICIENCYGAP) * Arrays.stream(normalized).average().getAsDouble();
 	}
