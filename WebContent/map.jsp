@@ -56,10 +56,10 @@
                                 <h2>State</h2>
                             </label>
                             <div class="col-sm-8">
-                                <select class="form-control" id="state" name="state">
-                                    <option name="Oregon" value="OR">Oregon</option>
-                                    <option name="Massachusetts" value="MA">Massachusets</option>
-                                    <option name="Ohio" value="OH">Ohio</option>
+                                <select class="form-control" id="state" name="state" onchange='selectState();'>
+                                    <option name="Oregon" value="Oregon">Oregon</option>
+                                    <option name="Massachusetts" value="Massachusetts">Massachusetts</option>
+                                    <option name="Ohio" value="Ohio">Ohio</option>
                                 </select>
                             </div>
                         </div>
