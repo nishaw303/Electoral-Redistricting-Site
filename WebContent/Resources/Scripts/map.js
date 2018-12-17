@@ -550,7 +550,7 @@ function updateMapManager() {
         dataType: 'json',
         success: function (response) {
             console.log(response);
-        	if (!response.done) {
+        	if (!response.isDone) {
         		if (response.movesReady) {
         			displayMoves(response.moves);
         		}
