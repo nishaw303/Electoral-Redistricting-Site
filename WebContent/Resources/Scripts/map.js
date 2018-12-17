@@ -303,7 +303,7 @@ function initMap() {
           usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
 					var latLng = new google.maps.LatLng(state.lat, state.lon);
     			map.setCenter(latLng);
-					map.setZoom(6);
+					map.setZoom(6); 
     			setSelected(state);
 		}
 	});
@@ -504,6 +504,7 @@ function startAlgorithm() {
                updateMapManager();
             },
             error: function (error) {
+                console.log(error);
                 console.log("Could not initialize algorithm.");
             }
         });
@@ -517,11 +518,17 @@ function updateMapManager() {
 
     function request() {
     	$.ajax({
+<<<<<<< HEAD
 
         url: 'updating',
+=======
+
+        url: 'update',
+>>>>>>> 75e99befe6d508ef29a013c39baabb483cce9705
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            console.log(response);
         	if (!response.done) {
         		if (response.movesReady) {
         			displayMoves();
@@ -534,13 +541,13 @@ function updateMapManager() {
     });
 }
     // TODO: add pause logic to pause interval
-    interval = setInterval(request, 500);
+    interval = setInterval(request, 2000);
  }
 
 function displayMoves() {
 	var moves = getMoves();
 
-	if (moves == -1) {
+	if (moves != -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
 		});

@@ -1,6 +1,8 @@
 package mapObjects;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class District {
 	private Map<Integer, Precinct> precincts;
 	private int population;
 	private ArrayList<Precinct> candidates;
+	private ArrayList<Precinct> testedCandidates;
 	private Set<Precinct> seeds;
 
 	public District() {
@@ -23,6 +26,7 @@ public class District {
 		this.precincts = new HashMap<Integer, Precinct>();
 		this.population = 0;
 		this.candidates = new ArrayList<Precinct>();
+		this.testedCandidates = new ArrayList<Precinct>();
 	}
 
 	public Precinct getPrecinctById(int ID) {
@@ -78,16 +82,17 @@ public class District {
 		ArrayList<Precinct> candidateClone = new ArrayList<>(candidates);
 		int i = 0;
 		for (Precinct p : candidateClone) {
-                        if (state.getUnassignedDistrict().getPrecincts().size() > 0 && p.getDistrictID() != 0){
-                            continue;
-                        }
-			if (i == 5) return bestP;
+			if (state.getUnassignedDistrict().getPrecincts().size() > 0 && p.getDistrictID() != 0
+					|| this.testedCandidates.contains(p) || p.getDistrictID() == this.ID) {
+				continue;
+			}
+			if (i == 10)
+				return bestP;
 			District src = state.getDistrict(p.getDistrictID());
 			src.removePrecinct(p);
 			this.addPrecinct(p);
 			Move tempMove = new Move(p, src, state.getDistrict(p.getDistrictID()));
 			double currentOFV = of.calculateObjectiveFunctionValue(state, tempMove);
-                        System.out.println(currentOFV);
 			if (currentOFV > bestOFV) {
 				bestOFV = currentOFV;
 				bestP = p;
@@ -103,7 +108,7 @@ public class District {
 		return candidates;
 	}
 
-	protected void setPrecincts(Map<Integer, Precinct> precincts) {
+	public void setPrecincts(Map<Integer, Precinct> precincts) {
 		this.precincts = precincts;
 	}
 
@@ -123,12 +128,30 @@ public class District {
 		return population;
 	}
 
-	public Precinct getRandomCandidate() {
-            Precinct temp = this.candidates.get(ThreadLocalRandom.current().nextInt(this.candidates.size()));
-            while (temp.getDistrictID() != 0) {
-                temp = this.candidates.get(ThreadLocalRandom.current().nextInt(this.candidates.size()));
-            }
-            return temp;
+	public Precinct getRandomCandidate(boolean checkUnassigned) {
+		Precinct temp = this.candidates.get(ThreadLocalRandom.current().nextInt(this.candidates.size()));
+		while (temp.getDistrictID() != 0 && checkUnassigned) {
+			temp = this.candidates.get(ThreadLocalRandom.current().nextInt(this.candidates.size()));
+		}
+		return temp;
+	}
+
+	public void addTestedCandidate(Precinct p) {
+		this.testedCandidates.add(p);
+	}
+
+	public void resetTestedCandidates() {
+		this.testedCandidates = new ArrayList<Precinct>();
+	}
+
+	public Precinct getSmallestPopulationCandidate(boolean checkUnassigned) {
+		ArrayList<Precinct> tempCandidates = new ArrayList<Precinct>(this.candidates);
+		Precinct temp = Collections.min(tempCandidates, Comparator.comparingInt(Precinct::getPopulation));
+		while (temp.getDistrictID() != 0 && checkUnassigned) {
+			tempCandidates.remove(temp);
+			temp = Collections.min(tempCandidates, Comparator.comparingInt(Precinct::getPopulation));
+		}
+		return temp;
 	}
 
 	public int getNumPrecincts() {
@@ -142,16 +165,17 @@ public class District {
 		return seeds;
 	}
 
-	public boolean addSeed(Precinct seed) {
-		this.getSeeds();
-		if (this.getSeeds().contains(seed)) {
-			return false;
-		}
-		this.getSeeds().add(seed);
-		return true;
+	public void setSeeds(Set<Precinct> seeds) {
+		this.seeds = seeds;
 	}
 
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+
+	@Override
+	public String toString() {
+		return "ID: " + this.ID + " Num precincts: " + this.precincts.size() + " Num cand: " + this.candidates.size()
+				+ " Pop: " + this.population;
 	}
 }
