@@ -303,7 +303,7 @@ function initMap() {
           usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
 					var latLng = new google.maps.LatLng(state.lat, state.lon);
     			map.setCenter(latLng);
-					map.setZoom(6); 
+					map.setZoom(6);
     			setSelected(state);
 		}
 	});
@@ -518,13 +518,9 @@ function updateMapManager() {
 
     function request() {
     	$.ajax({
-<<<<<<< HEAD
 
-        url: 'updating',
-=======
 
         url: 'update',
->>>>>>> 75e99befe6d508ef29a013c39baabb483cce9705
         type: 'GET',
         dataType: 'json',
         success: function (response) {
