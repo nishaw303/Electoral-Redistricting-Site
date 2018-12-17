@@ -1,6 +1,6 @@
 // *** GLOBAL VARIABLES ***
-var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1',
-			  '#36413E', '#F7B538', '#DB7C26', '#780116', '#F48484', '#CDE2BA'];
+var colors = ['#75B9BE', '#A8CCC9', '#7A9CC6', '#DCEAB2', '#9CC69B',
+							'#79B4A9', '#5F4B66', '#56667A', '#8797AF', '#2C1320'];
 var currYear;
 var selectedState = null;
 var currentLayer;
@@ -518,8 +518,6 @@ function updateMapManager() {
 
     function request() {
     	$.ajax({
-
-
         url: 'update',
         type: 'GET',
         dataType: 'json',
@@ -576,10 +574,11 @@ function showMovePrecinct(move) {
   var precinctID = move.precinct;
 
   var feature = currentLayer.getFeatureById(precinctID);
+	var newColor;
   if (destID <= colors.length) {
-	  var newColor = colors[destID];
+	  newColor = colors[destID];
   } else {
-	  var newColor = colors[destID - (destID-colors.length)];
+	  newColor = colors[destID - (destID-colors.length)];
   }
   currentLayer.setStyle(feature, {fillColor: newColor});
 

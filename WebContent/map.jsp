@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-default" title="About/FAQ" onclick="window.location.href = 'faq.html'">
                         <i class="fas fa-question-circle"></i>
                     </button>
-                    
+
                     <button type="button" class="btn btn-default" title="State Constitution" onclick="window.location.href = 'const.html'">
                         <i class="fas fa-file-alt"></i>
                     </button>
@@ -83,8 +83,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" id="electionYear">
-                            <label class="control-label col-sm-4" for="year">
+                        <div class="form-group row" id="seed">
+                            <label class="control-label col-sm-4" for="seedStrategy">
                                 Seed Strategy
                             </label>
                             <div class="col-sm-7">
@@ -175,7 +175,7 @@
 
                        <button id="submit-btn" type="button" onclick="startAlgorithm();" class="btn btn-success">CALCULATE</button>
                     </form>
-                    
+
                 </div> <!-- end customize panel div -->
 
                 <div id="user-settings-panel" style="display:none;"> <!-- will be displayed if user presses user button -->
