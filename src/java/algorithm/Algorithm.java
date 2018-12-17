@@ -15,10 +15,9 @@ public abstract class Algorithm {
 
 	abstract public void run();
 
-	abstract protected boolean checkTerimanationConditions();
+	abstract protected boolean checkTerminationConditions();
         
         public Algorithm() {
-            sp = 0;
             moves = new Stack<>();
         }
 

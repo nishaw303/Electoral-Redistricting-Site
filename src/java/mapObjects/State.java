@@ -1,9 +1,10 @@
 package mapObjects;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,7 +16,7 @@ public class State {
 
 	private StateName name;
 	private ArrayList<District> districts;
-	private District unassigned;
+	public District unassigned;
 	private Set<Representative> representatives;
 	private int numPrecincts;
 	private int numDistricts;
@@ -26,6 +27,19 @@ public class State {
 		this.numPrecincts = precincts.size();
 		this.unassigned = new District();
 		this.unassigned.setPrecincts(precincts);
+	}
+	
+	public void reset() {
+		Map<Integer, Precinct> temp = new HashMap<Integer, Precinct>();
+		temp.putAll(this.unassigned.getPrecincts());
+		for (District d : this.districts) {
+			Iterator<Entry<Integer, Precinct>> it = d.getPrecincts().entrySet().iterator();
+			while (it.hasNext()) it.next().getValue().setDistrictID(0);
+			temp.putAll(d.getPrecincts());
+		}
+		this.districts = null;
+		this.unassigned = new District();
+		this.unassigned.setPrecincts(temp);
 	}
 
 	public boolean makeMove(Move move) {
@@ -57,10 +71,6 @@ public class State {
 
 	public District getUnassignedDistrict() {
 		return this.unassigned;
-	}
-
-	public District getLowestPolulationDistrict() {
-		return Collections.min(districts, Comparator.comparingInt(District::getPopulation));
 	}
 
 	public Set<Representative> getRepresentatives() {
@@ -108,6 +118,12 @@ public class State {
     public void setNumDistricts(int numDistricts) {
         this.numDistricts = numDistricts;
     }
-        
-        
+    
+    @Override
+    public String toString() {
+    	return "Name: " + this.name + " Num precincts: " 
+    			+ this.numPrecincts + " Num districts: " 
+    			+ this.numDistricts + "\n    Unassigned: " 
+    			+ this.unassigned.toString();
+    }
 }

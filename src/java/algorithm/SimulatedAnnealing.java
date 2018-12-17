@@ -23,7 +23,8 @@ public class SimulatedAnnealing extends Algorithm {
 
 	@Override
 	public void run() {
-		while (this.checkTerimanationConditions() != true) {
+		this.currentObjectiveValue = this.objectiveFunction.calculateObjectiveFunctionValue(currentState);
+		while (this.checkTerminationConditions() != true) {
 			District d = this.selectDistrictToGrow();
 			Precinct precinctToMove = d.findMovablePrecinct(currentState, objectiveFunction);
 			if (precinctToMove != null) {
@@ -35,22 +36,37 @@ public class SimulatedAnnealing extends Algorithm {
 				if (compareToTolerance(checkImprovement(newOFV))) {
 					tempMove.setIsFinalized(true);
 					moves.push(tempMove);
+					this.currentObjectiveValue = newOFV;
+					resetNoImprovement();
+					d.resetTestedCandidates();
 					continue;
 				}
+				moves.push(tempMove);
 				d.removePrecinct(precinctToMove);
 				oldD.addPrecinct(precinctToMove);
+				d.addTestedCandidate(precinctToMove);
 			}
 			incrementNoImprovement();
 		}
 	}
 
 	@Override
-	protected boolean checkTerimanationConditions() {
+	protected boolean checkTerminationConditions() {
 		return noImprovement > SimulatedAnnealing.noImprovementThreshold;
 	}
 
 	private District selectDistrictToGrow() {
-		return this.currentState.getRandomDistrict();
+		double lowestOFV = this.objectiveFunction.calculateObjectiveFunctionValue(this.currentState,
+				this.currentState.getDistrict(1));
+		District temp = this.currentState.getDistrict(1);
+		for (District d : this.currentState.getDistricts()) {
+			double tempOFV = this.objectiveFunction.calculateObjectiveFunctionValue(this.currentState, d);
+			if (tempOFV < lowestOFV) {
+				temp = d;
+				lowestOFV = tempOFV;
+			}
+		}
+		return temp;
 	}
 
 	private double checkImprovement(double newOFV) {
@@ -63,5 +79,9 @@ public class SimulatedAnnealing extends Algorithm {
 
 	private void incrementNoImprovement() {
 		this.noImprovement++;
+	}
+
+	private void resetNoImprovement() {
+		this.noImprovement = 0;
 	}
 }
