@@ -1,5 +1,5 @@
 // *** GLOBAL VARIABLES ***
-var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1', 
+var colors = ['#D3684E', '#5386E4', '#4B5363', '#73CEE2', '#B7BDE8', '#B1C6C1',
 			  '#36413E', '#F7B538', '#DB7C26', '#780116', '#F48484', '#CDE2BA'];
 var currYear;
 var selectedState = null;
@@ -277,7 +277,7 @@ function initMap() {
     usaLayer = new google.maps.Data();
     usaLayer.loadGeoJson(properties.usaLayer, {}, function(features) {
     	usaLayer.forEach(function(feature) {
-	    	if(feature.getProperty('name') == "Oregon" | feature.getProperty('name') == "Ohio" 
+	    	if(feature.getProperty('name') == "Oregon" | feature.getProperty('name') == "Ohio"
 	    		| feature.getProperty('name') == "Massachusetts") {
 	            usaLayer.overrideStyle(feature, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
 	        }
@@ -289,7 +289,7 @@ function initMap() {
     	strokeWeight: 0,
     	fillOpacity: 0
     });
-    
+
     usaLayer.setMap(map);
 
 
@@ -298,13 +298,16 @@ function initMap() {
     	// console.log(event.latLng.lat(),event.latLng.lng());
 		var state = event.feature;
 		usaLayer.revertStyle(state);
-		if (state != selectedState && (state.getProperty('name') == "Oregon" 
+		if (state != selectedState && (state.getProperty('name') == "Oregon"
 			| state.getProperty('name') == "Ohio" | state.getProperty('name') == "Massachusetts")) {
-                usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
-    			setSelected(state);	
+          usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+					var latLng = new google.maps.LatLng(state.lat, state.lon);
+    			map.setCenter(latLng);
+					map.setZoom(6);
+    			setSelected(state);
 		}
 	});
-    
+
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
         if (selected != selectedState) {
@@ -317,14 +320,14 @@ function initMap() {
     	selected = event.feature;
     	if (selected != selectedState) {
     		usaLayer.revertStyle(selected);
-    		if(selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio" 
+    		if(selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio"
     			| selected.getProperty('name') == "Massachusetts") {
                 usaLayer.overrideStyle(selected, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
             }
 
     	}
     });
-    
+
     orLayer = new google.maps.Data();
     orLayer.loadGeoJson(properties.orPrecinctsLayer);
     orLayer.setStyle({
@@ -430,7 +433,7 @@ function setCurrentLayer(selectedState) {
 	  maLayer.setMap(map);
 
   }
-  
+
   console.log("current layer set to: " + selectedState.getProperty('name'));
 
   // info popup upon clicking a precinct
@@ -452,8 +455,8 @@ function setCurrentLayer(selectedState) {
 		content: contentString,
 		maxWidth: 200
 	});
-	
-	
+
+
 	orLayer.addListener('mouseover', function(event) {
 		var precinct = event.feature;
 		  //var contentString = getInfo(precinct);
@@ -496,7 +499,7 @@ function startAlgorithm() {
             url: 'calculate',
             type: 'POST',
             dataType: 'json',
-            success: function (response) { 
+            success: function (response) {
                console.log(response);
                updateMapManager();
             },
@@ -504,17 +507,17 @@ function startAlgorithm() {
                 console.log("Could not initialize algorithm.");
             }
         });
-	}	
+	}
 	request();
 }
 
 
 function updateMapManager() {
 	var interval;
-	
+
     function request() {
     	$.ajax({
-   
+
         url: 'updating',
         type: 'GET',
         dataType: 'json',
@@ -523,26 +526,26 @@ function updateMapManager() {
         		if (response.movesReady) {
         			displayMoves();
         		}
-        	} else clearInterval(interval);   
+        	} else clearInterval(interval);
         },
         error: function (error) {
             console.log("request failed in update map manager");
         }
     });
 }
-    // TODO: add pause logic to pause interval 
+    // TODO: add pause logic to pause interval
     interval = setInterval(request, 500);
  }
 
 function displayMoves() {
 	var moves = getMoves();
-	
+
 	if (moves == -1) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
 		});
 	}
-	
+
 }
 
 
