@@ -14,6 +14,7 @@ public class UpdateObject {
     boolean isDone;
     boolean movesReady;
     ArrayList<MovesShort> moves;
+    double currOF;
 
     public UpdateObject(boolean isDone, boolean movesReady, ArrayList<MovesShort> moves) {
         this.isDone = isDone;

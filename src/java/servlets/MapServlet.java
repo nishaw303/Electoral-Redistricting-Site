@@ -41,56 +41,41 @@ public class MapServlet extends HttpServlet {
         
         ObjectiveFunction objectiveFunction = new ObjectiveFunction(retrieveMetrics(request));
         SeedStrategy seedStrategy = new RandomSeedStrategy(); 
-//retrieveSeedingStrategy(request);
-//        StateName stateName = StateName.valueOf(request.getParameter("stateName"));
         StateName stateName = StateName.OREGON;
-        State s = StateManager.getInstance().getState(stateName.OREGON);
+        State s = StateManager.getState(stateName.OREGON);
+        
         s.setNumDistricts(5);
- 
-
-        
-
-        /// NORMALLY BUT
-//        RegionGrowing regionGrowing = new RegionGrowing(StateManager.getInstance().getState(stateName),
-//                objectiveFunction, seedStrategy);
-
-        RegionGrowing regionGrowing = new RegionGrowing(
-                StateManager.getInstance().getState(StateName.OREGON),
-                objectiveFunction,
-                seedStrategy
-        );
-        
-        
-
-
-        // now all servlets have access to the algorithms
-        
-        
-        regionGrowing.run();
-
-        ArrayList<MovesShort> moves = new ArrayList();
-        for (int i = 0; i < regionGrowing.getMoves().size(); i++) {
-             Move x = regionGrowing.getMoves().get(i);
-             MovesShort a = new MovesShort(
-                     x.getPrecinct().getID(),
-                     x.getSourceDistrict().getID(),
-                     x.getDestinationDistrict().getID()
-          );
-             moves.add(a);
-        }
-        
-        request.getSession().setAttribute("algorithm", regionGrowing);
-      
+        System.out.println(s.unassigned.getPrecincts().size());
         
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         int a = 10;
-        response.getWriter().write((new Gson()).toJson(moves));
-//        System.out.println();
-//			SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(
-//					StateManager.getInstance().getState(stateName), objectiveFunction);
-//                        request.getSession().setAttribute("simulatedAnnealing", simulatedAnnealing);    
-//			simulatedAnnealing.run();
+        response.getWriter().write((new Gson()).toJson(a));
+//        response.
+        
+ 
+
+        Toolkit.getDefaultToolkit().beep();
+
+        
+        RegionGrowing regionGrowing = new RegionGrowing(
+                s,
+                objectiveFunction,
+                seedStrategy
+        );
+
+
+        // now all servlets have access to the algorithms
+        
+        request.getSession().setAttribute("algorithm", regionGrowing);
+        regionGrowing.run();
+        Toolkit.getDefaultToolkit().beep();
+        System.out.println("cum plete");
+        
+       
+      
+        
+  
         
     }
     
@@ -105,16 +90,16 @@ public class MapServlet extends HttpServlet {
 //        metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
 //        metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
 //        metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
-        metrics.put(Metric.COMPACTNESS, 0.3);
-        metrics.put(Metric.POLTSBY_POPPER, 0.3);
+        metrics.put(Metric.COMPACTNESS, 0.5);
+        metrics.put(Metric.POLTSBY_POPPER, 0.8);
         metrics.put(Metric.SCHWARTZBERG, 0.0);
-        metrics.put(Metric.REOCK, 0.3);
-        metrics.put(Metric.PARTISANFAIRNESS, 0.1);
-        metrics.put(Metric.POPOULATIONEQUALITY, 0.3);
-        metrics.put(Metric.CONSISTENCY, 0.3);
-        metrics.put(Metric.GERRYMANDERING, 0.3);
-        metrics.put(Metric.ALIGNMENT, 0.3);
-        metrics.put(Metric.EFFICIENCYGAP, 0.3);
+        metrics.put(Metric.REOCK, 0.0);
+        metrics.put(Metric.PARTISANFAIRNESS, 0.0);
+        metrics.put(Metric.POPOULATIONEQUALITY, 0.0);
+        metrics.put(Metric.CONSISTENCY, 0.0);
+        metrics.put(Metric.GERRYMANDERING, 0.0);
+        metrics.put(Metric.ALIGNMENT, 0.1);
+        metrics.put(Metric.EFFICIENCYGAP, 0.1);
         return metrics;
     }
     

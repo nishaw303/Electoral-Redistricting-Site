@@ -1,3 +1,8 @@
+var paused = false;
+var inProgress = false;
+var interval;
+
+
 var current = new Date().getFullYear();
 	min = current - 20;
 	select = document.getElementById('year');

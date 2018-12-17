@@ -40,5 +40,11 @@ public abstract class Algorithm {
     public boolean isComplete() {
         return complete;
     }
+
+    public double getCurrentObjectiveValue() {
+        return currentObjectiveValue;
+    }
+    
+    
         
 }

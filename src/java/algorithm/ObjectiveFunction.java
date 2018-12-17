@@ -71,9 +71,16 @@ public class ObjectiveFunction {
 	public double calculateObjectiveFunctionValue(State state, Move move) {
 		if (state.getUnassignedDistrict().getID() == move.getSourceDistrict().getID()) {
 			// Move is from Region Growing algorithm
-			return this.calcCompactnessWeighted(move.getDestinationDistrict()) + this.calcPopulationEquality(state)
-					+ this.calcEfficiencyGap(state);
-			// ThreadLocalRandom.current().nextDouble(1);
+			double compactness = 0;
+			double popEquality = 0;
+			double efficiencyGap = 0;
+			if (this.metrics.get(Metric.COMPACTNESS) != 0)
+				compactness = this.calcCompactnessWeighted(move.getDestinationDistrict());
+			if (this.metrics.get(Metric.POPOULATIONEQUALITY) != 0)
+				popEquality = this.calcPopulationEquality(state);
+			if (this.metrics.get(Metric.EFFICIENCYGAP) != 0)
+				efficiencyGap = this.calcEfficiencyGap(state);
+			return compactness + popEquality + efficiencyGap;
 		} else {
 			// Move is from Simulated Annealing algorithm
 			return calculateObjectiveFunctionValue(state);
@@ -81,12 +88,23 @@ public class ObjectiveFunction {
 	}
 
 	public double calculateObjectiveFunctionValue(State state) {
-		return this.calcCompactness(state) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
+		double compactness = 0;
+		double popEquality = 0;
+		double efficiencyGap = 0;
+		if (this.metrics.get(Metric.COMPACTNESS) != 0)
+			compactness = this.calcCompactness(state);
+		if (this.metrics.get(Metric.POPOULATIONEQUALITY) != 0)
+			popEquality = this.calcPopulationEquality(state);
+		if (this.metrics.get(Metric.EFFICIENCYGAP) != 0)
+			efficiencyGap = this.calcEfficiencyGap(state);
+		return compactness + popEquality + efficiencyGap;
 	}
 
 	public double calculateObjectiveFunctionValue(State state, District d) {
 		return this.calcCompactnessWeighted(d) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
 	}
+        
+
 
 	// District level
 	public double calcCompactness(State state) {
@@ -105,7 +123,16 @@ public class ObjectiveFunction {
 	}
 
 	public double[] calcCompactness(District d) {
-		return new double[] { this.calcCompPP(d), this.calcCompSchwartz(d), this.calcCompReock(d) };
+		double pp = 0;
+		double schwartz = 0;
+		double reock = 0;
+		if (this.metrics.get(Metric.POLTSBY_POPPER) != 0)
+			pp = this.calcCompPP(d);
+		if (this.metrics.get(Metric.SCHWARTZBERG) != 0)
+			schwartz = this.calcCompSchwartz(d);
+		if (this.metrics.get(Metric.REOCK) != 0)
+			reock = this.calcCompReock(d);
+		return new double[] { pp, schwartz, reock };
 	}
 
 	public double calcCompactnessWeighted(District d) {

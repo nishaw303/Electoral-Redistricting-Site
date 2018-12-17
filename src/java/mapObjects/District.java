@@ -20,6 +20,8 @@ public class District {
 	private ArrayList<Precinct> candidates;
 	private ArrayList<Precinct> testedCandidates;
 	private Set<Precinct> seeds;
+        
+        private static final int testCandidates = 5;
 
 	public District() {
 		this.ID = 0;
@@ -86,7 +88,7 @@ public class District {
 					|| this.testedCandidates.contains(p) || p.getDistrictID() == this.ID) {
 				continue;
 			}
-			if (i == 10)
+			if (i == testCandidates)
 				return bestP;
 			District src = state.getDistrict(p.getDistrictID());
 			src.removePrecinct(p);

@@ -173,9 +173,9 @@
                                 <span  class="slider_label"></span></p>
                         </div>
 
-                       <button id="submit-btn" type="button" onclick="startAlgorithm();" class="btn btn-success">CALCULATE</button>
+                       <!--<button id="submit-btn" type="button" onclick="startAlgorithm();" class="btn btn-success">CALCULATE</button>-->
                     </form>
-
+                      <button id="submit-btn" type="button" onclick="startAlgorithm();" class="btn btn-success">CALCULATE</button>
                 </div> <!-- end customize panel div -->
 
                 <div id="user-settings-panel" style="display:none;"> <!-- will be displayed if user presses user button -->
@@ -208,7 +208,7 @@
                 <i class="far fa-pause-circle"></i>
             </button>
 
-            <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="cancel();">
+            <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="stop();">
                 <i class="far fa-times-circle"></i>
             </button>
 
@@ -216,7 +216,7 @@
         <div id="console">
             <p>Welcome, ${sessionScope.username}<p>
             <p>/Console log</p>
-            <p>Server is currently active.<p>
+            <p id="updatemsg">Server is currently active.<p>
         </div>
 
         <script src="Resources/Scripts/properties.js"></script>
