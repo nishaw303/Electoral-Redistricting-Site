@@ -57,9 +57,9 @@
                             </label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="state" name="state">
+                                    <option name="Oregon" value="OR">Oregon</option>
                                     <option name="Massachusetts" value="MA">Massachusets</option>
                                     <option name="Ohio" value="OH">Ohio</option>
-                                    <option name="Oregon" value="OR">Oregon</option>
                                 </select>
                             </div>
                         </div>
@@ -205,7 +205,7 @@
             </button>
 
             <button type="button" class="btn btn-default" title="Pause Algorithm" onclick="pause();">
-                <i class="far fa-pause-circle"></i>
+                <span id="pauseicon"><i class="far fa-pause-circle"></i></span>
             </button>
 
             <button type="button" class="btn btn-default" title="Cancel Algorithm" onclick="stop();">

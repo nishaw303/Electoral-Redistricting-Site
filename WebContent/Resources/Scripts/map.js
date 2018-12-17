@@ -297,6 +297,7 @@ function initMap() {
     // sets selected state
 	usaLayer.addListener('click', function(event) {
     	// console.log(event.latLng.lat(),event.latLng.lng());
+		// TODO: Update drop down select
 		var state = event.feature;
 		usaLayer.revertStyle(state);
 		if (state != selectedState && (state.getProperty('name') == "Oregon"
@@ -364,7 +365,9 @@ function initMap() {
 //    	strokeWeight: 1
 //    });
 
-	return map;
+		// TODO: Display all layers.
+
+		return map;
 
 }
 
@@ -394,46 +397,56 @@ function pause() {
     if (inProgress) {
         if (paused) {
             document.getElementById("updatemsg").innerHTML = "Algorithm is resumed.";
+						document.getElementById("pauseicon").innerHTML = "<i class='far fa-pause-circle'>";
             updateMapManager();
         }
         else {
             document.getElementById("updatemsg").innerHTML = "Algorithm is paused.";
+						document.getElementById("pauseicon").innerHTML = "<i class='far fa-play-circle'>";
             clearInterval(interval);
         }
         paused = !paused;
-
     }
-
-}
-
-function play() {
-
 }
 
 function stop() {
   inProgress = false;
   paused = false;
   clearInterval(interval);
-
-
-
+	document.getElementById("updatemsg").innerHTML = "Algorithm was cancelled.";
 }
 
 function save() {
-  //if (! user logged in) {
-  //  window.alert('You must be signed in to use this feature!');
-  //}
+  if (paused | completed) {
+		var fname = prompt("Enter a name for this map", "myMap");
+		if (filename != null) { // user did not cancel prompt
+			function request() {
+		        $.ajax({
+		            url: 'save',
+		            type: 'POST',
+		            dataType: {filename : fname},
+		            success: function (response) {
+		            	console.log("Map was saved.");
+		            },
+		            error: function (error) {
+		            	console.log("Map failed saving.");
+		            }
+		  			});
+				}
+	}
 
 }
 
 function load(filename) {
+	// TODO : post
+
   //if (! user logged in) {
   //  window.alert('You must be signed in to use this feature!');
   //}
 }
 
 function deleteFile(filename) {
-
+	// TODO
 }
 
 function setSelected(state) {
@@ -511,6 +524,7 @@ function getInfo(precinct) {
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
 function startAlgorithm() {
+				// TODO : clear current layer when user runs algorithm.
         inProgress = true;
         document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
 
@@ -564,18 +578,16 @@ function updateMapManager() {
  }
 
 function displayMoves(moves) {
-
-	if (moves != -1) {
+	if (moves != -1 | moves != null) {
 		moves.forEach(move => {
 			showMovePrecinct(move);
 		});
 	}
-
 }
 
 
 function showMovePrecinct(move) {
-  console.log("moving precum mmm yuummi");
+  console.log("moving precint");
   var destID = move.destinationDistrictID;
 
   var feature = currentLayer.getFeatureById(move.precinctID);
