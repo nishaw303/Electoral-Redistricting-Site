@@ -1,6 +1,17 @@
 <!DOCTYPE HTML>
 <HTML>
   <head>
+    <style>
+      ul {
+        background-color: LemonChiffon;
+      }
+      span {
+        padding: 10px;
+        padding-left: 40px;
+        padding-right: 40px;
+        display: inline-flex;
+      }
+    </style>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
@@ -23,51 +34,55 @@
     <div id="info">
       <h1 class="title">Saved Maps</h1>
 
-      <form class="form-inline">
-        <div class="form-check">
-          <table style="width: 100%">
-            <tr class="question" id="1">
-              <td><input type="checkbox" onchange="handleCheck(this);" class="form-check-input form-check-lg" value="myMap"></td>
-              <td><label class="form-check-label" for="myMap">myMap.json</label></td>
-              <td>12/18/2018</td>
-            </tr>
+      <ul id="fileslist">
+        <li><span>myMap.json</span> <span>12/18/18</span> <span><button class="btn-lg btn-primary">LOAD</button></span> <span><button class="btn-lg btn-danger">DELETE</button></span></li>
+      </ul>
 
-            <tr class="question" id="2">
-              <td><input type="checkbox" onchange="handleCheck(this);" class="form-check-input" value="testssd"></td>
-              <td><label class="form-check-label" for="myMap">testssd.json</label>
-              <td>12/17/2018</td>
-            </tr>
 
-          </table>
-
-        </div>
-        <button type="button" class="btn-lg btn-primary" onclick="load(fileToLoad);">LOAD</button>
-        <button type="button" class="btn-lg btn-primary" onclick="deleteFiles(filesToDelete);">DELETE</button>
-
-      </form>
-
+      <h3><a href="map.html"><- Back to home page.</a></h3>
+    </div>
 
   </body>
   <script>
-  	var fileToLoad = null;
-    var filesToDelete = [];
-
-    function handleCheck(checkbox){
-      if (checkbox.checked == true) {
-        if (fileToLoad == null) fileToLoad = checkbox.value;
-        filesToDelete.push(checkbox.value);
-        console.log(filesToDelete);
-        console.log("added " + checkbox.value);
-      } else {
-        if (fileToLoad == checkbox.value) fileToLoad = null;
-        filesToDelete.splice(filesToDelete.indexOf(checkbox.value), 1);
-        console.log("removed " + checkbox.value);
-        console.log(filesToDelete);
-      }
-    }
+  var fileToLoad = null;
+  var filesToDelete = [];
 
 
+  $(document).ready(function() {
+	$('#userName').blur(function() {
+		$.ajax({
+			url : 'getfiles',
+			dataType : 'json',
+			success : function(response) {
+				// populate table with response Values
+        var inner = "";
 
+        response.forEach(filename => {
+          inner += "<li><span>" + filename + "</span> <span>12/18/18</span> <span><button class='btn-lg btn-primary' onclick='load(" + filename + ");'>LOAD</button></span> <span><button class='btn-lg btn-danger' onclick='deleteFile(" + filename + ");'>DELETE</button></span></li>";
+        });
+
+        document.getElementById("fileslist").innerHTML = inner;
+			}
+		});
+	});
+});
+
+
+    // function handleCheck(checkbox){
+    //   if (checkbox.checked == true) {
+    //     if (fileToLoad == null) fileToLoad = checkbox.value;
+    //     filesToDelete.push(checkbox.value);
+    //     console.log(filesToDelete);
+    //     console.log("added " + checkbox.value);
+    //   } else {
+    //     if (fileToLoad == checkbox.value) fileToLoad = null;
+    //     filesToDelete.splice(filesToDelete.indexOf(checkbox.value), 1);
+    //     console.log("removed " + checkbox.value);
+    //     console.log(filesToDelete);
+    //   }
+    // }
   </script>
   <script src="Resources/Scripts/map.js"></script>
+  <script src="Resources/Scripts/actions.js"></script>
+
 </HTML>

@@ -64,28 +64,8 @@ function save() {
 
             request();
 
-
-
         }
-
     }
-}
-function getSavedFiles() {
-  var files = [];
-  function requestFiles() {
-      $.ajax({
-          url: 'load',
-          type: 'GET',
-          dataType: 'json',
-          success: function (response) {
-              files = response;
-          },
-          error: function (error) {
-              console.log("retrieve files failed");
-          }
-      });
-  }
-  requestFiles();
 }
 
 function load(filename) {
@@ -94,7 +74,7 @@ function load(filename) {
             function request() {
                 $.ajax({
                     url: 'load',
-                    type: 'GET',
+                    type: 'POST',
                     dataType: 'json',
                     data:{filename: filename},
                     success: function (response) {
@@ -105,24 +85,27 @@ function load(filename) {
                     }
                 });
             }
-
             request();
-
-
         }
-
     }
 }
 
-//function deleteFiles(files) {
-//	// TODO
-//	files.forEach(filename => {
-//		if (fileName == "myMap") {
-//			document.getElementById("1").innerHTML = "";
-//		} else {
-//			document.getElementById("2").innerHTML = "";
-//
-//		}
-//
-//	});
-//}
+function deleteFile(filename) {
+      if (filename != null) { // user did not cancel prompt
+          function request() {
+              $.ajax({
+                  url: 'delete',
+                  type: 'POST',
+                  dataType: 'json',
+                  data:{filename: filename},
+                  success: function (response) {
+                  },
+                  error: function (error) {
+                      console.log("failed deleting");
+                  }
+              });
+          }
+          request();
+      }
+
+}

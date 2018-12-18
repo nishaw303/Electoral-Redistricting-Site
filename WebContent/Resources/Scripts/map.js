@@ -332,8 +332,8 @@ function initMap() {
         })
     });
     orLayer.setStyle({
-        //fillColor: 'lightblue',
-        //fillOpacity: 0.4,
+        fillColor: 'lightblue',
+        fillOpacity: 0.4,
         strokeWeight: 1
     });
 

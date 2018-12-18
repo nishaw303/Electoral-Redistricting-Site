@@ -185,7 +185,7 @@
                 <i class="far fa-save"></i>
             </button>
 
-            <button type="button" class="btn btn-default" title="Load Redistricting" onclick="load();">
+            <button type="button" class="btn btn-default" title="Load Redistricting" onclick="window.location.href = 'saved.html'">
                 <i class="fas fa-upload"></i>
             </button>
 
