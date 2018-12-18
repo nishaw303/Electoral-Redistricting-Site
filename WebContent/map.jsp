@@ -192,11 +192,11 @@
         </div>
 
         <div id="user-controls">
-            <button type="button" class="btn btn-default disabled" title="Save Redistricting" onclick="save();">
+            <button type="button" class="btn btn-default" title="Save Redistricting" onclick="save();">
                 <i class="far fa-save"></i>
             </button>
 
-            <button type="button" class="btn btn-default disabled" title="Load Redistricting" onclick="load();">
+            <button type="button" class="btn btn-default" title="Load Redistricting" onclick="load();">
                 <i class="fas fa-upload"></i>
             </button>
 

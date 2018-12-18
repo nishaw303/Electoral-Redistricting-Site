@@ -43,10 +43,8 @@ public class UpdateServlet extends HttpServlet {
                 int numMoves = difference < MAX_MOVES_SENT ? difference : MAX_MOVES_SENT;
                 
                 for (int i = 0; i < numMoves; i++) {
-                    System.out.println(i + "in moves adding");
                     moves.add(MovesShort.toShort(stack.get(sp + i)));
                 }
-                System.out.println("moves: " + moves.size());
                 algorithm.setSp(algorithm.getSp() + numMoves);
                 object = new UpdateObject(false, true, moves);
             }
