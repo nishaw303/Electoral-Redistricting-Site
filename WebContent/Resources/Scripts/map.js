@@ -585,7 +585,7 @@ function startAlgorithm() {
             dataType: {state: state, numDistricts: numDistricts, electionYear: electionYear,
                       seedStrategy: seedStrategy, compactness: compactness, polsby: polsby,
                       schwartzberg: schwartzberg, reock:reock, populationEquality: populationEquality,
-                    efficiencyGap: efficiencyGap}
+                    efficiencyGap: efficiencyGap},
             success: function (response) {
                 console.log(response);
             },
