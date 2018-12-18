@@ -17,16 +17,24 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        System.out.println("REGISTA");
         User user = new User(
                 request.getParameter("username"),
                 request.getParameter("password"),
+                request.getParameter("email"),
                 request.getParameter("firstname"),
-                request.getParameter("lastname"),
-                request.getParameter("email")
+                request.getParameter("lastname")
         );
+        
+        System.out.println(request.getParameter("username"));
+                System.out.println(request.getParameter("password"));
+        System.out.println(request.getParameter("firstname"));
+        System.out.println(request.getParameter("lastname"));
+        System.out.println(request.getParameter("email"));
+
 
         HttpSession session = request.getSession();
+        session.setAttribute("username", request.getParameter("username"));
         
         RequestDispatcher rs;
         if (Queries.createUser(user)) {

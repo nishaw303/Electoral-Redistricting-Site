@@ -38,8 +38,7 @@
             <form action="register" method="post">
 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="
-                           " placeholder="First Name" required="required">
+                    <input type="text" class="form-control" name="firstname" placeholder="First Name" required="required">
                 </div>
 
                 <div class="form-group">
@@ -68,12 +67,6 @@
                 </div>
 
                 <div class="error-msg">
-                    <%
-                        String error = (String) request.getAttribute("registrationError");
-                        if (error != null) {
-                            out.println("<font color=red size=12px>" + error + "</font>");
-                        }
-                    %>
                 </div>
 
 
