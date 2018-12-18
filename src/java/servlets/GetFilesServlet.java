@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,20 +19,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author spitlord
  */
-public class LoadMapServlet extends HttpServlet {
-    public static final String path = "/Users/spitlord/NetBeansProjects/election/saving/";
+public class GetFilesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String filename = (String) req.getAttribute("filename");
+        
         String username = (String) req.getSession().getAttribute("username");
-        String string = new String(Files.readAllBytes(Paths.get(
-                path + username + "/" + filename
-        )));
+        File folder = new File(LoadMapServlet.path + username);
+        File[] listOfFiles = folder.listFiles();
+        String [] files = new String[listOfFiles.length];
+        for (int i = 0; i < listOfFiles.length; i++) {
+            files[i] = listOfFiles[i].getName();
+        }
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(string);
+        resp.getWriter().write(new Gson().toJson(files));
     }
 
 }
