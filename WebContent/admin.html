@@ -22,7 +22,7 @@
   <body>
     <div id="info">
       <h1 class="title">Administrator</h1>
-      
+
       <form class="form-inline">
         <div class="form-group">
           <label for="id">Enter user ID:</label>
@@ -106,22 +106,22 @@
   		if ((document.getElementById("name").value == "") | (document.getElementById("lastname").value == "")) {
   			document.getElementById("msg").innerHTML = "Invalid query. Please fill in information.";
   		} else {
-  		document.getElementById("msg").innerHTML = "Added user " + document.getElementById("name").value 
+  		document.getElementById("msg").innerHTML = "Added user " + document.getElementById("name").value
   		+ " " + document.getElementById("lastname").value + " successfully.";
   		}
-  
+
   	}
-  	
+
   	function edit() {
   		document.getElementById("msg").innerHTML = "Updated user information.";
-  		
+
   	}
-  	
+
   	function del() {
   		if (document.getElementById("deleteSelect").value == "yes") {
   		var username = "John";
-  		var lname = "Doe2";
-  		document.getElementById("msg").innerHTML = "Deleted user " + username 
+  		var lname = "Doe 2";
+  		document.getElementById("msg").innerHTML = "Deleted user " + username
   		+ " " + lname + " successfully.";
   		} else {
   			document.getElementById("msg").innerHTML = "Cancelled delete.";
@@ -129,6 +129,7 @@
   	}
     $('select').on('change', function() {
       var selectValue = this.value;
+      document.getElementById("msg").innerHTML = "";
       if (selectValue == "add" ) {
         document.getElementById("add").style.display = "inline";
         document.getElementById("delete").style.display = "none";
