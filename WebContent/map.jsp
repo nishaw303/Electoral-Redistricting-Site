@@ -49,9 +49,9 @@
                 </div>
 
                 <div id="customize-panel">
-                    <form class="form" id="options-form">
+                    <form class="form" id="metrics-form">
                         <h1>Redistricting Metrics</h1>
-                        <div class="form-group row" id="state">
+                        <div class="form-group row" id="state-div">
                             <label class="control-label col-sm-4" for="state">
                                 <h2>State</h2>
                             </label>
@@ -89,60 +89,49 @@
                             </label>
                             <div class="col-sm-7">
                                 <select class="form-control" id="seedStrategy" name="seedStrategy">
-                                    <option>Random</option>
-                                    <option>Incumbent</option>
+                                    <option value="Random">Random</option>
+                                    <option value="Incumbent">Incumbent</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-check" id="compactness">
+                        <div class="form-check" id="compactness-div">
                             <label class="form-check-label">
                                 <input type="checkbox" name="compactness" class="form-check-input" onchange="toggleCheck(this);">
                                 Compactness
                             </label>
                         </div>
                         <div id="compactness-expanded" style="display:none;">
-                            <p><input type="range" name="compactness" min="0" max="1" value="0" step="0.01" class="slider">
+                            <p><input type="range" id="compactness" name="compactness" min="0" max="1" value="0" step="0.01" class="slider">
                                 <span  class="slider_label"></span></p>
 
                             <p><label for="range_weight">Polsby-Popper: </label>
-                                <input type="range" name="polsby" min="0" max="1" value="0" step="0.01" class="sub slider">
+                                <input type="range" id="polsby" name="polsby" min="0" max="1" value="0" step="0.01" class="sub slider">
                                 <span  class="slider_label"></span></p>
 
                             <p><label for="range_weight">Schwartzberg: </label>
-                                <input type="range" name="schwartzberg" min="0" max="1" value="0" step="0.01" class="sub slider">
+                                <input type="range" id="schwartzberg" name="schwartzberg" min="0" max="1" value="0" step="0.01" class="sub slider">
                                 <span  class="slider_label"></span></p>
 
                             <p><label for="range_weight">Reock Score: </label>
-                                <input type="range" name="reock" min="0" max="1" value="0" step="0.01" class="sub slider">
+                                <input type="range" id="reock" name="reock" min="0" max="1" value="0" step="0.01" class="sub slider">
                                 <span style="display:inline;"class="slider_label"></span></p>
                         </div>
 
-                        <div class="form-check" id="populationEquality">
+                        <div class="form-check" id="population-div">
                             <label class="form-check-label">
                                 <input type="checkbox" name="populationEquality" class="form-check-input" onchange="toggleCheck(this);">
                                 Population Equality
                             </label>
                         </div>
                         <div id="population-equality-expanded" style="display:none;">
-                            <p><input type="range" name="populationEquality" min="0" max="1" value="0" step="0.01" class="slider">
+                            <p><input type="range" id="populationEquality" name="populationEquality" min="0" max="1" value="0" step="0.01" class="slider">
                                 <span  class="slider_label"></span></p>
                         </div>
 
-                        <div class="form-check" id="consistency">
+                        <div class="form-check" id="partisanSymmetry-div">
                             <label class="form-check-label">
-                                <input type="checkbox" name="consistency" class="form-check-input" onchange="toggleCheck(this);">
-                                Consistency (*?)
-                            </label>
-                        </div>
-                        <div id="consistency-expanded" style="display:none;">
-                            <p><input type="range" name="consistency" min="0" max="1" value="0" step="0.01" class="slider">
-                                <span  class="slider_label"></span></p>
-                        </div>
-
-                        <div class="form-check" id="partisanSymmetry">
-                            <label class="form-check-label">
-                                <input type="checkbox" name="partisanSymmetry" class="form-check-input" onchange="toggleCheck(this);">
+                                <input type="checkbox" id="partisanSymmetry" name="partisanSymmetry" class="form-check-input" onchange="toggleCheck(this);">
                                 Partisan Symmetry
                             </label>
                         </div>
@@ -217,6 +206,13 @@
             <p>Welcome, ${sessionScope.username}<p>
             <p>/Console log</p>
             <p id="updatemsg">Server is currently active.<p>
+        </div>
+
+        <div id="loadPopup" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some jsp text...</p>
+          </div>
         </div>
 
         <script src="Resources/Scripts/properties.js"></script>
