@@ -34,36 +34,36 @@ function displayContent() {
 
 function toggleCheck(checkbox) {
     if (checkbox.checked == true) {
-    	if (checkbox.name === "compactness") 
+    	if (checkbox.name === "compactness")
 		document.getElementById("compactness-expanded").style.display = "inline";
-		else if (checkbox.name === "populationEquality") 
+		else if (checkbox.name === "populationEquality")
 			document.getElementById("population-equality-expanded").style.display = "inline";
-		else if (checkbox.name === "consistency") 
+		else if (checkbox.name === "consistency")
 			document.getElementById("consistency-expanded").style.display = "inline";
-		else if (checkbox.name === "partisanSymmetry") 
+		else if (checkbox.name === "partisanSymmetry")
 			document.getElementById("partisan-symmetry-expanded").style.display = "inline";
-		else if (checkbox.name === "politicalFairness") 
+		else if (checkbox.name === "politicalFairness")
 			document.getElementById("political-fairness-expanded").style.display = "inline";
-		else if (checkbox.name === "alignment") 
+		else if (checkbox.name === "alignment")
 			document.getElementById("alignment-expanded").style.display = "inline";
 	}
 	else {
-		if (checkbox.name === "compactness") 
+		if (checkbox.name === "compactness")
 			document.getElementById("compactness-expanded").style.display = "none";
-		else if (checkbox.name === "populationEquality") 
+		else if (checkbox.name === "populationEquality")
 			document.getElementById("population-equality-expanded").style.display = "none";
-		else if (checkbox.name === "consistency") 
+		else if (checkbox.name === "consistency")
 			document.getElementById("consistency-expanded").style.display = "none";
-		else if (checkbox.name === "partisanSymmetry") 
+		else if (checkbox.name === "partisanSymmetry")
 			document.getElementById("partisan-symmetry-expanded").style.display = "none";
-		else if (checkbox.name === "politicalFairness") 
+		else if (checkbox.name === "politicalFairness")
 			document.getElementById("political-fairness-expanded").style.display = "none";
-		else if (checkbox.name === "alignment") 
+		else if (checkbox.name === "alignment")
 			document.getElementById("alignment-expanded").style.display = "none";
 	 }
 }
-  
-  
+
+
 $(function() {
   $('.slider').on('input change', function(){
 	  $(this).next($('.slider_label')).html(this.value);
@@ -73,8 +73,8 @@ $(function() {
       $(this).html(value);
   });
 });
-  
-  
+
+
 function initSearchBox(map) {
 
 var input = document.getElementById('pac-input');

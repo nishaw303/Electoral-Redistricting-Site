@@ -201,6 +201,10 @@
                 <i class="far fa-times-circle"></i>
             </button>
 
+            <button type="button" class="btn btn-default" title="Toggle Before/After" onmousedown="toggleOn();" onmouseout="toggleOff();">
+                <i class="far fa-map"></i></i>
+            </button>
+
         </div>
         <div id="console">
             <p>Welcome, ${sessionScope.username}<p>
