@@ -294,7 +294,7 @@ function initMap() {
         fillOpacity: 0
     });
 
-//    usaLayer.setMap(map);;
+    usaLayer.setMap(map);
 
 
     // sets selected state
@@ -307,8 +307,8 @@ function initMap() {
     usaLayer.addListener('mouseover', function(event) {
         selected = event.feature;
         if (selected != selectedState) {
-        	//usaLayer.revertStyle(selected);
-        	//usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
+        	usaLayer.revertStyle(selected); //cmmnt
+        	usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1}); //cmnt
         }
     });
 
