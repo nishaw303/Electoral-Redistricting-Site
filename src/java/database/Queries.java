@@ -30,6 +30,7 @@ public class Queries {
             preparedStmt.execute();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }

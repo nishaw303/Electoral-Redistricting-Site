@@ -4,22 +4,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import algorithm.Metric;
-import algorithm.Move;
-import algorithm.MovesShort;
 import algorithm.ObjectiveFunction;
 import algorithm.RegionGrowing;
+import algorithm.SimulatedAnnealing;
 import com.google.gson.Gson;
 import dataTypes.StateName;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import manager.MapEntityManagerFactory;
 import manager.StateManager;
 import mapObjects.State;
 import seeding.IncumbentSeedStrategy;
@@ -44,7 +40,10 @@ public class MapServlet extends HttpServlet {
         StateName stateName = StateName.OREGON;
         State s = StateManager.getState(stateName.OREGON);
         
-        s.setNumDistricts(5);
+        String numString = (String)request.getAttribute("numDistricts"); 
+        System.out.println(numString);
+        int numDistricts =  ((numString == null) ||  (numString.isEmpty())) ? 5 : Integer.valueOf(numString);
+        s.setNumDistricts(numDistricts);
         System.out.println(s.unassigned.getPrecincts().size());
         
         response.setContentType("application/json");
@@ -72,6 +71,20 @@ public class MapServlet extends HttpServlet {
         Toolkit.getDefaultToolkit().beep();
         System.out.println("cum plete");
         
+        
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(
+                s,
+                objectiveFunction
+        );
+        request.getSession().setAttribute("algorithm", simulatedAnnealing);
+        simulatedAnnealing.run();
+
+        
+        
+        
+        
+        
+        
        
       
         
@@ -81,25 +94,32 @@ public class MapServlet extends HttpServlet {
     
     private Map<Metric, Double> retrieveMetrics(HttpServletRequest request) {
         Map<Metric, Double> metrics = new HashMap<Metric, Double>();
-//        metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
-//        metrics.put(Metric.POLTSBY_POPPER, Double.valueOf(request.getParameter("polsby")));
-//        metrics.put(Metric.SCHWARTZBERG, Double.valueOf(request.getParameter("schwartzberg")));
-//        metrics.put(Metric.REOCK, Double.valueOf(request.getParameter("reock")));
-//        metrics.put(Metric.PARTISANFAIRNESS, Double.valueOf(request.getParameter("partisanFairness")));
-//        metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("consistency")));
-//        metrics.put(Metric.CONSISTENCY, Double.valueOf(request.getParameter("gerrymandering")));
-//        metrics.put(Metric.GERRYMANDERING, Double.valueOf(request.getParameter("populationWeight")));
-//        metrics.put(Metric.ALIGNMENT, Double.valueOf(request.getParameter("comppopulationWeightactness")));
-        metrics.put(Metric.COMPACTNESS, 0.5);
-        metrics.put(Metric.POLTSBY_POPPER, 0.8);
-        metrics.put(Metric.SCHWARTZBERG, 0.0);
-        metrics.put(Metric.REOCK, 0.0);
-        metrics.put(Metric.PARTISANFAIRNESS, 0.0);
-        metrics.put(Metric.POPOULATIONEQUALITY, 0.0);
-        metrics.put(Metric.CONSISTENCY, 0.0);
-        metrics.put(Metric.GERRYMANDERING, 0.0);
-        metrics.put(Metric.ALIGNMENT, 0.1);
-        metrics.put(Metric.EFFICIENCYGAP, 0.1);
+        metrics.put(Metric.COMPACTNESS, Double.valueOf(request.getParameter("compactness")));
+        metrics.put(Metric.EFFICIENCYGAP, Double.valueOf(request.getParameter("polsby")));
+        metrics.put(Metric.POLTSBY_POPPER, Double.valueOf(request.getParameter("polsby"))); 
+        metrics.put(Metric.SCHWARTZBERG, Double.valueOf(request.getParameter("schwartzberg")));
+        metrics.put(Metric.REOCK, Double.valueOf(request.getParameter("reock")));
+        metrics.put(Metric.POPOULATIONEQUALITY, Double.valueOf(request.getParameter("populationEquality")));
+        
+        metrics.forEach((a, b) -> System.out.println(b)); 
+        
+//            var state = document.getElementById("state").value;
+//        var numDistricts = document.getElementById("numDistrict").value;
+//        var electionYear = document.getElementById("year").value;
+//        var seedStrategy = document.getElementById("seedStrategy").value;
+
+
+
+//        metrics.put(Metric.COMPACTNESS, );
+//        metrics.put(Metric.POLTSBY_POPPER, 0.8);
+//        metrics.put(Metric.SCHWARTZBERG, 0.0);
+//        metrics.put(Metric.REOCK, 0.0);
+//        metrics.put(Metric.PARTISANFAIRNESS, 0.0);
+//        metrics.put(Metric.POPOULATIONEQUALITY, 0.0);
+//        metrics.put(Metric.CONSISTENCY, 0.0);
+//        metrics.put(Metric.GERRYMANDERING, 0.0);
+//        metrics.put(Metric.ALIGNMENT, 0.1);
+//        metrics.put(Metric.EFFICIENCYGAP, 0.1);
         return metrics;
     }
     

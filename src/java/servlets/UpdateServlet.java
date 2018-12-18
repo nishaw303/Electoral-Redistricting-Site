@@ -23,7 +23,6 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Algorithm algorithm = (Algorithm) req.getSession().getAttribute("algorithm");
         UpdateObject object;
         if (algorithm == null) {
@@ -43,7 +42,12 @@ public class UpdateServlet extends HttpServlet {
                 int numMoves = difference < MAX_MOVES_SENT ? difference : MAX_MOVES_SENT;
                 
                 for (int i = 0; i < numMoves; i++) {
+                    try {
                     moves.add(MovesShort.toShort(stack.get(sp + i)));
+                    } 
+                    catch (Exception ex) {
+                        
+                    }
                 }
                 algorithm.setSp(algorithm.getSp() + numMoves);
                 object = new UpdateObject(false, true, moves);
