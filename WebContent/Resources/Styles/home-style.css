@@ -152,7 +152,7 @@ height: 70%;
   display: none; /* will be displayed once compactness is checked */
 }
 
-#options-form {
+#metrics-form {
   color: white;
   opacity: 1.0 !important;
   margin-left: 3%;
