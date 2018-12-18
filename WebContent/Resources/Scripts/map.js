@@ -10,6 +10,9 @@ var usaLayer;
 var orLayer;
 var ohLayer;
 var maLayer;
+var orDistrictsLayer;
+var ohDistrictsLayer;
+var maDistrictsLayer;
 
 // **** MAPS API FUNCTIONS ******
 function initialize() {
@@ -356,6 +359,32 @@ function initMap() {
    	strokeWeight: 1
    });
 
+   // DISTRICT LAYERS
+
+   orDistrictsLayer = new google.maps.Data();
+   orDistrictsLayer.loadGeoJson(properties.orDistrictsLayer);
+   orDistrictsLayer.setStyle({
+       fillOpacity: 0,
+       strokeWeight: 2,
+       strokeColor: 'white'
+   });
+
+   ohDistrictsLayer = new google.maps.Data();
+   ohDistrictsLayer.loadGeoJson(properties.ohDistrictsLayer);
+   ohDistrictsLayer.setStyle({
+       fillOpacity: 0,
+       strokeWeight: 2,
+       strokeColor: 'white'
+   });
+
+   maDistrictsLayer = new google.maps.Data();
+   maDistrictsLayer.loadGeoJson(properties.maDistrictsLayer);
+   maDistrictsLayer.setStyle({
+       fillOpacity: 0,
+       strokeWeight: 2,
+       strokeColor: 'white'
+   });
+
     return map;
 
 }
@@ -443,10 +472,10 @@ function setCurrentLayer(selectedState) {
   var contentString = '<div id="content">'+
   '<div id="siteNotice">'+
   '</div>'+
-  '<h1 id="firstHeading" class="firstHeading">2016</h1>'+
+  '<h1 id="firstHeading" class="firstHeading">2018</h1>'+
   '<div id="bodyContent">'+
-  '<p><b>Democrat:</b> 47% <span class="democrat box"></span></p>'+
-  '<p><b>Republican:</b> 33% <span class="republican box"></span></p>'+
+  '<p><b>Democrat:</b> 47% <i class="fas fa-democrat"></i></p>'+
+  '<p><b>Republican:</b> 33% <i class="fas fa-republican"></i></p>'+
   '<hr></hr>'+
   '<p><b>Black:</b> 14% <span class="black box"></span></p>'+
   '<p><b>White:</b> 80% <span class="white box"></span></p>'+
@@ -575,5 +604,22 @@ function showMovePrecinct(move) {
 //	  newColor = colors[destID - (destID-colors.length)];
 //  }
     currentLayer.overrideStyle(feature, {fillColor: newColor, fillOpacity: 0.4});
+}
 
+function toggleOn() {
+  if (currentLayer != null) {
+    var stateName = currentLayer.getProperty('name');
+    if (stateName == "Oregon") orDistrictsLayer.setMap(map);
+    else if (stateName == "Ohio") ohDistrictsLayer.setMap(map);
+    else if (stateName == "Massachusetts") maDistrictsLayer.setMap(map);
+  }
+}
+
+function toggleOff() {
+  if (currentLayer != null) {
+    var stateName = currentLayer.getProperty('name');
+    if (stateName == "Oregon") orDistrictsLayer.setMap(null);
+    else if (stateName == "Ohio") ohDistrictsLayer.setMap(null);
+    else if (stateName == "Massachusetts") maDistrictsLayer.setMap(null);
+  }
 }
