@@ -295,35 +295,27 @@ function initMap() {
 
 
     // sets selected state
-    usaLayer.addListener('click', function (event) {
-        // console.log(event.latLng.lat(),event.latLng.lng());
-        // TODO: Update drop down select
-        var state = event.feature;
-        usaLayer.revertStyle(state);
-        if (state != selectedState && (state.getProperty('name') == "Oregon"
-                | state.getProperty('name') == "Ohio" | state.getProperty('name') == "Massachusetts")) {
-            usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
-            var latLng = new google.maps.LatLng(state.lat, state.lon);
-            map.setCenter(latLng);
-            map.setZoom(6);
-            setSelected(state);
+	usaLayer.addListener('click', function(event) {
+		selectedState(event);
+    // console.log(event.latLng.lat(),event.latLng.lng());
+
+	});
+
+    usaLayer.addListener('mouseover', function(event) {
+        selected = event.feature;
+        if (selected != selectedState) {
+        	//usaLayer.revertStyle(selected);
+        	//usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
         }
     });
 
-    usaLayer.addListener('mouseover', function (event) {
-        selected = event.feature;
-        if (selected != selectedState) {
-            //usaLayer.revertStyle(selected);
-            //usaLayer.overrideStyle(selected, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
-        }
-    });
-
-    usaLayer.addListener('mouseout', function (event) {
-        selected = event.feature;
-        if (selected != selectedState) {
-            usaLayer.revertStyle(selected);
-            if (selected.getProperty('name') == "Oregon" | selected.getProperty('name') == "Ohio"
-                    | selected.getProperty('name') == "Massachusetts") {
+    usaLayer.addListener('mouseout', function(event) {
+    	selected = event.feature;
+    	if (selected != selectedState) {
+    		usaLayer.revertStyle(selected);
+				var stateName = selected.getProperty('name');
+    		if(stateName == "Oregon" | stateName == "Ohio"
+    			| stateName == "Massachusetts") {
                 usaLayer.overrideStyle(selected, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
             }
 
@@ -334,7 +326,6 @@ function initMap() {
     orLayer.loadGeoJson(properties.orPrecinctsLayer, {}, function (features) {
         orLayer.forEach(function (feature) {
             orLayer.overrideStyle(feature, {fillColor: 'lightblue', fillOpacity: 0.4, strokeWeight: 1});
-
         })
     });
     orLayer.setStyle({
@@ -349,23 +340,21 @@ function initMap() {
     });
     currentLayer = orLayer;
 
-//    ohLayer = new google.maps.Data();
-//    ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
-//    ohLayer.setStyle({
-//    	fillColor: 'lightblue',
-//    	fillOpacity: 0.4,
-//    	strokeWeight: 1
-//    });
-//
-//    maLayer = new google.maps.Data();
-//    maLayer.loadGeoJson(properties.maPrecinctsLayer);
-//    maLayer.setStyle({
-//    	fillColor: 'lightblue',
-//    	fillOpacity: 0.4,
-//    	strokeWeight: 1
-//    });
+   ohLayer = new google.maps.Data();
+   ohLayer.loadGeoJson(properties.ohPrecinctsLayer);
+   ohLayer.setStyle({
+   	fillColor: 'lightblue',
+   	fillOpacity: 0.4,
+   	strokeWeight: 1
+   });
 
-    // TODO: Display all layers.
+   maLayer = new google.maps.Data();
+   maLayer.loadGeoJson(properties.maPrecinctsLayer);
+   maLayer.setStyle({
+   	fillColor: 'lightblue',
+   	fillOpacity: 0.4,
+   	strokeWeight: 1
+   });
 
     return map;
 
@@ -470,8 +459,32 @@ function load() {
     }
 }
 
-function deleteFile(filename) {
-    // TODO
+function deleteFiles(files) {
+	// TODO
+	files.forEach(filename => {
+		if (fileName == "myMap") {
+			document.getElementById("1").innerHTML = "";
+		} else {
+			document.getElementById("2").innerHTML = "";
+
+		}
+
+	});
+}
+
+function selectState(event) {
+	var state = event.feature;
+	usaLayer.revertStyle(state);
+	var stateName = state.getProperty('name');
+	if (state != selectedState && stateName == "Oregon"
+		| stateName == "Ohio" | stateName == "Massachusetts") {
+				usaLayer.overrideStyle(selectedState, {fillColor: 'silver', fillOpacity: 0.4, strokeWeight: 1});
+				var latLng = new google.maps.LatLng(state.lat, state.lon);
+				map.setCenter(latLng);
+				map.setZoom(6);
+				setSelected(state);
+				document.getElementById('state').value = stateName;
+	}
 }
 
 function setSelected(state) {
@@ -480,43 +493,41 @@ function setSelected(state) {
 }
 
 function setCurrentLayer(selectedState) {
-    if (selectedState.getProperty('name') == "Oregon") {
-        currentLayer = orLayer;
-//	  maLayer.setMap(null);
-//	  ohLayer.setMap(null);
-        orLayer.setMap(map);
-    }
-
-//  } else if (selectedState.getProperty('name') == "Ohio") {
-//	  currentLayer = ohLayer;
-//	  maLayer.setMap(null);
-//	  orLayer.setMap(null);
-//	  ohLayer.setMap(map);
-//
-//  } else if (selectedState.getProperty('name') == "Massachusetts") {
-//	  currentLayer = maLayer;
-//	  ohLayer.setMap(null);
-//	  orLayer.setMap(null);
-//	  maLayer.setMap(map);
-//
-//  }
+  if (selectedState.getProperty('name') == "Oregon") {
+	  currentLayer = orLayer;
+	  maLayer.setMap(null);
+	  ohLayer.setMap(null);
+	  orLayer.setMap(map);
+ }
+ else if (selectedState.getProperty('name') == "Ohio") {
+	  currentLayer = ohLayer;
+	  maLayer.setMap(null);
+	  orLayer.setMap(null);
+	  ohLayer.setMap(map);
+ }
+ else if (selectedState.getProperty('name') == "Massachusetts") {
+	  currentLayer = maLayer;
+	  ohLayer.setMap(null);
+	  orLayer.setMap(null);
+	  maLayer.setMap(map);
+ }
 
     console.log("current layer set to: " + selectedState.getProperty('name'));
 
-    // info popup upon clicking a precinct
-    var contentString = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading">2016</h1>' +
-            '<div id="bodyContent">' +
-            '<p><b>Democrat:</b> 50% <span class="democrat box"></span></p>' +
-            '<p><b>Republican:</b> 50% <span class="republican box"></span></p>' +
-            '<hr></hr>' +
-            '<p><b>Black:</b> 30% <span class="black box"></span></p>' +
-            '<p><b>White:</b> 55% <span class="white box"></span></p>' +
-            '<p><b>Other:</b> 5% <span class="other box"></span></p>' +
-            '</div>' +
-            '</div>';
+  // info popup upon clicking a precinct
+  var contentString = '<div id="content">'+
+  '<div id="siteNotice">'+
+  '</div>'+
+  '<h1 id="firstHeading" class="firstHeading">2016</h1>'+
+  '<div id="bodyContent">'+
+  '<p><b>Democrat:</b> 47% <span class="democrat box"></span></p>'+
+  '<p><b>Republican:</b> 33% <span class="republican box"></span></p>'+
+  '<hr></hr>'+
+  '<p><b>Black:</b> 14% <span class="black box"></span></p>'+
+  '<p><b>White:</b> 80% <span class="white box"></span></p>'+
+  '<p><b>Other:</b> 6% <span class="other box"></span></p>'+
+  '</div>'+
+  '</div>';
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString,
@@ -549,13 +560,13 @@ function getInfo(precinct) {
 
 //*** ALGORITHM UPDATE FUNCTIONS ***
 function startAlgorithm() {
-    // TODO : clear current layer when user runs algorithm.
-    inProgress = true;
-    document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
+        inProgress = true;
+				currentLayer.revertStyle(); // clear old layer when user starts new algorithm
+        document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
 
-    // initialize algorithm
-    console.log('aoeuaoeu');
-    updateMapManager();
+				// initialize algorithm
+        console.log('algorithn started');
+        updateMapManager();
 
     function request() {
         $.ajax({
@@ -579,26 +590,27 @@ function startAlgorithm() {
 function updateMapManager() {
 
     function request() {
-        console.log("entered 2nd request");
-        $.ajax({
-            url: 'update',
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-                console.log(response);
-                if (!response.isDone) {
-                    if (response.movesReady) {
-                        displayMoves(response.moves);
-                    }
-                } else
-                    clearInterval(interval);
-            },
-            error: function (error) {
-                console.log("request failed in update map manager");
-            }
-        });
-    }
-    // TODO: add pause logic to pause interval
+    	console.log("entered 2nd request");
+    	$.ajax({
+        url: 'update',
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+        	if (!response.isDone) {
+        		if (response.movesReady) {
+        			displayMoves(response.moves);
+        		}
+        	} else {
+						clearInterval(interval);
+						inProgress = false;
+					}
+        },
+        error: function (error) {
+            console.log("request failed in update map manager");
+        }
+    });
+}
     interval = setInterval(request, 1000);
 }
 
