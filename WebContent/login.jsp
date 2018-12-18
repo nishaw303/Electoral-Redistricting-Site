@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <HTML>
     <head>
+         <meta charset="UTF-8">
         <!-- Font Awesome Icons -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 

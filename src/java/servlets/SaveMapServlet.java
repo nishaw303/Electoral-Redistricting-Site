@@ -24,16 +24,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author spitlord
  */
 public class SaveMapServlet extends HttpServlet {
+    
+    public static final String path = "/Users/spitlord/NetBeansProjects/election/saving/";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Algorithm a = (Algorithm) req.getSession().getAttribute("algorithm");
         String fileName = req.getParameter("name");
-        System.out.println("");
-        System.out.println("sukabanw");
-        System.out.println("sukabanw");
-
-        System.out.println("sukabanw");
+        String username = (String)req.getSession().getAttribute("username") == null ?
+                "" : (String)req.getSession().getAttribute("username");
 
         int sp = a.getSp();
         ArrayList<MovesShort> moves = new ArrayList<>();
@@ -41,16 +40,17 @@ public class SaveMapServlet extends HttpServlet {
             moves.add(MovesShort.toShort(a.getMoves().get(i)));
         }
 
-//        FileWriter f = new FileWriter("suka.txt");
-//      
-//        f.close();
         resp.setContentType("application/text");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write("suka eat this file");
         int asuka = 0;
 
         try {
-            File f = new File("/Users/spitlord/NetBeansProjects/election/saving/SICSUKA.json");
+            File directory = new File(path + username);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            File f = new File(directory.getAbsolutePath() + "/" + fileName + ".json");
             FileWriter fw = new FileWriter(f);
             Gson gson = new GsonBuilder().create();
             gson.toJson(moves, fw);
@@ -61,5 +61,5 @@ public class SaveMapServlet extends HttpServlet {
         }
     }
 
-//    public static save() {}
+
 }

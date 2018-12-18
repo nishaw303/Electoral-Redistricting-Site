@@ -221,6 +221,7 @@
 
         <script src="Resources/Scripts/properties.js"></script>
         <script src="Resources/Scripts/map.js"></script>
+        <script src="Resources/Scripts/actions.js"></script>
         <script src="Resources/Scripts/controls.js"></script>
         <script src="Resources/Scripts/updating.js"></script>
 

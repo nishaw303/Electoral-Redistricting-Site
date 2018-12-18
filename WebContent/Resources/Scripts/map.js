@@ -397,80 +397,20 @@ function pause() {
     }
 }
 
-function stop() {
-    inProgress = false;
-    paused = false;
-    clearInterval(interval);
-    document.getElementById("updatemsg").innerHTML = "Algorithm was cancelled.";
-}
-
-function save() {
-    if (paused | !inProgress) {
-        var fname = prompt("Enter a name for this map", "myMap");
-        if (fname != null) { // user did not cancel prompt
-            function request() {
-                $.ajax({
-                    url: 'save',
-                    type: 'POST',
-                    dataType: 'text',
-                    success: function (response) {
-                        console.log("Map was saved.");
-                    },
-                    error: function (error) {
-                        console.log("Map failed saving.");
-                    }
-                });
-            }
-            
-            request();
-            
 
 
-        }
-
-    }
-}
-
-function load() {
-    if (!inProgress) {
-        var fname = 25;
-        if (fname != null) { // user did not cancel prompt
-            function request() {
-                $.ajax({
-                    url: 'load',
-                    type: 'GET',
-                    dataType: 'json',
-                    data:{name: 'ass'},
-                    success: function (response) {
-                        displayMoves(response);
-                    },
-                    error: function (error) {
-                        console.log("Map failed loading.");
-                    }
-                });
-            }
-            
-            request();
-            
-
-
-        }
-
-    }
-}
-
-function deleteFiles(files) {
-	// TODO
-	files.forEach(filename => {
-		if (fileName == "myMap") {
-			document.getElementById("1").innerHTML = "";
-		} else {
-			document.getElementById("2").innerHTML = "";
-
-		}
-
-	});
-}
+//function deleteFiles(files) {
+//	// TODO
+//	files.forEach(filename => {
+//		if (fileName == "myMap") {
+//			document.getElementById("1").innerHTML = "";
+//		} else {
+//			document.getElementById("2").innerHTML = "";
+//
+//		}
+//
+//	});
+//}
 
 function selectState(event) {
 	var state = event.feature;
