@@ -332,8 +332,8 @@ function initMap() {
         })
     });
     orLayer.setStyle({
-        //fillColor: 'lightblue',
-        //fillOpacity: 0.4,
+        fillColor: 'lightblue',
+        fillOpacity: 0.4,
         strokeWeight: 1
     });
 
@@ -515,12 +515,13 @@ function getInfo(precinct) {
 //*** ALGORITHM UPDATE FUNCTIONS ***
 function startAlgorithm() {
         inProgress = true;
-				currentLayer.revertStyle(); // clear old layer when user starts new algorithm
+        currentLayer.revertStyle(); // clear old layer when user starts new algorithm
         document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
 
         // initialize algorithm
         var state = document.getElementById("state").value;
-        var numDistricts = document.getElementById("numDistrict").value;
+//        var numDistricts = document.getElementById("numDistrict").value;
+var numDistricts = 10;
         var electionYear = document.getElementById("year").value;
         var seedStrategy = document.getElementById("seedStrategy").value;
         var compactness = document.getElementById("compactness").value;
@@ -529,17 +530,27 @@ function startAlgorithm() {
         var reock = document.getElementById("reock").value;
         var populationEquality = document.getElementById("populationEquality").value;
         var efficiencyGap = document.getElementById("partisanSymmetry").value;
-
+        console.log('compactness' + compactness + '  ' +  polsby );
+        console.log('compactness');
+        console.log('compactness');
         updateMapManager();
 
     function request() {
         $.ajax({
             url: 'calculate',
             type: 'POST',
-            dataType: {state: state, numDistricts: numDistricts, electionYear: electionYear,
-                      seedStrategy: seedStrategy, compactness: compactness, polsby: polsby,
-                      schwartzberg: schwartzberg, reock:reock, populationEquality: populationEquality,
-                    efficiencyGap: efficiencyGap},
+            dataType:'text',
+            data: {
+                state: state,
+                numDistricts: numDistricts,
+                electionYear: electionYear,
+                seedStrategy: seedStrategy,
+                 compactness: compactness,
+                      polsby: polsby,
+                schwartzberg: schwartzberg,
+                       reock:reock,
+          populationEquality: populationEquality,
+               efficiencyGap: efficiencyGap},
             success: function (response) {
                 console.log(response);
             },
@@ -547,8 +558,9 @@ function startAlgorithm() {
                 console.log(error);
                 console.log("Could not initialize algorithm.");
             }
-        });
-    }
+        }
+);
+    };
     request();
     console.log('response happened bbbbb');
 }
