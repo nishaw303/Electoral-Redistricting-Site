@@ -421,9 +421,9 @@ function save() {
                     }
                 });
             }
-            
+
             request();
-            
+
 
 
         }
@@ -449,9 +449,9 @@ function load() {
                     }
                 });
             }
-            
+
             request();
-            
+
 
 
         }
@@ -462,7 +462,7 @@ function load() {
 function deleteFiles(files) {
 	// TODO
 	files.forEach(filename => {
-		if (fileName == "myMap") {
+		if (filename == "myMap") {
 			document.getElementById("1").innerHTML = "";
 		} else {
 			document.getElementById("2").innerHTML = "";
@@ -564,15 +564,28 @@ function startAlgorithm() {
 				currentLayer.revertStyle(); // clear old layer when user starts new algorithm
         document.getElementById("updatemsg").innerHTML = "Algorithm has started.";
 
-				// initialize algorithm
-        console.log('algorithn started');
+        // initialize algorithm
+        var state = document.getElementById("state").value;
+        var numDistricts = document.getElementById("numDistrict").value;
+        var electionYear = document.getElementById("year").value;
+        var seedStrategy = document.getElementById("seedStrategy").value;
+        var compactness = document.getElementById("compactness").value;
+        var polsby = document.getElementById("polsby").value;
+        var schwartzberg = document.getElementById("schwartzberg").value;
+        var reock = document.getElementById("reock").value;
+        var populationEquality = document.getElementById("populationEquality").value;
+        var efficiencyGap = document.getElementById("partisanSymmetry").value;
+
         updateMapManager();
 
     function request() {
         $.ajax({
             url: 'calculate',
             type: 'POST',
-            dataType: 'json',
+            dataType: {state: state, numDistricts: numDistricts, electionYear: electionYear,
+                      seedStrategy: seedStrategy, compactness: compactness, polsby: polsby,
+                      schwartzberg: schwartzberg, reock:reock, populationEquality: populationEquality,
+                    efficiencyGap: efficiencyGap}
             success: function (response) {
                 console.log(response);
             },
