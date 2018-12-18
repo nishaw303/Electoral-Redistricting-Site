@@ -103,8 +103,6 @@ public class ObjectiveFunction {
 	public double calculateObjectiveFunctionValue(State state, District d) {
 		return this.calcCompactnessWeighted(d) + this.calcPopulationEquality(state) + this.calcEfficiencyGap(state);
 	}
-        
-
 
 	// District level
 	public double calcCompactness(State state) {
@@ -220,7 +218,8 @@ public class ObjectiveFunction {
 		for (int i = 1; i <= state.getNumDistricts(); i++) {
 			int totalDem = 0;
 			int totalRep = 0;
-			for (Precinct p : state.getDistrict(i).getPrecincts().values()) {
+			Map<Integer, Precinct> temp = new HashMap<Integer, Precinct>(state.getDistrict(i).getPrecincts());
+			for (Precinct p : temp.values()) {
 				double tempDem = p.getVotingData().getPartResults(Party.DEMOCRATIC) / 100;
 				double tempRep = p.getVotingData().getPartResults(Party.REPUBLICAN) / 100;
 				if (tempDem + tempRep > 1) {
